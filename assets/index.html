@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html>
+
 <head>
   <title></title>
 
@@ -39,6 +41,8 @@
 
 </head>
 
+
+
 <body>
   <!--
         Client-side Templates
@@ -76,13 +80,40 @@
       </div>
         <!-- nave bar -->
       <div id="navbar" class="navbar-collapse collapse">
+       
+       <div id='nav-left'></div>
+       
+        <!--ul class="nav navbar-nav">
+          <li class="active"><a href="#">加盟</a></li>
+          <li><a href="#about">注册</a></li>
+          <li><a href="#contact">登录</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul-->        
+        
+        <!-- ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="./">加盟<span class="sr-only">(current)</span></a></li>
+          <li><a href="../navbar-static-top/">注册</a></li>
+          <li><a href="../navbar-fixed-top/">登录</a></li>
+        </ul-->
+
         <div id='nav-right'></div>
       </div>
       <!--/.nav-collapse -->
     </div>
   </nav>
   
-  <div id="service-test"></div>
+
 
 <!-- big picture -->
   <div class="container theme-showcase" role="main">
@@ -104,11 +135,7 @@
     <div class="row">
       <div class="col-lg-4">
         <h2>Safari bug warning!</h2>
-        <p class="text-danger">As of v9.1.2, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified
-          nav that are cleared upon refreshing.</p>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-          nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        </p>
+        <img src="/images/3.png" alt="Mountain View" style="width:304px;height:228px; margin-bottom:10px;">        
         <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
       </div>
       <div class="col-lg-4">
@@ -154,41 +181,54 @@
 </body>
 </html>
 
-<script src="https://fb.me/react-15.0.0.js"></script>
-<script src="https://fb.me/react-dom-15.0.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://fb.me/react-0.13.3.js"></script>
+<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-<script type="text/babel" src="/js/NavMenus.jsx"></script>
+<script type="text/jsx">
 
-<script type="text/babel">
+  var NavMenuItem = React.createClass({  // this is a react class
+    
+    render: function(props) { // this is the function how to display this class
+      return <li className={this.props.className} ><a href="">{this.props.text}</a></li>
+    }
+  });
+    
+  var NavMenus = React.createClass({ // this is another react class
+    
+    render: function(props) { // this is the function how to display this class
 
-  class CallService extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {text:'', color:'black'}
+        var a = this.props.fangdao == "right" ? "navbar-right" : " ";
+        var b = "nav navbar-nav " + a;
+        
+        var menulist = []
+        this.props.neirong.forEach(function(element, index) { 
+            var style = index==0 ? "active" : "";
+            menulist.push(<NavMenuItem text={element} className={style} />)
+        });
+        
+        return <ul className={b} >
+            {menulist}
+        </ul>
     }
-       
-    componentDidMount() {
-      console.log('componentDidMount')
-      setInterval(() => { this.callService(); } , 5000);
-    }
+  });
 
-    callService() {
-      console.log('callService')
-      $.get("http://localhost:1337/message/2", (data) => {  
-        this.setState({text:data.title});  
-      });
-    }
-
-    render() {
-      console.log('render')
-      return <div>Response - {this.state.text}</div>;
-    }
+  var leftNeirong = function() {
+    return [ {text:"加盟" , style:"active"}, {text:"注册" , style:""}, {text:"登录" , style:""} ] 
   }
 
-  //import NavMenus from 'NavMenus'
+  var rightNeirong = function() {
+      return [ {text:"about us" , style:"active"}, {text:"contact us" , style:""} ]
+  }
 
-  ReactDOM.render(<NavMenus />,    document.getElementById('nav-right')  );
-  ReactDOM.render(<CallService />, document.getElementById('service-test')  );
+
+  // React.render(what, where) --> verb
+  // what is class, created by createClass
+  // where is a html <tag>
+
+  React.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录"]} />, document.getElementById('nav-right'));  
+
+  React.render(<NavMenus fangdao="left" neirong={["about us"]} />, document.getElementById('nav-left'));
+
 </script>
+ 

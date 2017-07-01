@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title></title>
@@ -39,6 +40,8 @@
 
 </head>
 
+
+
 <body>
   <!--
         Client-side Templates
@@ -76,13 +79,30 @@
       </div>
         <!-- nave bar -->
       <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">加盟</a></li>
+          <li><a href="#about">注册</a></li>
+          <li><a href="#contact">登录</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>        
         <div id='nav-right'></div>
       </div>
       <!--/.nav-collapse -->
     </div>
   </nav>
   
-  <div id="service-test"></div>
+
 
 <!-- big picture -->
   <div class="container theme-showcase" role="main">
@@ -154,41 +174,11 @@
 </body>
 </html>
 
-<script src="https://fb.me/react-15.0.0.js"></script>
-<script src="https://fb.me/react-dom-15.0.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://fb.me/react-0.13.3.js"></script>
+<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-<script type="text/babel" src="/js/NavMenus.jsx"></script>
-
-<script type="text/babel">
-
-  class CallService extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {text:'', color:'black'}
-    }
-       
-    componentDidMount() {
-      console.log('componentDidMount')
-      setInterval(() => { this.callService(); } , 5000);
-    }
-
-    callService() {
-      console.log('callService')
-      $.get("http://localhost:1337/message/2", (data) => {  
-        this.setState({text:data.title});  
-      });
-    }
-
-    render() {
-      console.log('render')
-      return <div>Response - {this.state.text}</div>;
-    }
-  }
-
-  //import NavMenus from 'NavMenus'
-
-  ReactDOM.render(<NavMenus />,    document.getElementById('nav-right')  );
-  ReactDOM.render(<CallService />, document.getElementById('service-test')  );
+<script type="text/jsx">
+  import NavMenus from 'NavMenus'
+  React.render(<NavMenus />, document.getElementById('nav-right'));
 </script>

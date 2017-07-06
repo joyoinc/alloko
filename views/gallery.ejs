@@ -141,18 +141,28 @@
     console.log("loading...")
     $.get("http://localhost:1337/message", (data) => {
       setTimeout(function() {
-        var model = [];
-        data.forEach(function(e){ 
-          model.push({title: e.title || '', imageUrl: e.imageUrl || '/images/img-missing.png'})
+        var model = data.map(function(e){ 
+          return { title: e.title || '',
+            imageUrl: e.snapshot ? `/message/snapshot/${e.snapshot}` : '/images/img-missing.png' 
+          }
         });  
-        var str = this['JST']['assets/templates/gallery_1x3.html'](model);
 
-        $('#root').append(str);
+        render_Row(model);
+
         $('.progress').hide();
         isLoading = false;
-      }, 10);
+      }, 100);
     });
+  }
 
+  var render_Row = function(model) {
+      var str = "<div class='row'>";
+      model.forEach(function(element) {
+        str += this['JST']['assets/templates/gallery_tile_1x3.html'](element);
+      });
+
+      str += "</div>";
+      $('#root').append(str);
   }
 
   $(window).on('scroll', function() {

@@ -232,33 +232,6 @@
 
 <script type="text/babel">
 
-  class CallService extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {text:'', color:'black'}
-    }
-       
-    componentDidMount() {
-      console.log('componentDidMount')
-      setInterval(() => { this.callService(); } , 5000);
-    }
-
-    callService() {
-      console.log('callService')
-      $.get("http://localhost:1337/message/2", (data) => {  
-        this.setState({text:data.title});  
-      });
-    }
-
-    render() {
-      console.log('render')
-      return <div>Response - {this.state.text}</div>;
-    }
-  }
-
-  //import NavMenus from 'NavMenus'
-  ReactDOM.render(<CallService />, document.getElementById('service-test')  );
-
-  ReactDOM.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录"]} />, document.getElementById('nav-right'));  
-  ReactDOM.render(<NavMenus fangdao="left" neirong={["About us"]} />, document.getElementById('nav-left'));
+  ReactDOM.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录", "gallery"]} />, document.getElementById('nav-right'));  
+  ReactDOM.render(<NavMenus fangdao="left" neirong={["working"]} />, document.getElementById('nav-left'));
 </script>

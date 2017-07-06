@@ -36,7 +36,7 @@ module.exports.routes = {
   'GET /message/snapshot/:fd' : 'MessageController.downloadSnapshot',
 
   '/home': {view: 'homepage'},
-
+  '/': {view: 'homepage'},
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

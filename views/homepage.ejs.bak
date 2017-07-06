@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title></title>
+
+  <% include sample1.html %>
 
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,19 +30,19 @@
     }
   </style>
 
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
   <!--STYLES-->
+  <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">-->
 
 </head>
-
-
 
 <body>
   <!--
@@ -62,7 +63,7 @@
     -->
 
   <!--TEMPLATES-->
-  
+  <script type="text/javascript" src="/jst.js"></script>
   <!--TEMPLATES END-->
 
   <!-- Fixed navbar -->
@@ -80,41 +81,13 @@
       </div>
         <!-- nave bar -->
       <div id="navbar" class="navbar-collapse collapse">
-       
-       <div id='nav-left'></div>
-       
-        <!--ul class="nav navbar-nav">
-          <li class="active"><a href="#">加盟</a></li>
-          <li><a href="#about">注册</a></li>
-          <li><a href="#contact">登录</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        </ul-->        
-        
-        <!-- ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="./">加盟<span class="sr-only">(current)</span></a></li>
-          <li><a href="../navbar-static-top/">注册</a></li>
-          <li><a href="../navbar-fixed-top/">登录</a></li>
-        </ul-->
-
+        <div id='nav-left'></div>
         <div id='nav-right'></div>
       </div>
       <!--/.nav-collapse -->
     </div>
   </nav>
   
-
-
 <!-- big picture -->
   <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -124,22 +97,73 @@
         something more unique by building on or modifying it.</p>
     </div>
 
+    <form class="form-inline">
+      <div class="form-group">
+        <label>目的地</label>
+        <select class="form-control">
+          <option>usa</option>
+          <option>china</option>
+        </select>
+        <select class="form-control">
+          <option>NC</option>
+          <option>TX</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>日期</label>
+        <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
+
+        <label>人数</label>
+        <input type="number" class="form-control" value=1 min=1 max=10 />
+      </div>
+
+      <div class="form-group">
+        <label>服务</label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">
+          私人向导
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">
+          私家车 + 司机
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">
+          住房
+        </label>
+      </div>
+      <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+
     <ol class="breadcrumb">
-      <li><a href="#">房源</a></li>
+      <li class="active">房源</li>
       <li><a href="#">私家车</a></li>
       <li><a href="#">向导</a></li>
-      <li class="active">评价</li>
+      <li><a href="#">评价</a></li>
     </ol>
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEx1">
+      Launch demo modal
+    </button>
 
     <div class="row">
       <div class="col-lg-4">
         <h2>Safari bug warning!</h2>
-        <img src="/images/3.png" alt="Mountain View" style="width:304px;height:228px; margin-bottom:10px;">        
+        <img src="/images/3.png" alt="Mountain View" style="width:304px;height:228px; margin-bottom:10px;">    
+        <p>900元/天  &nbsp&nbsp &nbsp   3 室1 厅3 床 &nbsp &nbsp  美国 &nbsp Cary   </br> 可议价  3.5 star
+        </p>
         <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
       </div>
       <div class="col-lg-4">
-        <h2>Heading</h2>
+        <h2 id="service-test">Heading</h2>
         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
           nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
         </p>
@@ -175,60 +199,66 @@
           + Use a different preprocessor, like TypeScript
     -->
 
+
   <!--SCRIPTS-->
   <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/dependencies/jquery-3.2.1.min.js"></script>
+  <script src="/js/dependencies/browser.min.js"></script>
+  <script src="/js/dependencies/react.js"></script>
+  <script src="/js/dependencies/react-dom.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/underscore.js"></script>
   <!--SCRIPTS END-->
+  <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('input[name="daterange"]').daterangepicker();
+    })
+
+  </script>
 </body>
 </html>
 
-<script src="https://fb.me/react-0.13.3.js"></script>
-<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+<!--<script src="https://fb.me/react-15.0.0.js"></script>
+<script src="https://fb.me/react-dom-15.0.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
 
-<script type="text/jsx">
+<script type="text/babel" src="/js/NavMenus.jsx"></script>
 
-  var NavMenuItem = React.createClass({  // this is a react class
-    
-    render: function(props) { // this is the function how to display this class
-      return <li className={this.props.className} ><a href="">{this.props.text}</a></li>
+<script type="text/babel">
+
+  class CallService extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {text:'', color:'black'}
     }
-  });
-    
-  var NavMenus = React.createClass({ // this is another react class
-    
-    render: function(props) { // this is the function how to display this class
-
-        var a = this.props.fangdao == "right" ? "navbar-right" : " ";
-        var b = "nav navbar-nav " + a;
-        
-        var menulist = []
-        this.props.neirong.forEach(function(element, index) { 
-            var style = index==0 ? "active" : "";
-            menulist.push(<NavMenuItem text={element} className={style} />)
-        });
-        
-        return <ul className={b} >
-            {menulist}
-        </ul>
+       
+    componentDidMount() {
+      console.log('componentDidMount')
+      setInterval(() => { this.callService(); } , 5000);
     }
-  });
 
-  var leftNeirong = function() {
-    return [ {text:"加盟" , style:"active"}, {text:"注册" , style:""}, {text:"登录" , style:""} ] 
+    callService() {
+      console.log('callService')
+      $.get("http://localhost:1337/message/2", (data) => {  
+        this.setState({text:data.title});  
+      });
+    }
+
+    render() {
+      console.log('render')
+      return <div>Response - {this.state.text}</div>;
+    }
   }
 
-  var rightNeirong = function() {
-      return [ {text:"about us" , style:"active"}, {text:"contact us" , style:""} ]
-  }
+  //import NavMenus from 'NavMenus'
+  ReactDOM.render(<CallService />, document.getElementById('service-test')  );
 
-
-  // React.render(what, where) --> verb
-  // what is class, created by createClass
-  // where is a html <tag>
-
-  React.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录"]} />, document.getElementById('nav-right'));  
-
-  React.render(<NavMenus fangdao="left" neirong={["about us"]} />, document.getElementById('nav-left'));
-
+  ReactDOM.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录"]} />, document.getElementById('nav-right'));  
+  ReactDOM.render(<NavMenus fangdao="left" neirong={["About us"]} />, document.getElementById('nav-left'));
 </script>
- 

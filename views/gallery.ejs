@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!--
+        Stylesheets and Preprocessors
+        ==============================
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+  <style>
+    body {
+      padding-top: 70px;
+      padding-bottom: 30px;
+    }
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <!--STYLES END-->
+  <!-- Latest compiled and minified CSS -->
+  
+
+</head>
+
+<body class="container">
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="#">Alloko</a>
+      </div>
+        <!-- nave bar -->
+      <div id="navbar" class="navbar-collapse collapse">
+        <div id='nav-left'></div>
+        <div id='nav-right'></div>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+  
+  <!-- gallery -->
+  <div id='root'>
+  <!-- row 1 -->
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="/images/3.png" alt="...">
+        <div class="caption">
+          <h3>Thumbnail label</h3>
+          <p>...</p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="/images/3.png" alt="...">
+        <div class="caption">
+          <h3>Thumbnail label</h3>
+          <p>...</p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="/images/3.png" alt="...">
+        <div class="caption">
+          <h3>Thumbnail label</h3>
+          <p>...</p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="progress" style="display: none"> 
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+    <span class="sr-only">75% Complete</span>
+  </div>
+
+</div>
+
+</body>
+</html>
+
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dependencies/jquery-3.2.1.min.js"></script>
+<script src="/js/dependencies/browser.min.js"></script>
+<script src="/js/dependencies/react.js"></script>
+<script src="/js/dependencies/react-dom.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/underscore.js"></script>
+<!--SCRIPTS END-->
+
+  <script type="text/javascript">
+  var isLoading = false;
+  
+  var loadMore = function() {
+    if(isLoading) 
+      return false;
+    else {
+      $('.progress').show(); isLoading = true;
+    }
+
+    doLoad();
+  }
+
+  var doLoad = function() {
+    console.log("loading...")
+    $.get("http://localhost:1337/message", (data) => {
+      setTimeout(function() {
+        var model = [];
+        data.forEach(function(e){ 
+          model.push({title: e.title || '', imageUrl: e.imageUrl || '/images/img-missing.png'})
+        });  
+        var str = this['JST']['assets/templates/gallery_1x3.html'](model);
+
+        $('#root').append(str);
+        $('.progress').hide();
+        isLoading = false;
+      }, 10);
+    });
+
+  }
+
+  $(window).on('scroll', function() {
+    if( $(window).scrollTop() == $(document).height() - $(window).height() ) {
+        loadMore()
+    }
+  }).scroll();
+
+</script>
+
+<!--TEMPLATES-->
+<script type="text/javascript" src="/jst.js"></script>
+<!--TEMPLATES END-->
+
+

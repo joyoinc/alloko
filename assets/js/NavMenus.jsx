@@ -6,11 +6,18 @@ class NavMenuItem extends React.Component {
 }
 
 class NavMenus extends React.Component {
-    render() {
-        return <ul className="nav navbar-nav navbar-right">
-            <NavMenuItem text="加盟" className="active" />
-            <NavMenuItem text="注册" className=" " />
-            <NavMenuItem text="登录" className=" " />
+
+    render(props) {
+        
+        var style = `nav navbar-nav ${this.props.fangdao=="right" ? "navbar-right" : ""}`;
+        const menulist = this.props.neirong.map((e, index) => {
+            var style = index==0 ? "active" : "";
+            return <NavMenuItem key={e.toString()} text={e} className={style} />
+            }
+        );
+
+        return <ul className={style} >
+            {menulist}
         </ul>
     }
 }

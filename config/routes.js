@@ -31,6 +31,9 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+  'POST /message/uploadSnapshot' : 'MessageController.uploadSnapshot',
+  'POST /message/RichMessage' : 'MessageController.createRichMessage',
+  'GET /message/snapshot/:fd' : 'MessageController.downloadSnapshot',
 
   '/home': {view: 'homepage'}
 

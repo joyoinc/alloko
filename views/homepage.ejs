@@ -36,11 +36,6 @@
   <link rel="stylesheet" href="/styles/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
-  <!-- Latest compiled and minified CSS -->
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-    crossorigin="anonymous">-->
 
 </head>
 
@@ -77,49 +72,93 @@
         something more unique by building on or modifying it.</p>
     </div>
 
-    <form class="form-inline">
+    <form class="form-horizontal">
       <div class="form-group">
-        <label>目的地</label>
-        <select class="form-control">
-          <option>usa</option>
-          <option>china</option>
-        </select>
-        <select class="form-control">
-          <option>NC</option>
-          <option>TX</option>
-        </select>
-      </div>
+
+        <div class="col-md-3">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Province <span class="caret"></span></button>
+                <ul class="dropdown-menu" id="province-menu">
+                </ul>
+              </div><!-- /btn-group -->
+            <input type="text" name="province" class="form-control" readonly="" aria-label="...">
+          </div><!-- /input-group -->
+        </div><!-- /.col-md -->
+
+        <div class="col-md-3">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City <span class="caret"></span></button>
+                <ul class="dropdown-menu" id="city-menu">
+                </ul>
+              </div><!-- /btn-group -->
+            <input type="text" name="city" class="form-control" readonly="" aria-label="...">
+          </div><!-- /input-group -->
+        </div><!-- /.col-md -->
+
+        <div class="col-md-3">
+          <div class="input-group ">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" ></span></span>
+            <input type="text" name="daterange" readonly="" class="form-control" value="01/01/2017 - 01/01/2018" />
+          </div>
+        </div><!-- /.col-md -->
+
+        <div class="col-md-2">
+          <div class="input-group ">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
+            <input type="number" class="form-control" value=1 min=1 max=10 />
+          </div>
+        </div><!-- /.col-md -->
+
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-success form-control" >
+            <span class="glyphicon glyphicon-search" ></span>
+          </button>
+        </div><!-- /.col-md -->
+      </div><!-- form-group -->
 
       <div class="form-group">
-        <label>日期</label>
-        <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
+        <div class="checkbox col-md-2">
+          <label>
+            <input type="checkbox" value="">
+            私人向导
+          </label>
+        </div><!-- div.checkbox -->
 
-        <label>人数</label>
-        <input type="number" class="form-control" value=1 min=1 max=10 />
-      </div>
+        <div class="checkbox col-md-2">
+          <label>
+            <input type="checkbox" value="">
+            私家车 + 司机
+          </label>
+        </div><!-- div.checkbox -->
 
-      <div class="form-group">
-        <label>服务</label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">
-          私人向导
-        </label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">
-          私家车 + 司机
-        </label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">
-          住房
-        </label>
-      </div>
-      <button type="submit" class="btn btn-default">搜索</button>
+        <div class="checkbox col-md-2">
+          <label>
+            <input type="checkbox" value="">
+            住房
+          </label>
+        </div><!-- div.checkbox -->
+
+        <div class="col-md-3">
+          <div class="input-group ">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-minus" ></span></span>
+            <span class="input-group-addon">$</span>
+            <input type="number" class="form-control" value=100 min=1 />
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div><!-- /.col-md -->
+        <div class="col-md-3">
+          <div class="input-group ">
+            <span class="input-group-addon">$</span>
+            <input type="number" class="form-control" value=10000 max=10000 />
+            <span class="input-group-addon">.00</span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-plus" ></span></span>
+          </div>
+        </div><!-- /.col-md -->
+
+
+      </div><!-- form-group -->
     </form>
 
     <ol class="breadcrumb">
@@ -193,9 +232,55 @@
   <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
   <script>
+    /* data */
+    var provinces = [
+      {id:'jiangsu', text:'江苏'},
+      {id:'zhejiang', text:'浙江'},
+      {id:'guangdong', text:'广东'},
+    ]
+    var cities = [
+      {id:'nanjing', text:'南京', par:'jiangsu'},
+      {id:'wuxi', text:'无锡', par:'jiangsu'},
+      {id:'suzhou', text:'苏州', par:'jiangsu'},
+
+      {id:'wenzhou', text:'温州', par:'zhejiang'},
+      {id:'hangzhou', text:'杭州', par:'zhejiang'},
+    ]
+    /* end data */
+
     $(document).ready(function(){
       $('input[name="daterange"]').daterangepicker();
+
+      provinces.forEach(function(e,idx){
+        $('#province-menu').append(`<li><a id=${e.id} class='input-link' target='province'>${e.text}</a></li>`)
+      })
+
+      cities.forEach(function(e,idx){
+        $('#city-menu').append(`<li><a id=${e.id} par=${e.par} class='input-link' target='city'>${e.text}</a></li>`)
+      })
+
     })
+
+    $(document).on('click', 'a.input-link', function(e){
+      e.preventDefault();
+      var t =$(this).attr('target');
+      var oldValue = $(`input[name=${t}]`).val();
+      if(oldValue !== $(this).text()) {
+        $(`input[name=${t}]`).val($(this).text()).trigger('change')
+      }
+    });
+
+    $('input[name="province"]').on("change", function(){
+      $('input[name="city"]').val("");
+      $('#city-menu a.input-link').hide();
+
+      var current_province = provinces.find((elem) => { return elem.text===$(this).val()});
+
+      $('#city-menu a.input-link').filter((idx, elem) => {
+        return $(elem).attr('par') === current_province.id;
+      }).show();
+    });
+
 
   </script>
 </body>

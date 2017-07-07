@@ -5,8 +5,10 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var fsdb = 'mongodb://dba:dba@pox:27017/alloko.snapshot'
+var current_db = sails.config.connections[sails.config.models.connection];
+var fsdb = `mongodb://${current_db.user}:${current_db.password}@${current_db.host}:${current_db.port}/${current_db.database}.snapshot`
 var blobAdapter = require('skipper-gridfs')({uri: fsdb})
+
 
 module.exports = {
 

@@ -119,7 +119,7 @@
 
   var doLoad = function() {
     console.log("loading...")
-    $.get("http://localhost:1337/message", (data) => {
+    $.get("/message", (data) => {
       setTimeout(function() {
         var model = data.map(function(e){ 
           return { title: e.title || '',

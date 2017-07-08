@@ -46,6 +46,7 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  '/gallery': {view: 'gallery'}
+  '/gallery': {view: 'gallery'},
+  '/publish': {view: 'house'}
 
 };

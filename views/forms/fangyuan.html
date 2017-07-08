@@ -1,0 +1,151 @@
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="housename" class="control-label col-md-2">房源名称</label>
+      <div class="col-md-10">
+        <input type="text" class="form-control " id="housename" name="housename" placeholder=" ">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bedroomcount" class="control-label col-md-2">房间数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" id="bedroomcount" name="bedroomcount" min="1" max="10" value="2">
+      </div>
+      <label for="livingroomcount" class="control-label col-md-2">厅数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" id="livingroomcount" name="livingroomcount" min="1" max="10" value="1">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="bathroomcount" class="control-label col-md-2">卫生间数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" id="bathroomcount" name="bathroomcount" min="1" max="10" value="2">
+      </div>
+      <label for="capacity" class="control-label col-md-2">最多可住人数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" id="capacity" name="capacity" min="1" max="30" value="4">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="country" class="control-label col-md-2">地址</label>
+      <div class="col-md-2">
+        <input type="text" class="form-control" name="country" id="country" placeholder="国家">
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control" name="city" id="city" placeholder="城市">
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="street" id="street" placeholder="街道，门牌号">
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control" name="zip" id="zip" placeholder="邮编">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="housepic" class="control-label col-md-2">房屋图片</label>
+      <div class="col-md-10">
+        <label  class="btn btn-default">选择文件 <span><input type="file" name="housepic" id="housepic"></span></label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ownershippic" class="control-label col-md-2">房产证照片</label>
+      <div class="col-md-10">
+        <label class="btn btn-default">选择文件 <span><input type="file" name="ownershippic" id="ownershippic"></span></label>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label col-md-2">入住要求</label>
+      <div class="col-md-2">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="nopet">
+          禁止带宠物
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="noparty">
+          禁止办聚会
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>   <input type="checkbox" value="" name="nokids">
+          禁止带儿童
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label col-md-2">便利设施</label>
+      <div class="col-md-2">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="kitchen">
+          厨房
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="freewifi">
+          免费上网
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>   <input type="checkbox" value="" name="freeparking">
+          免费停车
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="checkintime" class="control-label col-md-2">入住时间</label>
+      <div class="col-md-4">
+        <input type="time" class="form-control" name="checkintime" id="checkintime" value="14:00:00">
+      </div>
+      <label for="checkouttime" class="control-label col-md-2">退房时间</label>
+      <div class="col-md-4">
+        <input type="time" class="form-control" name="checkouttime" id="checkouttime" value="12:00:00">
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <label for="price" class="control-label col-md-2">价格/天（美元）</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="price" id="price" min="1" max="1000">
+      </div>
+      <label for="minday" class="control-label col-md-2">最少入住天数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="minday" id="minday" min="1" max="30" value="1">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="memo" class="control-label col-md-2">补充说明:</label>
+      <div class="col-md-10">
+        <textarea class="form-control" rows="5" name="memo" id="memo"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-md-10">
+        <button type="submit" class="btn btn-primary btn-submit">提交</button>
+      </div>
+    </div>
+  </form>

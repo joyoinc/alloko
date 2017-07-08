@@ -1,16 +1,198 @@
 <!doctype html>
 <html>
+
 <head>
   <title></title>
-
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/default.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="/js/dependencies/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 </head>
 
-<body>
-  <form action="/message/RichMessage" enctype="multipart/form-data" method="post">
-    <input type=text name="title" placeholder='untitled' />
-    <textarea name="detail" placeholder='empty body' ></textarea>
-    <input type=file name="snap" />
-    <input type=submit value="ok">
+<body style="width:1098px; padding:10px;" class="container">
+
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-md-2">服务类型</label>
+      <div class="col-md-3">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="guide">
+          可只提供向导服务
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="caranddrive">
+          可提供向导 + 私家车服务
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-2">服务要求</label>
+      <div class="col-md-3">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="noman">
+          不接待男士
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="nopat">
+          禁止带宠物
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="checkbox ">
+          <label>   <input type="checkbox" value="" name="nokids">
+          禁止带儿童
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-2">设施及要求</label>
+      <div class="col-md-3">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="ac">
+          空调
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="carseat">
+          儿童座椅
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="checkbox ">
+          <label>   <input type="checkbox" value="" name="nonsmoking">
+          车内不许吸烟
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="guideintroduction" class="control-label col-md-2">向导简介:</label>
+      <div class="col-md-10">
+        <textarea class="form-control" rows="5" name="guideintroduction" id="guideintroduction"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <label for="guideprice" class="control-label col-md-2">向导价格/小时（美元）</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="guideprice" id="guideprice" min="1" max="100">
+      </div>
+      <label for="guidewithcarprice" class="control-label col-md-2">向导加车价格</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="guidewithcarprice" id="guidewithcarprice" min="1" max="1000">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="minservicetime" class="control-label col-md-2">最短服务时间（小时）</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="minservicetime" id="minservicetime" min="1" max="10" value="1">
+      </div>
+      <label for="maxserivecount" class="control-label col-md-2">最多服务人数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="maxserivecount" id="maxserivecount" min="1" max="100" value="4">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="doorcount" class="control-label col-md-2">车门数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="doorcount" id="doorcount" min="1" max="10" value="4">
+      </div>
+      <label for="seatcount" class="control-label col-md-2">座位数</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control" name="seatcount" id="seatcount" min="1" max="100" value="5">
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="cartype" class="control-label col-md-2">车型</label>
+      <div class="col-md-4">
+        <select class="form-control" name="cartype" id="cartype">
+          <option value="经济型">经济型</option>
+          <option value="商务型">商务型</option>
+          <option value="豪华型">豪华型</option>
+         </select>
+      </div>
+      <label for="cargroup" class="control-label col-md-2">类型</label>
+      <div class="col-md-4">
+        <select class="form-control" name="cargroup" id="cargroup">
+          <option value="轿车">轿车</option>
+          <option value="SUV">SUV</option>
+          <option value="面包车">面包车</option>
+          <option value="跑车">跑车</option>
+         </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="carbrand" class="control-label col-md-2">品牌</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="carbrand" id="carbrand" value="">
+      </div>
+      <label for="carmodel" class="control-label col-md-2">型号</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="carmodel" id="carmodel" value="">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="carpic" class="control-label col-md-2">车辆图片</label>
+      <div class="col-md-10">
+        <label class="btn btn-default">选择文件<span><input type="file" name="carpic" id="carpic"></span></label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="insurancepic" class="control-label col-md-2">车保险扫描件</label>
+      <div class="col-md-10">
+        <label class="btn btn-default">选择文件 <span><input type="file" name="insurancepic" id="insurancepic"></span></label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dlpic" class="control-label col-md-2">驾照扫描件</label>
+      <div class="col-md-10">
+        <label class="btn btn-default">选择文件  <span><input type="file" name="dlpic" id="dlpic"></span></label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-md-10">
+        <button type="submit" class="btn btn-primary">提交</button>
+      </div>
+    </div>
   </form>
+
 </body>
+
 </html>

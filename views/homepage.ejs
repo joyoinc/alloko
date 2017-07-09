@@ -3,7 +3,7 @@
 <head>
   <title></title>
 
-  <% include sample1.html %>
+  <% include modal1.html %>
 
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -290,6 +290,6 @@
 <script type="text/babel" src="/js/NavMenus.jsx"></script>
 <script type="text/babel">
 
-  ReactDOM.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录", "publish", "gallery"]} />, document.getElementById('nav-right'));  
-  ReactDOM.render(<NavMenus fangdao="left" neirong={["working"]} />, document.getElementById('nav-left'));
+  ReactDOM.render(<NavMenus fangdao="right" neirong={["加盟","注册","登录", "dashboard", "gallery"]} />, document.getElementById('nav-right'));  
+  ReactDOM.render(<NavMenus fangdao="left" neirong={["working", "dashboard"]} />, document.getElementById('nav-left'));
 </script>

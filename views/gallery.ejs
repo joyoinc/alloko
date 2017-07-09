@@ -120,7 +120,7 @@
 
   var doLoad = function() {
     console.log("loading...")
-    $.get("/message", (data) => {
+    $.get("/house/recent", (data) => {
       setTimeout(function() {
         var model = data.map(function(e){ 
           return { title: e.title || '',

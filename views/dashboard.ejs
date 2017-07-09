@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!--
+        Stylesheets and Preprocessors
+        ==============================
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+  <style>
+
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/default.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <!--STYLES END-->
+  <!-- Latest compiled and minified CSS -->
+</head>
+
+<body>
+  <!-- nav bar --!>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Alloko Admin Console</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <p class="navbar-text ">Hello <%= typeof cuser == 'undefined' ? 'Anoymnous' : cuser %></p>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/ac/dashboard">Dashboard</a></li>
+          <li><a href="/ac/setting">Settings</a></li>
+          <li><a href="/ac/profile">Profile</a></li>
+          <li><a href="/ac/help">Help</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left panel --!>
+      <div class="col-sm-3 col-md-2 sidebar">
+        <% include console_left.html %>
+      </div>
+
+      <!-- right panel --!>
+      <div id="root" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
+
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dependencies/jquery-3.2.1.min.js"></script>
+<script src="/js/dependencies/browser.min.js"></script>
+<script src="/js/dependencies/react.js"></script>
+<script src="/js/dependencies/react-dom.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/underscore.js"></script>
+<!--SCRIPTS END-->
+
+<script >
+
+$('.nav li a').click((evt) => {evt.preventDefault();
+  $('.nav li').removeClass('active');
+  $(evt.target).parent().addClass('active');
+
+  var tmpl = $(evt.target).attr('data-tmpl');
+  var jst_tmpl = typeof tmpl == 'undefined' ? '' : this['JST'][`assets/templates/${tmpl}`]();
+  $('#root').html(jst_tmpl);
+})
+
+$(document).on('submit', 'form', (evt)=>{
+  evt.preventDefault();
+  $.post($('form').attr('action'), $('form').serialize(), (data)=>{ 
+    var jst_tmpl = this['JST'][`assets/templates/alert-dismissible.html`]({
+      type:'alert-success', title:'Good job!', info:'New record success'})
+
+    $('#root').append(jst_tmpl);
+  })
+})
+
+$(document).on('click', 'form .btn-submit', (evt)=>{
+  evt.preventDefault()
+    $('form').submit() })
+
+</script>
+
+<!--TEMPLATES-->
+<script type="text/javascript" src="/jst.js"></script>
+<!--TEMPLATES END-->
+
+

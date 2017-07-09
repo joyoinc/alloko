@@ -33,4 +33,10 @@ var self = module.exports = {
         return elemOrArray instanceof Array ? elemOrArray : [ elemOrArray ];
     },
 
+    handleChkboxControl: function(req, chkNames, obj) {
+        self.ensureArray(chkNames).forEach((elem) => {
+            obj[elem] = self.ensureArray(req.param(elem) || '');
+        });
+    },
+
 }

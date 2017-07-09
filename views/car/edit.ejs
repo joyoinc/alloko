@@ -76,19 +76,24 @@
 
 <script >
 
-  /*
-  $("#housepic").fileinput({
+  $("#carpic").fileinput({
     showPreview: true,
     uploadAsync: false,
-    uploadUrl:"/message/image/housepic",
-  })
+    uploadUrl:"/message/image/carpic",
+  });
 
-  $("#ownershippic").fileinput({
+  $("#insurancepic").fileinput({
     showPreview: true,
     uploadAsync: false,
-    uploadUrl:"/message/image/ownershippic",
-  })
-  */
+    uploadUrl:"/message/image/insurancepic",
+  });
+
+  $("#dlpic").fileinput({
+    showPreview: true,
+    uploadAsync: false,
+    uploadUrl:"/message/image/dlpic",
+  });
+
 
   $(document).on('submit', 'form', (evt) => {
     evt.preventDefault();

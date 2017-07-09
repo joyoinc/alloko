@@ -1,175 +1,189 @@
-
-  <form class="form-horizontal">
-    <div class="form-group">
-      <label class="control-label col-md-2">服务类型</label>
-      <div class="col-md-3">
-        <div class="checkbox">
-          <label>    <input type="checkbox" value="" name="guide">
+<form class="form-horizontal" action="/car/createOrUpdate">
+  <div class="form-group">
+    <label class="control-label col-md-2">服务类型</label>
+    <div class="col-md-3">
+      <div class="checkbox">
+        <label>    <input type="checkbox" value="guide" name="servicetypes" <%= typeof myCar == 'undefined' || myCar.servicetypes.indexOf('guide') == -1 ? '' : 'checked'  %>>
           可只提供向导服务
           </label>
-        </div>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <div class="checkbox ">
-          <label>    <input type="checkbox" value="" name="caranddrive">
+    <div class="col-md-3">
+      <div class="checkbox ">
+        <label>    <input type="checkbox" value="caranddrive" name="servicetypes" <%= typeof myCar == 'undefined' || myCar.servicetypes.indexOf('caranddrive') == -1 ? '' : 'checked'  %>>
           可提供向导 + 私家车服务
           </label>
-        </div>
       </div>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label class="control-label col-md-2">服务要求</label>
-      <div class="col-md-3">
-        <div class="checkbox">
-          <label>    <input type="checkbox" value="" name="noman">
+  <div class="form-group">
+    <label class="control-label col-md-2">服务要求</label>
+    <div class="col-md-3">
+      <div class="checkbox">
+        <label>    <input type="checkbox" value="male" name="forbids" <%= typeof myCar == 'undefined' || myCar.forbids.indexOf('male') == -1 ? '' : 'checked'  %>>
           不接待男士
           </label>
-        </div>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <div class="checkbox ">
-          <label>    <input type="checkbox" value="" name="nopat">
+    <div class="col-md-3">
+      <div class="checkbox ">
+        <label>    <input type="checkbox" value="pet" name="forbids" <%= typeof myCar == 'undefined' || myCar.forbids.indexOf('pet') == -1 ? '' : 'checked'  %>>
           禁止带宠物
           </label>
-        </div>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <div class="checkbox ">
-          <label>   <input type="checkbox" value="" name="nokids">
+    <div class="col-md-3">
+      <div class="checkbox ">
+        <label>   <input type="checkbox" value="kid" name="forbids" <%= typeof myCar == 'undefined' || myCar.forbids.indexOf('kid') == -1 ? '' : 'checked'  %>>
           禁止带儿童
           </label>
-        </div>
       </div>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label class="control-label col-md-2">设施及要求</label>
-      <div class="col-md-3">
-        <div class="checkbox">
-          <label>    <input type="checkbox" value="" name="ac">
+  <div class="form-group">
+    <label class="control-label col-md-2">设施及要求</label>
+    <div class="col-md-3">
+      <div class="checkbox">
+        <label>    <input type="checkbox" value="ac" name="facility" <%= typeof myCar == 'undefined' || myCar.facility.indexOf('ac') == -1 ? '' : 'checked'  %>>
           空调
           </label>
-        </div>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <div class="checkbox ">
-          <label>    <input type="checkbox" value="" name="carseat">
+    <div class="col-md-3">
+      <div class="checkbox ">
+        <label>    <input type="checkbox" value="carseat" name="facility" <%= typeof myCar == 'undefined' || myCar.facility.indexOf('carseat') == -1 ? '' : 'checked'  %>>
           儿童座椅
           </label>
-        </div>
       </div>
-      <div class="col-md-3">
-        <div class="checkbox ">
-          <label>   <input type="checkbox" value="" name="nonsmoking">
+    </div>
+    <div class="col-md-3">
+      <div class="checkbox ">
+        <label>   <input type="checkbox" value="nonsmoking" name="facility" <%= typeof myCar == 'undefined' || myCar.facility.indexOf('nonsmoking') == -1 ? '' : 'checked'  %>>
           车内不许吸烟
           </label>
-        </div>
       </div>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="guideintroduction" class="control-label col-md-2">向导简介:</label>
-      <div class="col-md-10">
-        <textarea class="form-control" rows="5" name="guideintroduction" id="guideintroduction"></textarea>
-      </div>
+  <div class="form-group">
+    <label for="guideintroduction" class="control-label col-md-2">向导简介:</label>
+    <div class="col-md-10">
+      <textarea class="form-control" rows="5" name="guideintroduction" id="guideintroduction" value="<%= typeof myCar == 'undefined' ? '' : myCar.guideintroduction %>"> </textarea>
     </div>
+  </div>
 
-    <div class="form-group ">
-      <label for="guideprice" class="control-label col-md-2">向导价格/小时（美元）</label>
-      <div class="col-md-4">
-        <input type="number" class="form-control" name="guideprice" id="guideprice" min="1" max="100">
-      </div>
-      <label for="guidewithcarprice" class="control-label col-md-2">向导加车价格</label>
-      <div class="col-md-4">
-        <input type="number" class="form-control" name="guidewithcarprice" id="guidewithcarprice" min="1" max="1000">
-      </div>
+  <div class="form-group ">
+    <label for="guideprice" class="control-label col-md-2">向导价格/小时（美元）</label>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="guideprice" id="guideprice" min="1" max="100" value="<%= typeof myCar == 'undefined' ? '' : myCar.guideprice %>">
     </div>
-
-    <div class="form-group">
-      <label for="minservicetime" class="control-label col-md-2">最短服务时间（小时）</label>
-      <div class="col-md-4">
-        <input type="number" class="form-control" name="minservicetime" id="minservicetime" min="1" max="10" value="1">
-      </div>
-      <label for="maxserivecount" class="control-label col-md-2">最多服务人数</label>
-      <div class="col-md-4">
-        <input type="number" class="form-control" name="maxserivecount" id="maxserivecount" min="1" max="100" value="4">
-      </div>
+    <label for="guidewithcarprice" class="control-label col-md-2">向导加车价格</label>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="guidewithcarprice" id="guidewithcarprice" min="1" max="1000" value="<%= typeof myCar == 'undefined' ? '' : myCar.guidewithcarprice %>">
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="doorcount" class="control-label col-md-2">车门数</label>
-      <div class="col-md-4">
-        <input type="number" class="form-control" name="doorcount" id="doorcount" min="1" max="10" value="4">
-      </div>
-      <label for="seatcount" class="control-label col-md-2">座位数</label>
-      <div class="col-md-4">
-        <input type="number" class="form-control" name="seatcount" id="seatcount" min="1" max="100" value="5">
-      </div>
+  <div class="form-group">
+    <label for="minservicetime" class="control-label col-md-2">最短服务时间（小时）</label>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="minservicetime" id="minservicetime" min="1" max="10" value="<%= typeof myCar == 'undefined' ? '1' : myCar.minservicetime %>">
     </div>
+    <label for="maxserivecount" class="control-label col-md-2">最多服务人数</label>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="maxserivecount" id="maxserivecount" min="1" max="100" value="<%= typeof myCar == 'undefined' ? '4' : myCar.maxserivecount %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="doorcount" class="control-label col-md-2">车门数</label>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="doorcount" id="doorcount" min="1" max="10" value="<%= typeof myCar == 'undefined' ? '4' : myCar.doorcount %>">
+    </div>
+    <label for="seatcount" class="control-label col-md-2">座位数</label>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="seatcount" id="seatcount" min="1" max="100" value="<%= typeof myCar == 'undefined' ? '5' : myCar.seatcount %>">
+    </div>
+  </div>
 
 
 
-    <div class="form-group">
-      <label for="cartype" class="control-label col-md-2">车型</label>
-      <div class="col-md-4">
-        <select class="form-control" name="cartype" id="cartype">
-          <option value="经济型">经济型</option>
-          <option value="商务型">商务型</option>
-          <option value="豪华型">豪华型</option>
+  <div class="form-group">
+    <label for="cartype" class="control-label col-md-2">车型</label>
+    <div class="col-md-4">
+      <select class="form-control" name="cartype" id="cartype">
+          <option value="经济型" <%= typeof myCar == 'undefined' || myCar.cartype != '经济型' ? '' : 'selected'  %>>经济型</option>
+          <option value="商务型" <%= typeof myCar == 'undefined' || myCar.cartype != '商务型' ? '' : 'selected'  %>>商务型</option>
+          <option value="豪华型" <%= typeof myCar == 'undefined' || myCar.cartype != '豪华型' ? '' : 'selected'  %>>豪华型</option>
          </select>
-      </div>
-      <label for="cargroup" class="control-label col-md-2">类型</label>
-      <div class="col-md-4">
-        <select class="form-control" name="cargroup" id="cargroup">
-          <option value="轿车">轿车</option>
-          <option value="SUV">SUV</option>
-          <option value="面包车">面包车</option>
-          <option value="跑车">跑车</option>
+    </div>
+    <label for="cargroup" class="control-label col-md-2">类型</label>
+    <div class="col-md-4">
+      <select class="form-control" name="cargroup" id="cargroup">
+          <option value="轿车" <%= typeof myCar == 'undefined' || myCar.cargroup != '轿车' ? '' : 'selected'  %>>轿车</option>
+          <option value="SUV" <%= typeof myCar == 'undefined' || myCar.cargroup != 'SUV' ? '' : 'selected'  %>>SUV</option>
+          <option value="面包车" <%= typeof myCar == 'undefined' || myCar.cargroup != '面包车' ? '' : 'selected'  %>>面包车</option>
+          <option value="跑车" <%= typeof myCar == 'undefined' || myCar.cargroup != '跑车' ? '' : 'selected'  %>>跑车</option>
          </select>
-      </div>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="carbrand" class="control-label col-md-2">品牌</label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" name="carbrand" id="carbrand" value="">
-      </div>
-      <label for="carmodel" class="control-label col-md-2">型号</label>
-      <div class="col-md-4">
-        <input type="text" class="form-control" name="carmodel" id="carmodel" value="">
-      </div>
+  <div class="form-group">
+    <label for="carbrand" class="control-label col-md-2">品牌</label>
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="carbrand" id="carbrand" value="<%= typeof myCar == 'undefined' ? '' : myCar.carbrand %>">
     </div>
-
-
-    <div class="form-group">
-      <label for="carpic" class="control-label col-md-2">车辆图片</label>
-      <div class="col-md-10">
-        <label class="btn btn-default">选择文件<span><input type="file" name="carpic" id="carpic"></span></label>
-      </div>
+    <label for="carmodel" class="control-label col-md-2">型号</label>
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="carmodel" id="carmodel" value="<%= typeof myCar == 'undefined' ? '' : myCar.carmodel %>">
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="insurancepic" class="control-label col-md-2">车保险扫描件</label>
-      <div class="col-md-10">
-        <label class="btn btn-default">选择文件 <span><input type="file" name="insurancepic" id="insurancepic"></span></label>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <label for="dlpic" class="control-label col-md-2">驾照扫描件</label>
-      <div class="col-md-10">
-        <label class="btn btn-default">选择文件  <span><input type="file" name="dlpic" id="dlpic"></span></label>
-      </div>
+  <div class="form-group">
+    <label for="carpic" class="control-label col-md-2">车辆图片</label>
+    <div class="col-md-10">
+      <% if ((typeof myCar == 'undefined') || !(myCar.carpic_fd) ) { %>
+        <input type="file" name="carpic" id="carpic" multiple class="file-loading">
+        <input type="hidden" name="carpic_fd">
+      <% } else { %>
+          <img src="/message/snapshot/<%= myCar.carpic_fd%>" alt="...">
+      <% } %>
     </div>
+  </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-md-10">
-        <button type="submit" class="btn btn-primary">提交</button>
-      </div>
+  <div class="form-group">
+    <label for="insurancepic" class="control-label col-md-2">车保险扫描件</label>
+    <div class="col-md-10">
+      <% if ((typeof myCar == 'undefined') || !(myCar.insurancepic_fd) ) { %>
+        <input type="file" name="insurancepic" id="insurancepic" multiple class="file-loading">
+        <input type="hidden" name="insurancepic_fd">
+      <% } else { %>
+          <img src="/message/snapshot/<%= myCar.insurancepic_fd%>" alt="...">
+      <% } %>
     </div>
-  </form>
+  </div>
+
+  <div class="form-group">
+    <label for="dlpic" class="control-label col-md-2">驾照扫描件</label>
+    <div class="col-md-10">
+      <% if ((typeof myCar == 'undefined') || !(myCar.dlpic_fd) ) { %>
+        <input type="file" name="dlpic" id="dlpic" multiple class="file-loading">
+        <input type="hidden" name="dlpic_fd">
+        <% } else { %>
+          <img src="/message/snapshot/<%= myCar.dlpic_fd%>" alt="...">
+          <% } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-md-10">
+      <button type="submit" class="btn btn-primary">提交</button>
+    </div>
+  </div>
+</form>

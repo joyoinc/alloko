@@ -10,9 +10,8 @@ var Util = require('../helpers/util')
 var self = module.exports = {
 
   /* API */
-	hi: function(req,res) {
-      
-      console.log(Util.simpleID(7))
+	hi: function(req,res) {   
+      sails.log(Util.simpleID(7))
       res.ok();
   },
 
@@ -34,7 +33,7 @@ var self = module.exports = {
     House.update({ owner: house.owner },house).exec(function (err, record){
       if(err) return res.serverError(err);
 
-      sails.log(`${record.length} house updated`);
+      sails.log(`${record.length} house(s) updated`);
       return res.ok({code:"ok"});
     })
   },
@@ -43,9 +42,8 @@ var self = module.exports = {
     var newHouse = req.allParams();
     newHouse['modifiedBy'] = req.session.me || 'A ghost!'; 
     newHouse['owner'] = req.param('houseowner') || req.session.me ;
-    newHouse['forbids'] = Util.ensureArray(req.param('forbids') || '');
-    newHouse['facility'] = Util.ensureArray(req.param('facility') || '');
-    //obj['forbids'] = Util.ensureArray(req.param('forbids') || '');
+
+    Util.handleChkboxControl(req, ['forbids', 'facility'], newHouse);
 
     House.findOne({ owner: newHouse['owner'] }).exec(function (err, record) {
       if (err) return res.serverError(err);

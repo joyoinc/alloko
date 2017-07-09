@@ -31,11 +31,10 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-  'POST /message/uploadSnapshot' : 'MessageController.uploadSnapshot',
   'POST /message/RichMessage' : 'MessageController.createRichMessage',
+  'POST /message/image/:fieldName' : 'MessageController.uploadImage',
   'GET /message/snapshot/:fd' : 'MessageController.downloadSnapshot',
 
-  '/home': {view: 'homepage'},
   '/': {view: 'homepage'},
   /***************************************************************************
   *                                                                          *
@@ -46,8 +45,14 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+  '/working': {view: 'working'},
+  '/home': {view: 'homepage'},
   '/gallery': {view: 'gallery'},
-  '/publish': {view: 'house'},
-  '/dashboard': {view: 'dashboard'},
+  
+  '/dashboard': '/h/dashboard',
+  '/h/dashboard': 'HostManagerController.main',
+  '/h/setting': 'HostManagerController.main',
+  '/h/profile': 'HostManagerController.main',
+  '/h/help': 'HostManagerController.me',
 
 };

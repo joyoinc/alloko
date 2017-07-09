@@ -65,7 +65,6 @@
 <script src="/js/dependencies/fileinput/purify.min.js"></script>
 <script src="/js/dependencies/fileinput/sortable.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/fileHiddenExt.js"></script>
 <script src="/js/moment.min.js"></script>
 <script src="/js/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="/js/plugins/fileinput/fileinput.min.js"></script>
@@ -74,6 +73,52 @@
 <!--SCRIPTS END-->
 
 <script >
+
+  $('.nav li a').click((evt) => {
+    evt.preventDefault();
+    $('.nav li').removeClass('active');
+    $(evt.target).parent().addClass('active');
+
+    var tmpl = $(evt.target).attr('data-tmpl');
+    var jst_tmpl = typeof tmpl == 'undefined' ? '' : this['JST'][`assets/templates/${tmpl}`]();
+    $('#root').html(jst_tmpl);
+
+    /*
+    $("#housepic").fileinput({
+      showPreview: true,
+      uploadAsync: false,
+      uploadUrl:"",
+    })
+
+    $("#ownershippic").fileinput({
+      showPreview: true,
+      uploadAsync: false,
+      uploadUrl:"",
+    })
+    */
+  });
+
+  $(document).on('submit', 'form', (evt) => {
+    evt.preventDefault();
+    $.post($('form').attr('action'), $('form').serialize(), (data) => {
+      var jst_tmpl = this['JST'][`assets/templates/alert-dismissible.html`]({
+        type: 'alert-success', title: 'Good job!', info: 'New record success'
+      });
+
+      $('#root').append(jst_tmpl);
+    });
+  });
+
+  $(document).on('click', 'form .btn-submit', (evt) => {
+    evt.preventDefault();
+    $('form').submit();
+  });
+
+
 </script>
+
+<!--TEMPLATES-->
+<script type="text/javascript" src="/jst.js"></script>
+<!--TEMPLATES END-->
 
 

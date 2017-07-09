@@ -10,7 +10,7 @@ var fsdb = `mongodb://${current_db.user}:${current_db.password}@${current_db.hos
 var blobAdapter = require('skipper-gridfs')({uri: fsdb})
 
 
-module.exports = {
+var self = module.exports = {
 
   createRichMessage: function(req, res) {
     req.file('snap').upload({ adapter: blobAdapter },function whenDone(err, uploadedFiles){
@@ -33,6 +33,25 @@ module.exports = {
       if (err) return res.negotiate(err);
       return res.ok({code:"ok", files: uploadedFiles});
     })
+  },
+
+  uploadAvartars: function(req, res) {
+    req.file('avartar').upload({ adapter: blobAdapter },function whenDone(err, uploadedFiles){
+      if (err) return res.negotiate(err);
+      return res.ok({code:"ok", files: uploadedFiles});
+    })
+  },
+
+  uploadImage: function(req, res) {
+    var file = req.file(req.param('fieldName'));
+    self.upload_helper(req, res, file);
+  },
+
+  upload_helper:function(req, res, fileTodo) {
+    fileTodo.upload({ adapter: blobAdapter }, function whenDone(err, uploadedFiles){
+      if (err) return res.negotiate(err);
+      return res.ok({code:"ok", files: uploadedFiles});
+    });
   },
 
   downloadSnapshot: function(req,res) {

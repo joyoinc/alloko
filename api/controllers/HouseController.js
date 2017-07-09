@@ -5,33 +5,71 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-module.exports = {
+var Util = require('../helpers/util')
+
+var self = module.exports = {
+
+  /* API */
 	hi: function(req,res) {
-        console.log(req.allParams())
-        res.ok();
+      
+      console.log(Util.simpleID(7))
+      res.ok();
   },
 
 	echo: function(req,res) {
         res.ok(req.allParams())
   },
 
-	publish: function(req,res) {
-    var obj = req.allParams()
+	_publish: function(house, res) {
 
-    House.create(obj).exec(function (err, house){
-      if(err) return res.serverError(err)
+    House.create(house).exec(function (err, record){
+      if(err) return res.serverError(err);
 
-      sails.log(`${house.id} created`)
+      sails.log(`house ${record.id} created`);
       return res.ok({code:"ok"});
     })
   },
 
+  _update: function(house, res) {
+    House.update({ owner: house.owner },house).exec(function (err, record){
+      if(err) return res.serverError(err);
+
+      sails.log(`${record.length} house updated`);
+      return res.ok({code:"ok"});
+    })
+  },
+
+  publishOrUpdate: function (req, res) {
+    var newHouse = req.allParams();
+    newHouse['modifiedBy'] = req.session.me || 'A ghost!'; 
+    newHouse['owner'] = req.param('houseowner') || req.session.me ;
+    newHouse['forbids'] = Util.ensureArray(req.param('forbids') || '');
+    newHouse['facility'] = Util.ensureArray(req.param('facility') || '');
+    //obj['forbids'] = Util.ensureArray(req.param('forbids') || '');
+
+    House.findOne({ owner: newHouse['owner'] }).exec(function (err, record) {
+      if (err) return res.serverError(err);
+
+      if (record) {
+        self._update(newHouse, res);
+      } else {
+        self._publish(newHouse, res);
+      }
+    });
+  },
+
 	recent: function(req,res) {
-    House.find().exec(function (err, house){
+    var query = House.find();
+    var toSkip = req.param('skipCount');
+    query.sort('updatedAt DESC').limit(6).skip(toSkip);
+
+    query.exec(function (err, house){
       if(err) return res.serverError(err)
 
       return res.json(house);
     })
   },
+
+  /* End API */
 };
 

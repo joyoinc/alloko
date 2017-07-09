@@ -36,17 +36,18 @@
 
 <body>
   <!-- nav bar -->
-  <% include host.navbar.ejs %>
+  <% include ../host.navbar.ejs %>
 
   <div class="container-fluid">
     <div class="row">
       <!-- left panel -->
       <div class="col-sm-3 col-md-2 sidebar">
-        <% include host.sidebar.ejs %>
+        <% include ../host.sidebar.ejs %>
       </div>
 
       <!-- right panel -->
       <div id="root" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <% include ../forms/new.car.ejs %>
       </div>
 
     </div>
@@ -74,6 +75,42 @@
 <!--SCRIPTS END-->
 
 <script >
+
+  /*
+  $("#housepic").fileinput({
+    showPreview: true,
+    uploadAsync: false,
+    uploadUrl:"/message/image/housepic",
+  })
+
+  $("#ownershippic").fileinput({
+    showPreview: true,
+    uploadAsync: false,
+    uploadUrl:"/message/image/ownershippic",
+  })
+  */
+
+  $(document).on('submit', 'form', (evt) => {
+    evt.preventDefault();
+    $.post($('form').attr('action'), $('form').serialize(), (data) => {
+      var jst_tmpl = this['JST'][`assets/templates/alert-dismissible.html`]({
+        type: 'alert-success', title: 'Good job!', info: 'New record success'
+      });
+
+      $('#root').append(jst_tmpl);
+    });
+  });
+
+  $(document).on('click', 'form .btn-submit', (evt) => {
+    evt.preventDefault();
+    $('form').submit();
+  });
+
+
 </script>
+
+<!--TEMPLATES-->
+<script type="text/javascript" src="/jst.js"></script>
+<!--TEMPLATES END-->
 
 

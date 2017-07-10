@@ -11,14 +11,14 @@ module.exports = {
     me : function(req, res) {
         host = req.session.me;
 
-        res.view("dashboard", { chost: host } );
+        res.view("dashboard", { chost: host, layout: 'host.layout.ejs' } );
     },
 
 	main : function(req, res) {
         var host = Util.simpleID(3);
         req.session.me = host;
 
-        res.view("dashboard", { chost: host } );
+        res.view("dashboard", { chost: host, layout: 'host.layout.ejs' } );
     },
 
     editHouse: function (req, res) {
@@ -30,11 +30,11 @@ module.exports = {
             if (!myHouse) {
                 sails.log(`Could not find house for ${host}`);
 
-                res.view("house.edit.ejs", { chost: host });
+                res.view("house.edit.ejs", { chost: host, layout: 'host.layout.ejs' });
             } else {
                 sails.log(`Find house ${myHouse.id} for ${host}`);
 
-                res.view("house.edit.ejs", { chost: host, myHouse: myHouse });
+                res.view("house.edit.ejs", { chost: host, layout: 'host.layout.ejs', myHouse: myHouse });
             }
         });
 
@@ -49,11 +49,11 @@ module.exports = {
             if (!myCar) {
                 sails.log(`Could not find car for ${host}`);
 
-                res.view("car.edit.ejs", { chost: host });
+                res.view("car.edit.ejs", { chost: host, layout: 'host.layout.ejs' });
             } else {
                 sails.log(`Find car ${myCar.id} for ${host}`);
 
-                res.view("car.edit.ejs", { chost: host, myCar: myCar });
+                res.view("car.edit.ejs", { chost: host, layout: 'host.layout.ejs', myCar: myCar });
             }
         });
 

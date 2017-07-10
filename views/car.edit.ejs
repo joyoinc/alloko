@@ -1,21 +1,4 @@
-<body>
-  <!-- nav bar -->
-  <% include partials/host.navbar.ejs %>
-
-  <div class="container-fluid">
-    <div class="row">
-      <!-- left panel -->
-      <div class="col-sm-3 col-md-2 sidebar">
-        <% include partials/host.sidebar.ejs %>
-      </div>
-
-      <!-- right panel -->
-      <div id="root" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <% include forms/new.car.ejs %>
-      </div>
-
-    </div>
-  </div>
+<% include forms/new.car.ejs %>
 
 <script >
 
@@ -54,7 +37,7 @@
     $('form').submit();
   });
 
+  $(document).ready(function () {
+    toggleSiderbarMenu('edit_car');
+  });
 </script>
-
-</body>
-

@@ -3,31 +3,50 @@ body {
     padding-bottom: 30px;
 }
 
-input[type=file] { display: none; }
+footer {
+  padding: 30px 0;
+}
 
-.nav-sidebar > .active > a ,
-.nav-sidebar > .active > a:hover ,
-.nav-sidebar > .active > a:focus {
-    color: #fff;
+
+.sidebar-offcanvas  a.active ,
+.sidebar-offcanvas  a:hover ,
+.sidebar-offcanvas  a:focus {
+    color: #eee;
     background-color: #428bca;
 }
 
 
-.sidebar {
-  display: none;
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+  
+  .sidebar-offcanvas {
+    position: fixed;
+    width: 60%; /* 6 columns */
+    display: none;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-right.active
+  .sidebar-offcanvas {
+    display: block;  
+    right: 0;
+    top: 10%;
+    z-index: 1;
+  }
 }
-@media (min-width: 768px) {
-  .sidebar {
-      position: fixed;
-      top: 51px;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
-      display: block;
-      padding: 20px;
-      overflow-x: hidden;
-      overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-      background-color: #f5f5f5;
-      border-right: 1px solid #eee;
-    }
+
+.console-main-panel {    
+    padding: 0 5%;
 }

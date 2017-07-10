@@ -9,8 +9,7 @@ var Util = require('../helpers/util');
 module.exports = {
     /** Page */
     me : function(req, res) {
-        var host = 'ths';
-        req.session.me = host;
+        host = req.session.me;
 
         res.view("dashboard", { chost: host } );
     },
@@ -31,11 +30,11 @@ module.exports = {
             if (!myHouse) {
                 sails.log(`Could not find house for ${host}`);
 
-                res.view("house/edit", { chost: host });
+                res.view("house.edit.ejs", { chost: host });
             } else {
                 sails.log(`Find house ${myHouse.id} for ${host}`);
 
-                res.view("house/edit", { chost: host, myHouse: myHouse });
+                res.view("house.edit.ejs", { chost: host, myHouse: myHouse });
             }
         });
 
@@ -50,11 +49,11 @@ module.exports = {
             if (!myCar) {
                 sails.log(`Could not find car for ${host}`);
 
-                res.view("car/edit", { chost: host });
+                res.view("car.edit.ejs", { chost: host });
             } else {
                 sails.log(`Find car ${myCar.id} for ${host}`);
 
-                res.view("car/edit", { chost: host, myCar: myCar });
+                res.view("car.edit.ejs", { chost: host, myCar: myCar });
             }
         });
 

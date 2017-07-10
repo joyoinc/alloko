@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+
+<head>
+  <title></title>
+
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/daterangepicker.css">
+  <link rel="stylesheet" href="/styles/default.css">
+  <link rel="stylesheet" href="/styles/fileinput.min.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <!--STYLES END-->
+
+  <!--SCRIPTS-->
+  <script src="/js/dependencies/sails.io.js"></script>
+  <script src="/js/dependencies/jquery-3.2.1.min.js"></script>
+  <script src="/js/dependencies/browser.min.js"></script>
+  <script src="/js/dependencies/react.js"></script>
+  <script src="/js/dependencies/react-dom.js"></script>
+  <script src="/js/dependencies/fileinput/piexif.min.js"></script>
+  <script src="/js/dependencies/fileinput/purify.min.js"></script>
+  <script src="/js/dependencies/fileinput/sortable.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/fileHiddenExt.js"></script>
+  <script src="/js/moment.min.js"></script>
+  <script src="/js/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="/js/plugins/fileinput/fileinput.min.js"></script>
+  <script src="/js/plugins/fileinput/locale/zh.js"></script>
+  <script src="/js/underscore.js"></script>
+  <!--SCRIPTS END-->
+</head>
+
+<body style="width:1098px; padding:10px;" class="container">
+
+  <form class="form-horizontal">
+
+    <div class="form-group">
+      <label for="username" class="control-label col-md-2">用户名</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="username" id="username">
+      </div>
+      <label for="email" class="control-label col-md-2">邮箱</label>
+      <div class="col-md-4">
+        <input type="email" class="form-control" name="email" id="email">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastname" class="control-label col-md-2">姓</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="lastname" id="lastname">
+      </div>
+      <label for="firstname" class="control-label col-md-2">名</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="firstname" id="firstname">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label col-md-2">服务类型</label>
+       <div class="col-md-2">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="caranddrive">
+          租房服务
+          </label>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="guide">
+          向导服务
+          </label>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="caranddrive">
+          向导 + 私家车服务
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-2">服务城市</label>
+      <div class="col-md-1">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="newyork">
+          纽约
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="boston">
+          波士顿
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="sanfran">
+          旧金山
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="raleigh">
+          罗利
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="lasvigas">
+         拉斯维加斯
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label col-md-2">服务语言</label>
+      <div class="col-md-1">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="chinese">
+          中文
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="english">
+          英语
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="germany">
+         德语
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="japanese">
+          日语
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="france">
+          法语
+          </label>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="spanish">
+          西班牙语
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-2">兴趣爱好</label>
+      <div class="col-md-1">
+        <div class="checkbox">
+          <label>    <input type="checkbox" value="" name="shopping">
+          购物
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="travel">
+          旅游
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="food">
+          美食
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="clibming">
+          登山
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="fishing">
+          钓鱼
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="fishing">
+          打猎
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="surfing">
+          冲浪
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="checkbox ">
+          <label>    <input type="checkbox" value="" name="golf">
+          高尔夫
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="avartar" class="control-label col-md-2">头像</label>
+      <div class="col-md-10">
+        <input type="file" name="avartar" id="avartar" multiple class="file-loading">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="memo" class="control-label col-md-2">个人简介:</label>
+      <div class="col-md-10">
+        <textarea class="form-control" rows="5" name="memo" id="memo"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-md-10">
+        <button type="submit" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </form>
+
+</body>
+
+</html>
+
+<script>
+  $("#avartar").fileinput({
+    showPreview: true,
+    uploadAsync: false,
+    uploadUrl: "/message/uploadAvartars", // server upload action
+    language: "zh",
+    allowedFileExtensions: ['jpg', 'png', 'gif'],
+    maxFileCount: 1,
+  }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
+    var form = data.form, files = data.files, extra = data.extra,
+        response = data.response, reader = data.reader;
+    console.log('File uploaded triggered');
+  })
+</script>

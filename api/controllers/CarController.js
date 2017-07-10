@@ -9,6 +9,7 @@ var Util = require('../helpers/util');
 
 var self = module.exports = {
 
+    /* API */
     hi: function(req,res) {
         sails.log.debug(req.allParams());
     },
@@ -49,5 +50,7 @@ var self = module.exports = {
             }
         });
     },
+
+    /* End API */
 };
 

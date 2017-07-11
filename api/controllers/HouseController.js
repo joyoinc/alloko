@@ -69,5 +69,26 @@ var self = module.exports = {
   },
 
   /* End API */
+
+  /* Page */
+
+  /* override Blueprint */
+  findOne: function(req, res) {
+    var id = req.param('id');
+
+    House.findOne(id).exec(function (err, record) {
+      if (err) return res.serverError(err);
+
+      if (record) {
+        res.view('house.detail.ejs', { house: record });
+      } else {
+        res.notFound(id);
+      }
+    });
+  },
+
+  /* End Blueprint */
+
+  /* End Page */
 };
 

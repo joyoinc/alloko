@@ -21,6 +21,24 @@ module.exports = {
         res.view("dashboard", { chost: host, layout: 'host.layout.ejs' } );
     },
 
+    becomeHost : function(req, res) {
+        var host = req.session.me;
+
+        res.view("user.join.ejs", { chost: host, layout: 'host.layout.ejs' } );
+    },
+
+    signIn : function(req, res) {
+        var host = req.session.me;
+
+        res.view("user.signin.ejs", { chost: host, layout: 'host.layout.ejs' } );
+    },
+
+    signUp : function(req, res) {
+        var host = req.session.me;
+
+        res.view("user.signup.ejs", { chost: host, layout: 'host.layout.ejs' } );
+    },
+
     editHouse: function (req, res) {
         var host = req.session.me;
 

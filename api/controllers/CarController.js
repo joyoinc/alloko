@@ -20,7 +20,7 @@ var self = module.exports = {
             if (err) return res.serverError(err);
 
             sails.log(`car ${record.id} created`);
-            return res.ok({ code: "ok" });
+            return res.ok({ ok: 'ok', op:'c' });
         })
     },
 
@@ -29,7 +29,7 @@ var self = module.exports = {
             if (err) return res.serverError(err);
 
             sails.log(`${record.length} car(s) updated`);
-            return res.ok({ code: "ok" });
+            return res.ok({ ok: 'ok', op:'u' });
         })
     },
 

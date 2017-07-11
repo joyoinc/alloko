@@ -5,18 +5,21 @@
   $("#carpic").fileinput({
     showPreview: true,
     uploadAsync: false,
+    language: 'zh',
     uploadUrl:"/message/image/carpic",
   });
 
   $("#insurancepic").fileinput({
     showPreview: true,
     uploadAsync: false,
+    language: 'zh',
     uploadUrl:"/message/image/insurancepic",
   });
 
   $("#dlpic").fileinput({
     showPreview: true,
     uploadAsync: false,
+    language: 'zh',
     uploadUrl:"/message/image/dlpic",
   });
 
@@ -24,11 +27,16 @@
   $(document).on('submit', 'form', (evt) => {
     evt.preventDefault();
     $.post($('form').attr('action'), $('form').serialize(), (data) => {
-      var jst_tmpl = this['JST'][`assets/templates/alert-dismissible.html`]({
-        type: 'alert-success', title: 'Good job!', info: 'New record success'
-      });
+      var model = {type:'alert-success', title:'Yeah!', info: 'New record created'};
+      if(data.ok) {
+        if(data.op=='u') 
+          model = {type:'alert-info', title:'Alright!', info: 'Record updated'}; 
+      } else {
+        model = {type:'alert-error', title:'Sorry!', info:'Something wrong to save the data'};
+      }
+      var jst_tmpl = this['JST'][`assets/templates/alert-dismissible.html`](model);
 
-      $('#root').append(jst_tmpl);
+      $(form).append(jst_tmpl);
     });
   });
 

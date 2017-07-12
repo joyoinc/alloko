@@ -150,7 +150,6 @@
     <div class="col-md-10">
       <% if ((typeof myCar == 'undefined') || !(myCar.carpic_fd) ) { %>
         <input type="file" name="carpic" id="carpic" multiple class="file-loading">
-        <input type="hidden" name="carpic_fd">
       <% } else { %>
           <img src="/message/snapshot/<%= myCar.carpic_fd%>" alt="...">
       <% } %>
@@ -162,7 +161,6 @@
     <div class="col-md-10">
       <% if ((typeof myCar == 'undefined') || !(myCar.insurancepic_fd) ) { %>
         <input type="file" name="insurancepic" id="insurancepic" multiple class="file-loading">
-        <input type="hidden" name="insurancepic_fd">
       <% } else { %>
           <img src="/message/snapshot/<%= myCar.insurancepic_fd%>" alt="...">
       <% } %>
@@ -174,7 +172,6 @@
     <div class="col-md-10">
       <% if ((typeof myCar == 'undefined') || !(myCar.dlpic_fd) ) { %>
         <input type="file" name="dlpic" id="dlpic" multiple class="file-loading">
-        <input type="hidden" name="dlpic_fd">
         <% } else { %>
           <img src="/message/snapshot/<%= myCar.dlpic_fd%>" alt="...">
           <% } %>

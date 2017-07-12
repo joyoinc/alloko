@@ -71,23 +71,29 @@ var self = module.exports = {
   /* End API */
 
   /* Page */
-
-  /* override Blueprint */
-  findOne: function(req, res) {
+  __g: function(req, res) {
     var id = req.param('id');
 
     House.findOne(id).exec(function (err, record) {
       if (err) return res.serverError(err);
 
       if (record) {
-        res.view('house.detail.ejs', { house: record });
+        res.view('house.detail.ejs', { house: record,
+          ratings: { overall:{ name:'overall', value: parseInt(1 + Math.random() * 5) },
+            information:{}, 
+            clean:{ name:'clean', value: parseInt(1 + Math.random() * 5)},
+            infomatch:{ name:'infomatch', value: parseInt(1 + Math.random() * 5)},
+            goodlocation:{ name:'goodlocation', value: parseInt(1 + Math.random() * 5)},
+            communication:{ name:'communication', value: parseInt(1 + Math.random() * 5)},
+            goodfacility:{ name:'goodfacility', value: parseInt(1 + Math.random() * 5)},
+            goodprice:{ name:'goodprice', value: parseInt(1 + Math.random() * 5)},
+          },
+        });
       } else {
         res.notFound(id);
       }
     });
   },
-
-  /* End Blueprint */
 
   /* End Page */
 };

@@ -1,11 +1,21 @@
 <!-- A tile in 1x3 row -->
 <div class="col-sm-6 col-md-4">
 	<div class="thumbnail">
-	<img src="<%= imageUrl %>" alt="...">
-	<div class="caption">
-		<h3><%= title %></h3>
-		<p><%= detail %></p>
-		<p><a href="/house/__g/<%= id%>" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-	</div>
+		<img src="<%= imageUrl %>" alt="...">
+		<div class="caption">
+			<h3><b><%= title %></b></h3>
+			<p>	<%= line2 %> <%= line3 %> </p>
+			<div class="stars stars-small">
+				<label class="star star-static star-<%= rating[0] %>" ></label>
+				<label class="star star-static star-<%= rating[1] %>" ></label>
+				<label class="star star-static star-<%= rating[2] %>" ></label>
+				<label class="star star-static star-<%= rating[3] %>" ></label>
+				<label class="star star-static star-<%= rating[4] %>" ></label>
+				<%= reviewcount %>个评价
+			</div>
+			<p><a href="/house/__g/<%= id%>" class="btn btn-primary" role="button">查看详情</a>&nbsp <a href="#" class="btn btn-success" role="button">查看地图</a></p>
+		</div>
 	</div>
 </div>
+
+

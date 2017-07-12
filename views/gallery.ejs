@@ -33,11 +33,17 @@
       loadedCount += data.length;
       
       setTimeout(function() {
+
         var model = data.map(function(e){ 
-          return { title: e.housename || '',
+          var rr = parseInt(1 + Math.random() * 5);
+          return { title: `$${e.price} ${e.housename}`,
             id: e.id,
             imageUrl: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
             detail: e.owner + "'s Property.",
+            line2 : `${e.city} ${e.housetype}`,
+            line3 : `${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+            rating: Array(5-rr).fill('off').concat(Array(rr).fill('on')) ,
+            reviewcount : 428,
           }
         });  
 

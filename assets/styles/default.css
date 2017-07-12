@@ -99,6 +99,11 @@ label.star:before {
   font-family: FontAwesome;
 }
 
+.stars label.star-static:hover { transform: rotate(0deg) scale(1); }
+.stars label.star-static { content: '\f005' }
+.stars label.star-on { color: #FD4;  }
+.stars label.star-off { color: #444; }
+
 /*
  * End Stars
  */

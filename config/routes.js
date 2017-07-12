@@ -45,7 +45,7 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  '/working': {view: 'working'},
+  '/signin': {view: 'home-signin'},
   '/home': {view: 'homepage'},
   '/gallery': {view: 'gallery'},
   

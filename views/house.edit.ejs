@@ -2,19 +2,7 @@
 
 <script >
 
-  $("#housepic").fileinput({
-    showPreview: true,
-    uploadAsync: false,
-    language: 'zh',
-    uploadUrl:"/message/image/housepic",
-  });
 
-  $("#ownershippic").fileinput({
-    showPreview: true,
-    uploadAsync: false,
-    language: 'zh',
-    uploadUrl:"/message/image/ownershippic",
-  });
 
   $(document).on('submit', 'form', (evt) => {
     evt.preventDefault();

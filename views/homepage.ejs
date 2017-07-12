@@ -107,7 +107,7 @@
     </ol>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEx1">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEx1" id="modal-btn1">
       Launch demo modal
     </button>
 
@@ -180,7 +180,7 @@
       {id:'jiangsu', text:'江苏'},
       {id:'zhejiang', text:'浙江'},
       {id:'guangdong', text:'广东'},
-    ]
+    ];
     var cities = [
       {id:'nanjing', text:'南京', par:'jiangsu'},
       {id:'wuxi', text:'无锡', par:'jiangsu'},
@@ -188,7 +188,7 @@
 
       {id:'wenzhou', text:'温州', par:'zhejiang'},
       {id:'hangzhou', text:'杭州', par:'zhejiang'},
-    ]
+    ];
     /* end data */
 
     $(document).ready(function(){
@@ -196,13 +196,14 @@
 
       provinces.forEach(function(e,idx){
         $('#province-menu').append(`<li><a id=${e.id} class='input-link' target='province'>${e.text}</a></li>`)
-      })
+      });
 
       cities.forEach(function(e,idx){
         $('#city-menu').append(`<li><a id=${e.id} par=${e.par} class='input-link' target='city'>${e.text}</a></li>`)
-      })
+      });
 
-    })
+
+    });
 
     $(document).on('click', 'a.input-link', function(e){
       e.preventDefault();
@@ -223,5 +224,13 @@
         return $(elem).attr('par') === current_province.id;
       }).show();
     });
+
+    $(window).on('load', function () {
+      //console.log(this['JST']);  diffs window.onload vs document.ready
+      var jst_modal = this['JST']['assets/templates/modal1.html']({ id: 'modalEx1', title: 'Oh yeah!', body: '... ... ...' });
+      $('#modal-btn1').after(jst_modal);
+    });
+
   </script>
 </body>
+

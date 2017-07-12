@@ -52,7 +52,6 @@
       <div class="col-md-10">
         <% if ((typeof myHouse == 'undefined') || !(myHouse.housepic_fd) ) { %>
           <input type="file" name="housepic" id="housepic" multiple class="file-loading">
-          <input type="hidden" name="housepic_fd">
         <% } else { %>
           <img src="/message/snapshot/<%= myHouse.housepic_fd%>" alt="...">
         <% } %>
@@ -64,7 +63,6 @@
       <div class="col-md-10">
         <% if ((typeof myHouse == 'undefined') || !(myHouse.ownershippic_fd) ) { %>
         <input type="file" name="ownershippic" id="ownershippic" multiple class="file-loading">
-        <input type="hidden" name="ownershippic_fd">
          <% } else { %>
           <img src="/message/snapshot/<%= myHouse.ownershippic_fd%>" alt="...">
         <% } %>

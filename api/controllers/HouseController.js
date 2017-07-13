@@ -78,7 +78,7 @@ var self = module.exports = {
       if (err) return res.serverError(err);
 
       if (record) {
-        res.view('house.detail.ejs', { house: record,
+        res.view('house-detail', { house: record,
           ratings: { overall:{ name:'overall', value: parseInt(1 + Math.random() * 5) },
             information:{}, 
             clean:{ name:'clean', value: parseInt(1 + Math.random() * 5)},

@@ -1,0 +1,184 @@
+<div class="container">
+  <div class="blog-header">
+    <h1 class="blog-title">
+      <%= house.housename %>
+    </h1>
+    <p class="lead blog-description">
+      <%= house.country %>,
+        <%= house.city %>&nbsp&nbsp&nbsp&nbsp
+          <%= house.reviewcount %>个评价
+    </p>
+
+    <div class="stars">
+      <% var rating = ratings.overall; rating.uiid='ui1'; %>
+        <%include forms/star5.ejs %>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-8 blog-main">
+    <br>
+    <img src="/message/snapshot/<%= house.housepic_fd %>" alt="暂时没有该房屋图片" style="width:600px;height:400px;" class="img-thumbnail">
+    <br>
+    <br>
+    <div class="blog-post">
+      <h3 class="blog-post-title">房屋详情</h3>
+      <table class="table table-bordered">
+        <tbody>
+          <tr class="info">
+            <th>房主</th>
+            <td>
+              <%= house.owner %>&nbsp&nbsp<button class="btn btn-success btn-sm " btn-smtype="submit">查看房主信息</button></td>
+            <th>价格/天</th>
+            <td>
+              <%= house.price %>美金</td>
+          </tr>
+          <tr>
+            <th>房屋类型</th>
+            <td>
+              <%= house.housetype %>，
+                <%= house.bedroomcount %>室
+                  <%= house.livingroomcount %>厅
+                    <%= house.bathroomcount %>卫</td>
+            <th>便利设施</th>
+            <td>
+              <%= house.facility %>
+            </td>
+          </tr>
+          <tr class="info">
+            <th>入住时间</th>
+            <td>
+              <%= house.checkintime %>后入住，
+                <%= house.checkouttime %>前退房</td>
+            <th>租房要求</th>
+            <td>
+              <%= house.forbids%>
+            </td>
+          </tr>
+          <tr>
+            <th>最多入住人数</th>
+            <td>
+              <%= house.capacity %>人</td>
+            <th>最短预定时间</th>
+            <td>
+              <%= house.minday %>天</td>
+          </tr>
+          <tr class="info">
+            <th>所在城市</th>
+            <td>
+              <%= house.country %>,
+                <%= house.city %>
+            </td>
+            <th>地址</th>
+            <td>
+              <%= house.street %>,
+                <%= house.zip%> &nbsp&nbsp<button class="btn btn-success btn-sm " btn-smtype="submit">地图</button></td>
+          </tr>
+          <tr>
+            <th>补充说明</th>
+            <td>
+              <%= house.memo %>
+            </td>
+            <th></th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.blog-post -->
+    <br>
+    <div class="blog-post">
+      <div class="stars">
+        <% var rating = ratings.overall; rating.uiid='ui2'; %>
+          <%include forms/star5.ejs %>
+      </div>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>信息准确</th>
+            <td>
+              <div class="stars stars-small">
+                <% rating = ratings.infomatch; %>
+                  <% include forms/star5.ejs %>
+              </div>
+            </td>
+            <th>交通便利</th>
+            <td>
+              <div class="stars stars-small">
+                <% rating = ratings.goodlocation; %>
+                  <% include forms/star5.ejs %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>沟通愉快</th>
+            <td>
+              <div class="stars stars-small">
+                <% rating = ratings.communication; %>
+                  <% include forms/star5.ejs %>
+              </div>
+            </td>
+            <th>便利设施</th>
+            <td>
+              <div class="stars stars-small">
+                <% rating = ratings.goodfacility; %>
+                  <% include forms/star5.ejs %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>干净整洁</th>
+            <td>
+              <div class="stars stars-small">
+                <% rating = ratings.clean; %>
+                  <% include forms/star5.ejs %>
+              </div>
+            </td>
+            <th>价格合理</th>
+            <td>
+              <div class="stars stars-small">
+                <% rating = ratings.goodprice; %>
+                  <% include forms/star5.ejs %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="blog-post-title">
+        <%= house.reviewcount %>条评价 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
+      </h3>
+    </div>
+    <!-- /.blog-post -->
+  </div>
+  <!-- /.blog-main -->
+
+  <div class="col-sm-3 col-sm-offset-1 ">
+    <div class="affix">
+      <div class="sidebar-module sidebar-module-inset">
+        <h3>$50 &nbsp&nbsp预订 </h3>
+        <br>
+      </div>
+      <div class="sidebar-module">
+
+        <form>
+          <div class="form-group">
+            <label for="chenkin">入住日期</label>
+            <input type="date" class="form-control" id="chenkin" name="chenkin" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="checkout">退房日期</label>
+            <input type="date" class="form-control" id="checkout" name="checkout" placeholder="">
+          </div>
+        </form>
+
+
+        <h4><b>总价:</b> &nbsp$150</h4>
+        <button class="btn btn-success" btn-smtype="submit">预订</button>
+      </div>
+    </div>
+  </div>
+  <!-- /.blog-sidebar -->
+</div>

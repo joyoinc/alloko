@@ -11,32 +11,32 @@ module.exports = {
     me : function(req, res) {
         host = req.session.me;
 
-        res.view("dashboard", { chost: host, layout: 'host.layout.ejs' } );
+        res.view("dashboard", { chost: host, layout: 'host-layout' } );
     },
 
 	main : function(req, res) {
         var host = Util.simpleID(3);
         req.session.me = host;
 
-        res.view("dashboard", { chost: host, layout: 'host.layout.ejs' } );
+        res.view("dashboard", { chost: host, layout: 'host-layout' } );
     },
 
     becomeHost : function(req, res) {
         var host = req.session.me;
 
-        res.view("user.join.ejs", { chost: host, layout: 'host.layout.ejs' } );
+        res.view("user.join.ejs", { chost: host, layout: 'host-layout' } );
     },
 
     signIn : function(req, res) {
         var host = req.session.me;
 
-        res.view("user.signin.ejs", { chost: host, layout: 'host.layout.ejs' } );
+        res.view("user.signin.ejs", { chost: host, layout: 'host-layout' } );
     },
 
     signUp : function(req, res) {
         var host = req.session.me;
 
-        res.view("user.signup.ejs", { chost: host, layout: 'host.layout.ejs' } );
+        res.view("user.signup.ejs", { chost: host, layout: 'host-layout' } );
     },
 
     editHouse: function (req, res) {
@@ -48,11 +48,11 @@ module.exports = {
             if (!myHouse) {
                 sails.log(`Could not find house for ${host}`);
 
-                res.view("house.edit.ejs", { chost: host, layout: 'host.layout.ejs' });
+                res.view("house.edit.ejs", { chost: host, layout: 'host-layout' });
             } else {
                 sails.log(`Find house ${myHouse.id} for ${host}`);
 
-                res.view("house.edit.ejs", { chost: host, layout: 'host.layout.ejs', myHouse: myHouse });
+                res.view("house.edit.ejs", { chost: host, layout: 'host-layout', myHouse: myHouse });
             }
         });
 
@@ -67,11 +67,11 @@ module.exports = {
             if (!myCar) {
                 sails.log(`Could not find car for ${host}`);
 
-                res.view("car.edit.ejs", { chost: host, layout: 'host.layout.ejs' });
+                res.view("car.edit.ejs", { chost: host, layout: 'host-layout' });
             } else {
                 sails.log(`Find car ${myCar.id} for ${host}`);
 
-                res.view("car.edit.ejs", { chost: host, layout: 'host.layout.ejs', myCar: myCar });
+                res.view("car.edit.ejs", { chost: host, layout: 'host-layout', myCar: myCar });
             }
         });
 

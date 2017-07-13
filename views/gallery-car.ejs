@@ -135,7 +135,6 @@
   }
 
   var doLoad = function() {
-    console.log("loading...")
     $.get("/car", (data) => {
       loadedCount += data.length;
       
@@ -144,13 +143,12 @@
         var model = data.map(function(e){ 
           var rr = parseInt(1 + Math.random() * 5);
           return { title: `car name`,
-            id: e.id,
-            imageUrl: e.carpic_fd ? `/message/snapshot/${e.carpic_fd}` : '/images/img-missing.png',
             detail: e.owner + "'s Car.",
-            line2 : ``,
-            line3 : ``,
-            rating: Array(5-rr).fill('off').concat(Array(rr).fill('on')) ,
-            reviewcount : 4,
+            btnText: "查看详情",
+            btnLink: `/car/__g/${e.id}`,
+            btnText2: "查看地图",
+            btnLink2: '#',
+            imageLink: e.carpic_fd ? `/message/snapshot/${e.carpic_fd}` : '/images/img-missing.png',
           }
         });  
 
@@ -166,7 +164,7 @@
       while(model.length > 0) {
         var str = "<div class='row'>";
         model.slice(0, 3).forEach(function(element) {
-          str += this['JST']['assets/templates/gallery_tile_1x3.html'](element);
+          str += cli_render_bind(element, 'gallery_tile_1x3');
         });
         str += "</div>";
         $('#root').append(str);

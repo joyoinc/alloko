@@ -94,6 +94,21 @@ var self = module.exports = {
     });
   },
 
+  ownerInfo: function(req, res) {
+    var id = req.param('id');
+
+    House.findOne({owner: id}).exec(function (err, record) {
+      if (err) return res.serverError(err);
+
+      if (record) {
+        res.view('owner-detail', { house: record,
+        });
+      } else {
+        res.notFound(id);
+      }
+    });
+  },
+
   /* End Page */
 };
 

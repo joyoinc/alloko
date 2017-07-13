@@ -31,7 +31,6 @@
   }
 
   var doLoad = function() {
-    console.log("loading...")
     $.post("/house/recent", {skipCount:loadedCount}, (data) => {
       loadedCount += data.length;
       

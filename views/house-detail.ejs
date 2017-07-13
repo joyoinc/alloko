@@ -32,7 +32,7 @@
             <tr class="info">
               <th>房主</th>
               <td>
-                <%= house.owner %>&nbsp&nbsp<button class="btn btn-success btn-sm " btn-smtype="submit">查看房主信息</button></td>
+                <%= house.owner %>&nbsp&nbsp<a class="btn btn-success btn-sm " href="/house/ownerInfo/<%= house.owner %>">查看房主信息</a></td>
               <th>价格/天</th>
               <td>
                 <%= house.price %>美金</td>

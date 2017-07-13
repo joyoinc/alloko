@@ -2,110 +2,7 @@
 
 <div class="container">
 
-  <form class="form-horizontal">
-    <div class="form-group">
-
-      <div class="col-md-3">
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country <span class="caret"></span></button>
-            <ul class="dropdown-menu" id="country-menu">
-            </ul>
-          </div>
-          <!-- /btn-group -->
-          <input type="text" name="country" class="form-control" readonly="" aria-label="...">
-        </div>
-        <!-- /input-group -->
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-3">
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City <span class="caret"></span></button>
-            <ul class="dropdown-menu" id="city-menu">
-            </ul>
-          </div>
-          <!-- /btn-group -->
-          <input type="text" name="city" class="form-control" readonly="" aria-label="...">
-        </div>
-        <!-- /input-group -->
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-3">
-        <div class="input-group ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" ></span></span>
-          <input type="text" name="daterange" readonly="" class="form-control" value="01/01/2017 - 01/01/2018" />
-        </div>
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-2">
-        <div class="input-group ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
-          <input type="number" class="form-control" value=1 min=1 max=10 />
-        </div>
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-success form-control">
-            <span class="glyphicon glyphicon-search" ></span>
-          </button>
-      </div>
-      <!-- /.col-md -->
-    </div>
-    <!-- form-group -->
-
-    <div class="form-group">
-      <div class="checkbox col-md-2">
-        <label>
-            <input type="checkbox" value="">
-            私人向导
-          </label>
-      </div>
-      <!-- div.checkbox -->
-
-      <div class="checkbox col-md-2">
-        <label>
-            <input type="checkbox" value="">
-            私家车 + 司机
-          </label>
-      </div>
-      <!-- div.checkbox -->
-
-      <div class="checkbox col-md-2">
-        <label>
-            <input type="checkbox" value="">
-            住房
-          </label>
-      </div>
-      <!-- div.checkbox -->
-
-      <div class="col-md-3">
-        <div class="input-group ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-minus" ></span></span>
-          <span class="input-group-addon">$</span>
-          <input type="number" class="form-control" value=100 min=1 />
-          <span class="input-group-addon">.00</span>
-        </div>
-      </div>
-      <!-- /.col-md -->
-      <div class="col-md-3">
-        <div class="input-group ">
-          <span class="input-group-addon">$</span>
-          <input type="number" class="form-control" value=10000 max=10000 />
-          <span class="input-group-addon">.00</span>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-plus" ></span></span>
-        </div>
-      </div>
-      <!-- /.col-md -->
-
-
-    </div>
-    <!-- form-group -->
-  </form>
+  <% include forms/search.ejs %>
 
   <!-- gallery -->
   <div id='root'>
@@ -130,7 +27,6 @@
     else {
       $('.progress').show(); isLoading = true;
     }
-
     doLoad();
   }
 
@@ -140,17 +36,17 @@
       loadedCount += data.length;
       
       setTimeout(function() {
-
         var model = data.map(function(e){ 
           var rr = parseInt(1 + Math.random() * 5);
           return { title: `$${e.price} ${e.housename}`,
-            id: e.id,
-            imageUrl: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
-            detail: e.owner + "'s Property.",
-            line2 : `${e.city} ${e.housetype}`,
-            line3 : `${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+            imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
+            detail: `${e.city} ${e.housetype} <BR> ${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+            btnText: "查看详情",
+            btnLink: `/house/__g/${e.id}`,
+            btnText2: "查看地图",
+            btnLink2: '#',
+            reviewCount : 428,
             rating: Array(5-rr).fill('off').concat(Array(rr).fill('on')) ,
-            reviewcount : 428,
           }
         });  
 
@@ -166,7 +62,7 @@
       while(model.length > 0) {
         var str = "<div class='row'>";
         model.slice(0, 3).forEach(function(element) {
-          str += this['JST']['assets/templates/gallery_tile_1x3.html'](element);
+          str += cli_render_bind(element, 'gallery_tile_1x3_star5');
         });
         str += "</div>";
         $('#root').append(str);

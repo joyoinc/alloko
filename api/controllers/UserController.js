@@ -7,13 +7,13 @@
 
 var self = module.exports = {
 
-    _me : function(uid) {
+    _me : function(uid, req, res) {
         req.session.me = uid;
     },
 
     /* API */
 	me : function(req, res) {
-        self._me(req.param('uid'));
+        self._me(req.param('id'), req);
 
         res.ok(req.session.me);
     },
@@ -25,7 +25,7 @@ var self = module.exports = {
             if (err) return res.serverError(err);
 
             if (record) {
-                self._me(record.uid);
+                self._me(record.uid, req);
 
             } else {
                 res.notFound('user not found');

@@ -1,0 +1,43 @@
+<% include forms/new.car.ejs %>
+
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="alert " role="alert"> message  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script >
+
+  $(document).on('submit', 'form', (evt) => {
+    evt.preventDefault();
+    $.post($('form').attr('action'), $('form').serialize(), (data) => {
+      var model = {type:'success', title:'Well done!', message: 'New record created', modalId:'modal1' };
+      if(data.ok) {
+        if(data.op=='u') 
+          model = {type:'info', title:'Alright!', message: 'Record updated', modalId:'modal1'}; 
+      } else {
+        model = {type:'error', title:'Sorry!', message:'Something wrong to save the data', modalId:'modal1'};
+      }
+
+      $('#modal1 div.alert').removeClass().addClass(`alert alert-${model.type}`).text(`${model.title} ${model.message}`);
+
+      $('#modal1').modal('show');
+    });
+  });
+
+  $(document).on('click', 'form .btn-submit', (evt) => {
+    evt.preventDefault();
+    $('form').submit();
+  });
+
+  $(document).ready(function () {
+    toggleSiderbarMenu('edit_car');
+  });
+</script>

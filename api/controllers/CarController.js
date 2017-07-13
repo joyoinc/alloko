@@ -40,7 +40,7 @@ var self = module.exports = {
 
         Util.handleChkboxControl(req, ['forbids', 'facility', 'servicetypes'], newCar);
 
-        House.findOne({ owner: newCar['owner'] }).exec(function (err, record) {
+        Car.findOne({ owner: newCar['owner'] }).exec(function (err, record) {
             if (err) return res.serverError(err);
 
             if (record) {

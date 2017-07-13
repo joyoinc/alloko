@@ -7,6 +7,8 @@ footer {
   padding: 30px 0;
 }
 
+div.tmpl-placeholder { display: none; }
+
 
 .sidebar-offcanvas  a.active ,
 .sidebar-offcanvas  a:hover ,

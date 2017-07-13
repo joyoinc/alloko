@@ -48,11 +48,11 @@ module.exports = {
             if (!myHouse) {
                 sails.log(`Could not find house for ${host}`);
 
-                res.view("house.edit.ejs", { chost: host, layout: 'host-layout' });
+                res.view("hostMgr-edit-house", { chost: host, layout: 'host-layout' });
             } else {
                 sails.log(`Find house ${myHouse.id} for ${host}`);
 
-                res.view("house.edit.ejs", { chost: host, layout: 'host-layout', myHouse: myHouse });
+                res.view("hostMgr-edit-house", { chost: host, layout: 'host-layout', myHouse: myHouse });
             }
         });
 
@@ -67,11 +67,11 @@ module.exports = {
             if (!myCar) {
                 sails.log(`Could not find car for ${host}`);
 
-                res.view("car.edit.ejs", { chost: host, layout: 'host-layout' });
+                res.view("hostMgr-edit-car", { chost: host, layout: 'host-layout' });
             } else {
                 sails.log(`Find car ${myCar.id} for ${host}`);
 
-                res.view("car.edit.ejs", { chost: host, layout: 'host-layout', myCar: myCar });
+                res.view("hostMgr-edit-car", { chost: host, layout: 'host-layout', myCar: myCar });
             }
         });
 

@@ -52,5 +52,27 @@ var self = module.exports = {
     },
 
     /* End API */
+
+    /* Page */
+  __g: function(req, res) {
+    var id = req.param('id');
+
+    Car.findOne(id).exec(function (err, record) {
+      if (err) return res.serverError(err);
+
+      if (record) {
+        sails.log(`Find car ${record.id}`);
+          
+        res.view('car-detail', { car: record,
+          ratings: { overall:{ name:'overall', value: parseInt(1 + Math.random() * 5) },
+          },
+        });
+      } else {
+        res.notFound(id);
+      }
+    });
+  },
+
+  /* End Page */
 };
 

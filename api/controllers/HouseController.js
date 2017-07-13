@@ -80,7 +80,6 @@ var self = module.exports = {
       if (record) {
         res.view('house-detail', { house: record,
           ratings: { overall:{ name:'overall', value: parseInt(1 + Math.random() * 5) },
-            information:{}, 
             clean:{ name:'clean', value: parseInt(1 + Math.random() * 5)},
             infomatch:{ name:'infomatch', value: parseInt(1 + Math.random() * 5)},
             goodlocation:{ name:'goodlocation', value: parseInt(1 + Math.random() * 5)},

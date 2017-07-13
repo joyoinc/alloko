@@ -5,15 +5,33 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-module.exports = {
+var self = module.exports = {
+
+    _me : function(uid) {
+        req.session.me = uid;
+    },
 
     /* API */
 	me : function(req, res) {
-        req.session.me = req.param('uid');
+        self._me(req.param('uid'));
 
         res.ok(req.session.me);
     },
 
     /* End API */
+
+    signIn: function(req, res) {
+        User.findOne({uid: req.param('uid'), password: req.param('password')}).exec(function (err, record) {
+            if (err) return res.serverError(err);
+
+            if (record) {
+                self._me(record.uid);
+
+            } else {
+                res.notFound('user not found');
+            }
+        });
+
+    },
 };
 

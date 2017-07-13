@@ -1,0 +1,171 @@
+<% include partials/navbar.ejs %>
+
+  <div class="container">
+    <div class="blog-header">
+      <h1 class="blog-title">
+        美国, 波士顿
+        <%= car.carbrand %>&nbsp
+          <%= car.carmodel %>
+      </h1>
+      <p class="lead blog-description">
+        <%= car.carbrand %>,
+          <%= car.carmodel %>&nbsp
+            <%= car.carmodel %>门
+              <%= car.carmodel %> 座 &nbsp&nbsp&nbsp
+                <%= car.reviewcount %>个评价
+      </p>
+
+      <div class="stars">
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <br>
+        <img src="/message/snapshot/<%= car.carpic_fd %>" alt="暂时没有该车图片" style="width:600px;height:400px;" class="img-thumbnail">
+        <br>
+        <br>
+        <div class="blog-post">
+          <h3 class="blog-post-title">车辆详情</h3>
+          <table class="table table-bordered">
+            <tbody>
+              <tr class="info">
+                <th>车主</th>
+                <td>
+                  <%= car.owner %>&nbsp&nbsp<button class="btn btn-success btn-sm " btn-smtype="submit">查看车主信息</button></td>
+                <th>价格/天</th>
+                <td>
+                  <%= car.guidewithcarprice %>美金</td>
+              </tr>
+              <tr>
+                <th>车辆类型</th>
+                <td>
+                  <%= car.cartype %> &nbsp
+                    <%= car.cargroup %>
+                </td>
+                <th>品牌型号</th>
+                <td>
+                  <%= car.carbrand %>&nbsp
+                    <%= car.carmodel %>
+                </td>
+              </tr>
+              <tr class="info">
+                <th>车辆详情</th>
+                <td>
+                  <%= car.doorcount %>门
+                    <%= car.seatcount %> 座 &nbsp&nbsp
+                      <%= car.facility %>
+                </td>
+                <th>服务要求</th>
+                <td>
+                  <%= car.forbids %>
+                </td>
+              </tr>
+              <tr>
+                <th>最多服务人数</th>
+                <td>
+                  <%= car.maxserivecount %>人</td>
+                <th>最短预定时间</th>
+                <td>
+                  <%= car.minservicetime %>天</td>
+              </tr>
+              <tr class="info">
+                <th>所在城市</th>
+                <td>
+                  美国 波士顿
+                </td>
+              </tr>
+              <tr>
+                <th>司机简介</th>
+                <td>
+                  <%= car.guideintroduction %>
+                </td>
+                <th></th>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.blog-post -->
+        <br>
+        <div class="blog-post">
+          <div class="stars">
+          </div>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>信息准确</th>
+                <td>
+                  <div class="stars stars-small">
+                  </div>
+                </td>
+                <th>服务守时</th>
+                <td>
+                  <div class="stars stars-small">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>干净整洁</th>
+                <td>
+                  <div class="stars stars-small">
+                  </div>
+                </td>
+                <th>价格合理</th>
+                <td>
+                  <div class="stars stars-small">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>沟通愉快</th>
+                <td>
+                  <div class="stars stars-small">
+                  </div>
+                </td>
+                <th>便利设施</th>
+                <td>
+                  <div class="stars stars-small">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 class="blog-post-title">
+            <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
+          </h3>
+        </div>
+        <!-- /.blog-post -->
+      </div>
+      <!-- /.blog-main -->
+
+      <div class="col-sm-3 col-sm-offset-1 ">
+        <div class="affix">
+          <div class="sidebar-module sidebar-module-inset">
+            <h3>$50 &nbsp&nbsp预订 </h3>
+            <br>
+          </div>
+          <div class="sidebar-module">
+
+            <form>
+              <div class="form-group">
+                <label for="chenkin">预订时间</label>
+                <input type="datetime-local" class="form-control" id="chenkin" name="chenkin" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="checkout">结束时间</label>
+                <input type="datetime-local" class="form-control" id="checkout" name="checkout" placeholder="">
+              </div>
+            </form>
+
+
+            <h4><b>总价:</b> &nbsp$150</h4>
+            <button class="btn btn-success" btn-smtype="submit">预订</button>
+          </div>
+        </div>
+      </div>
+      <!-- /.blog-sidebar -->
+    </div>
+
+  </div>

@@ -136,21 +136,21 @@
 
   var doLoad = function() {
     console.log("loading...")
-    $.post("/house/recent", {skipCount:loadedCount}, (data) => {
+    $.get("/car", (data) => {
       loadedCount += data.length;
       
       setTimeout(function() {
 
         var model = data.map(function(e){ 
           var rr = parseInt(1 + Math.random() * 5);
-          return { title: `$${e.price} ${e.housename}`,
+          return { title: `car name`,
             id: e.id,
-            imageUrl: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
-            detail: e.owner + "'s Property.",
-            line2 : `${e.city} ${e.housetype}`,
-            line3 : `${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+            imageUrl: e.carpic_fd ? `/message/snapshot/${e.carpic_fd}` : '/images/img-missing.png',
+            detail: e.owner + "'s Car.",
+            line2 : ``,
+            line3 : ``,
             rating: Array(5-rr).fill('off').concat(Array(rr).fill('on')) ,
-            reviewcount : 428,
+            reviewcount : 4,
           }
         });  
 

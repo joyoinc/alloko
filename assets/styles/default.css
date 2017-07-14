@@ -9,6 +9,15 @@ footer {
 
 div.tmpl-placeholder { display: none; }
 
+.jumbotron {
+  padding: 0px;
+  background-color: white;
+}
+
+.jumbotron > img {
+  width: 100%;
+  height: auto;
+}
 
 .sidebar-offcanvas  a.active ,
 .sidebar-offcanvas  a:hover ,

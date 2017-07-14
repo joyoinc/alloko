@@ -20,6 +20,11 @@ var self = module.exports = {
         res.ok(req.session.me);
     },
 
+    updateProfile: function(req, res) {
+
+        
+    },
+
     /* End API */
 
     /* Page */

@@ -6,7 +6,7 @@
     <button type="Primary" class="btn btn-info " align="right">重置密码</button>
 </h3>
 
-<table class="table">
+<table class="table table-bordered">
   <tbody>
     <tr class="info" >
       <th>用户名</th>
@@ -23,8 +23,8 @@
     <tr  class="info">
       <th>兴趣爱好</th>
       <td>滑雪、购物</td>
-      <th></th>
-      <td></td>
+      <th>手机号码</th>
+      <td>123</td>
     </tr>
     <tr>
       <th>服务类型</th>
@@ -32,12 +32,7 @@
       <th>服务语言</th>
       <td>中文、英语</td>
     </tr>
-      <tr class="info">
-      <th>服务类型</th>
-      <td>尚未开通</td>
-      <th><button type="Primary" class="btn btn-success ">我要加盟</button></th>
-      <td> </td>
-    </tr>
+    
   </tbody>
 </table>
 
@@ -51,36 +46,42 @@
 
 <h3 style="color:orange;"><b>司机、导游服务&nbsp&nbsp&nbsp </b> <a href="/HostManager/editCar" class="btn btn-success" align="right">修改司机+导游服务</a></h3>
 
+    guideintroduction": "xxd's car 2",
+    "guideprice": "",
+    "guidewithcarprice": "",
+    "minservicetime": "1",
+    "maxserivecount": "4",
+
 
 <table class="table">
   <tbody>
     <tr  class="warning">
       <th>服务类型</th>
-      <td>司机、导游</td>
+      <td> personal</td>
       <th>服务人数</th>
-      <td>最多5人</td>
+      <td>最多<%= car.maxserivecount %>人</td>
     </tr>
     <tr>
       <th>服务要求</th>
-      <td>禁止带宠物</td>
+      <td><%= car.forbids %></td>
       <th>最短服务时间</th>
-      <td>3小时</td>
+      <td><%= car.minservicetime %>小时</td>
     </tr>
     <tr  class="warning">
       <th>导游收费</th>
-      <td>30美金/小时</td>
+      <td><%= car.guideprice %>美金/小时</td>
       <th>司机+私家车收费</th>
-      <td>60美金/小时</td>
+      <td><%= car.guidewithcarprice %>美金/小时</td>
     </tr>
     <tr>
       <th>我的爱车</th>
-      <td>宝马&nbsp730&nbsp&nbsp豪华型&nbsp轿车</td>
+      <td><%= car.carbrand %>&nbsp730&nbsp&nbsp<%= car.cartype %>&nbsp<%= car.cargroup %></td>
       <th>车辆详情</th>
-      <td>4门5座&nbsp空调&nbsp安全座椅</td>
+      <td><%= car.doorcount %>门<%= car.seatcount %>座&nbsp<%= car.facility %></td>
     </tr>
     <tr  class="warning">
       <th>向导简介</th>
-      <td>我是好人</td>
+      <td><%= car.guideintroduction %></td>
       <th></th>
       <td></td>
     </tr>
@@ -88,10 +89,6 @@
   </tbody>
 </table>
 
-<img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
-&nbsp&nbsp
-<img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
-&nbsp&nbsp
 <img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
 &nbsp&nbsp
 
@@ -107,37 +104,40 @@
   <tbody>
     <tr  class="success">
       <th>房源名称</th>
-      <td>波士顿大房子</td>
+      <td>
+        <%= house.housename %>
+      </td>
       <th>价格/天</th>
-      <td>60美金</td>
+      <td><%= house.price %></td>
     </tr>
     <tr>
       <th>我的房子</th>
-      <td>独栋别墅，2室1厅2卫</td>
+      <td><%= house.housetype %>，<%= house.bedroomcount %>室<%= house.livingroomcount %>厅<%= house.bathroomcount %>卫</td>
       <th>便利设施</th>
-      <td>免费上网</td>
+      <td><%= house.facility %></td>
     </tr>
     <tr  class="success">
       <th>入住时间</th>
-      <td>14：00后入住，11：00前退房</td>
+      <td><%= house.checkintime %>后入住，<%= house.checkouttime %>前退房</td>
       <th>租房要求</th>
-      <td>禁止带宠物</td>
+      <td><%= house.forbids %></td>
       </tr>
       <tr>
         <th>最多入住人数</th>
-        <td>5人</td>
+        <td><%= house.capacity %>人</td>
         <th>最短预定时间</th>
-        <td>2天</td>
+        <td><%= house.minday %>天</td>
       </tr>
       <tr class="success">
         <th>所在城市</th>
-        <td>美国波士顿</td>
+        <td> <%= house.country %>,
+      <%= house.city %></td>
         <th>地址</th>
-        <td>11abcd路，12345</td>
+        <td><%= house.street %>，<%= house.zip %></td>
         </tr>
         <tr>
           <th>补充说明</th>
-          <td>好房子</td>
+          <td><%= house.memo %></td>
           <th></th>
           <td></td>
         </tr>
@@ -145,6 +145,3 @@
 </table>
 
 <img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
-&nbsp&nbsp
-<img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
-&nbsp&nbsp

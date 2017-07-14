@@ -29,12 +29,18 @@ var self = module.exports = {
 
     /* Page */
     signIn: function(req, res) {
-        User.findOne({uid: req.param('uid'), password: req.param('password')}).exec(function (err, record) {
+        console.log(req.allParams());
+
+        User.findOne({email: req.param('email'), password: Util.encString(req.param('password'))}).exec(function (err, record) {
             if (err) return res.serverError(err);
 
             if (record) {
-                self._me(record.uid, req);
+                self._me(record.email, req, res);
 
+                sails.log(`User ${record.email} sign in `);
+
+                var target = decodeURIComponent(req.session.redirectTo || '/');
+                res.redirect(target);
             } else {
                 res.notFound('user not found');
             }
@@ -50,6 +56,9 @@ var self = module.exports = {
         }).exec(function (err, record) {
             if (err) return res.serverError(err);
 
+            sails.log(`User ${record.email} sign up done`);
+            
+            self._me(record.email, req, res);
             res.ok('ok');
         });
 

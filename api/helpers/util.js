@@ -3,6 +3,8 @@
  * Util functions 
  */
 
+var md5 = require('./md5');
+
 var self = module.exports = {
 
     simpleID: function(length) {
@@ -38,5 +40,9 @@ var self = module.exports = {
             obj[elem] = self.ensureArray(req.param(elem) || '');
         });
     },
+
+    encString: function(inputString) {
+        return md5(inputString);
+    }
 
 }

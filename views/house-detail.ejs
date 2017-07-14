@@ -76,7 +76,7 @@
               <th>地址</th>
               <td>
                 <%= house.street %>,
-                  <%= house.zip%> &nbsp&nbsp<button class="btn btn-success btn-sm " btn-smtype="submit">地图</button></td>
+                  <%= house.zip%> &nbsp&nbsp<a class="btn btn-success btn-sm " href="/house/ownerInfo/<%= house.owner %>">地图</a></td>
             </tr>
             <tr>
               <th>补充说明</th>

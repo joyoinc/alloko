@@ -2,114 +2,12 @@
 
 <div class="container">
 
-  <form class="form-horizontal">
-    <div class="form-group">
+  <% include forms/search.ejs %>
 
-      <div class="col-md-3">
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country <span class="caret"></span></button>
-            <ul class="dropdown-menu" id="country-menu">
-            </ul>
-          </div>
-          <!-- /btn-group -->
-          <input type="text" name="country" class="form-control" readonly="" aria-label="...">
-        </div>
-        <!-- /input-group -->
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-3">
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City <span class="caret"></span></button>
-            <ul class="dropdown-menu" id="city-menu">
-            </ul>
-          </div>
-          <!-- /btn-group -->
-          <input type="text" name="city" class="form-control" readonly="" aria-label="...">
-        </div>
-        <!-- /input-group -->
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-3">
-        <div class="input-group ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" ></span></span>
-          <input type="text" name="daterange" readonly="" class="form-control" value="01/01/2017 - 01/01/2018" />
-        </div>
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-2">
-        <div class="input-group ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
-          <input type="number" class="form-control" value=1 min=1 max=10 />
-        </div>
-      </div>
-      <!-- /.col-md -->
-
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-success form-control">
-            <span class="glyphicon glyphicon-search" ></span>
-          </button>
-      </div>
-      <!-- /.col-md -->
-    </div>
-    <!-- form-group -->
-
-    <div class="form-group">
-      <div class="checkbox col-md-2">
-        <label>
-            <input type="checkbox" value="">
-            私人向导
-          </label>
-      </div>
-      <!-- div.checkbox -->
-
-      <div class="checkbox col-md-2">
-        <label>
-            <input type="checkbox" value="">
-            私家车 + 司机
-          </label>
-      </div>
-      <!-- div.checkbox -->
-
-      <div class="checkbox col-md-2">
-        <label>
-            <input type="checkbox" value="">
-            住房
-          </label>
-      </div>
-      <!-- div.checkbox -->
-
-      <div class="col-md-3">
-        <div class="input-group ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-minus" ></span></span>
-          <span class="input-group-addon">$</span>
-          <input type="number" class="form-control" value=100 min=1 />
-          <span class="input-group-addon">.00</span>
-        </div>
-      </div>
-      <!-- /.col-md -->
-      <div class="col-md-3">
-        <div class="input-group ">
-          <span class="input-group-addon">$</span>
-          <input type="number" class="form-control" value=10000 max=10000 />
-          <span class="input-group-addon">.00</span>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-plus" ></span></span>
-        </div>
-      </div>
-      <!-- /.col-md -->
-
-
-    </div>
-    <!-- form-group -->
-  </form>
+  <hr />
 
   <!-- gallery -->
-  <div id='root'>
-  </div>
+  <div id='root'></div>
 
   <div class="progress" style="display: none">
     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"

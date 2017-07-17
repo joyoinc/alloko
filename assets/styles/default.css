@@ -111,10 +111,8 @@ label.star:before {
 }
 
 .stars label.star-static:hover { transform: rotate(0deg) scale(1); }
-.stars label.star-static { content: '\f005' }
-.stars label.star-on { color: #FD4;  }
-.stars label.star-off { color: #444; }
-
+/*.stars label.star-static:before { content: '\f005'; }*/
+.stars .fa-star { color: #FD4; }
 /*
  * End Stars
  */

@@ -12,10 +12,7 @@
       <%= house.reviewcount %>个评价
     </p>
 
-    <div class="stars">
-      <% var rating = ratings.overall; rating.uiid='ui1'; %>
-      <%include forms/star5.ejs %>
-    </div>
+    <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
   </div>
 
 
@@ -92,58 +89,37 @@
       <!-- /.blog-post -->
       <br>
       <div class="blog-post">
-        <div class="stars">
-          <% var rating = ratings.overall; rating.uiid='ui2'; %>
-            <%include forms/star5.ejs %>
-        </div>
+        <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
         <table class="table table-bordered">
           <tbody>
             <tr>
               <th>信息准确</th>
               <td>
-                <div class="stars stars-small">
-                  <% rating = ratings.infomatch; %>
-                    <% include forms/star5.ejs %>
-                </div>
+                <div class="star5Ext stars-small" data-name='<%= ratings.infomatch.name %>' data-rating='<%= ratings.infomatch.value %>'  ></div>
               </td>
               <th>交通便利</th>
               <td>
-                <div class="stars stars-small">
-                  <% rating = ratings.goodlocation; %>
-                    <% include forms/star5.ejs %>
-                </div>
+                <div class="star5Ext stars-small" data-name='<%= ratings.goodlocation.name %>' data-rating='<%= ratings.goodlocation.value %>'  ></div>
               </td>
             </tr>
             <tr>
               <th>沟通愉快</th>
               <td>
-                <div class="stars stars-small">
-                  <% rating = ratings.communication; %>
-                    <% include forms/star5.ejs %>
-                </div>
+                <div class="star5Ext stars-small" data-name='<%= ratings.communication.name %>' data-rating='<%= ratings.communication.value %>'  ></div>
               </td>
               <th>便利设施</th>
               <td>
-                <div class="stars stars-small">
-                  <% rating = ratings.goodfacility; %>
-                    <% include forms/star5.ejs %>
-                </div>
+                <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'  ></div>
               </td>
             </tr>
             <tr>
               <th>干净整洁</th>
               <td>
-                <div class="stars stars-small">
-                  <% rating = ratings.clean; %>
-                    <% include forms/star5.ejs %>
-                </div>
+                <div class="star5Ext stars-small" data-name='<%= ratings.clean.name %>' data-rating='<%= ratings.clean.value %>'  ></div>
               </td>
               <th>价格合理</th>
               <td>
-                <div class="stars stars-small">
-                  <% rating = ratings.goodprice; %>
-                    <% include forms/star5.ejs %>
-                </div>
+                <div class="star5Ext stars-small" data-name='<%= ratings.goodprice.name %>' data-rating='<%= ratings.goodprice.value %>'  ></div>
               </td>
             </tr>
           </tbody>

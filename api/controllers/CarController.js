@@ -65,6 +65,12 @@ var self = module.exports = {
           
         res.view('car-detail', { car: record,
           ratings: { overall:{ name:'overall', value: parseInt(1 + Math.random() * 5) },
+            clean:{ name:'clean', value: parseInt(1 + Math.random() * 5)},
+            infomatch:{ name:'infomatch', value: parseInt(1 + Math.random() * 5)},
+            goodlocation:{ name:'goodlocation', value: parseInt(1 + Math.random() * 5)},
+            communication:{ name:'communication', value: parseInt(1 + Math.random() * 5)},
+            goodfacility:{ name:'goodfacility', value: parseInt(1 + Math.random() * 5)},
+            goodprice:{ name:'goodprice', value: parseInt(1 + Math.random() * 5)},
           },
         });
       } else {

@@ -21,5 +21,19 @@ $(document).ready(function () {
             $(`input[name="${name}_fd"]`).val(response.files[0].fd);
         });
     });
+
+
+
+    // star2 ext. will move to separate file later
+
+    $('div.star5Ext').each((idx, elem) => {
+        $(elem).addClass('stars').append('<form></form>');
+        var uiid = $(elem).attr('id') || `ui${parseInt(Math.random() * 10000)}`;
+        console.log(uiid);
+        [5,4,3,2,1].forEach((i) => {
+            $('form', elem).append(`<input name=${$(elem).attr('data-name')} class="star star-${i}" id="star-${uiid}-${i}" type="radio" value=${i} ${ i==$(elem).attr('data-rating') ? 'checked' : '' } />`)
+            .append(`<label class="star star-${i}" for="star-${uiid}-${i}"></label>`);
+        });
+    });
     
 });

@@ -2,28 +2,7 @@
 <p align='center'  style="color:#149354"><b>欢迎加盟ALLKO</b></p>
 </br>
 
-<form class="form-horizontal">
-    <div class="form-group">
-        <label for="username" class="control-label col-md-2">用户名</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" name="username" id="username">
-        </div>
-        <label for="email" class="control-label col-md-2">邮箱</label>
-        <div class="col-md-4">
-            <input type="email" class="form-control" name="email" id="email">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="password" class="control-label col-md-2">密码</label>
-        <div class="col-md-4">
-            <input type="password" class="form-control" name="password" id="password">
-        </div>
-        <label for="passwordconfirm" class="control-label col-md-2">确认密码</label>
-        <div class="col-md-4">
-            <input type="password" class="form-control" name="passwordconfirm" id="passwordconfirm">
-        </div>
-    </div>
+<form class="form-horizontal" action="/HostManager/join">
 
     <div class="form-group">
         <label for="lastname" class="control-label col-md-2">姓</label>
@@ -37,31 +16,24 @@
     </div>
 
     <div class="form-group">
-        <label for="cell" class="control-label col-md-2">手机号码</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" name="cell" id="cell">
-        </div>
-    </div>
-
-    <div class="form-group">
         <label class="control-label col-md-2">服务类型</label>
         <div class="col-md-2">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="caranddrive">
+                <label>    <input type="checkbox" value="houserental" name="servicetype">
           租房服务
           </label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="checkbox">
-                <label>    <input type="checkbox" value="" name="guide">
+                <label>    <input type="checkbox" value="guide" name="servicetype">
           向导服务
           </label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="caranddrive">
+                <label>    <input type="checkbox" value="caranddrive" name="servicetype">
           向导 + 私家车服务
           </label>
             </div>
@@ -72,28 +44,28 @@
         <label class="control-label col-md-2">服务城市</label>
         <div class="col-md-1">
             <div class="checkbox">
-                <label>    <input type="checkbox" value="" name="newyork">
+                <label>    <input type="checkbox" value="newyork" name="servicecity">
           纽约
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="boston">
+                <label>    <input type="checkbox" value="boston" name="servicecity">
           波士顿
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="sanfran">
+                <label>    <input type="checkbox" value="sanfrancisco" name="servicecity">
           旧金山
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="raleigh">
+                <label>    <input type="checkbox" value="raleigh" name="servicecity">
           罗利
           </label>
             </div>
@@ -101,7 +73,7 @@
 
         <div class="col-md-2">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="lasvigas">
+                <label>    <input type="checkbox" value="lasvigas" name="servicecity">
          拉斯维加斯
           </label>
             </div>
@@ -113,42 +85,42 @@
         <label class="control-label col-md-2">服务语言</label>
         <div class="col-md-1">
             <div class="checkbox">
-                <label>    <input type="checkbox" value="" name="chinese">
+                <label>    <input type="checkbox" value="chinese" name="servicelanguage">
           中文
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="english">
+                <label>    <input type="checkbox" value="english" name="servicelanguage">
           英语
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="germany">
+                <label>    <input type="checkbox" value="germany" name="servicelanguage">
          德语
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="japanese">
+                <label>    <input type="checkbox" value="japanese" name="servicelanguage">
           日语
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="france">
+                <label>    <input type="checkbox" value="french" name="servicelanguage">
           法语
           </label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="spanish">
+                <label>    <input type="checkbox" value="spanish" name="servicelanguage">
           西班牙语
           </label>
             </div>
@@ -159,7 +131,7 @@
         <label class="control-label col-md-2">兴趣爱好</label>
         <div class="col-md-1">
             <div class="checkbox">
-                <label>    <input type="checkbox" value="" name="shopping">
+                <label>    <input type="checkbox" value="shopping" name="hobby">
           购物
           </label>
             </div>
@@ -167,49 +139,49 @@
 
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="travel">
+                <label>    <input type="checkbox" value="travel" name="hobby">
           旅游
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="food">
+                <label>    <input type="checkbox" value="food" name="hobby">
           美食
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="clibming">
+                <label>    <input type="checkbox" value="clibming" name="hobby">
           登山
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="fishing">
+                <label>    <input type="checkbox" value="fishing" name="hobby">
           钓鱼
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="fishing">
+                <label>    <input type="checkbox" value="hunting" name="hobby">
           打猎
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="surfing">
+                <label>    <input type="checkbox" value="surfing" name="hobby">
           冲浪
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="" name="golf">
+                <label>    <input type="checkbox" value="golf" name="hobby">
           高尔夫
           </label>
             </div>

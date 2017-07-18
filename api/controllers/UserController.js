@@ -9,13 +9,13 @@ var Util = require('../helpers/util');
 
 var self = module.exports = {
 
-    _me : function(uid, req, res) {
-        req.session.me = uid;
+    _setMe : function(id, req, res) {
+        req.session.me = id;
     },
 
     /* API */
 	me : function(req, res) {
-        self._me(req.param('id'), req);
+        self._setMe(req.param('id'), req);
 
         res.ok(req.session.me);
     },
@@ -35,7 +35,7 @@ var self = module.exports = {
             if (err) return res.serverError(err);
 
             if (record) {
-                self._me(record.email, req, res);
+                self._setMe(record.email, req, res);
 
                 sails.log(`User ${record.email} sign in `);
 
@@ -58,7 +58,7 @@ var self = module.exports = {
 
             sails.log(`User ${record.email} sign up done`);
             
-            self._me(record.email, req, res);
+            self._setMe(record.email, req, res);
             res.ok('ok');
         });
 

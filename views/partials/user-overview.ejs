@@ -9,29 +9,37 @@
 <table class="table table-bordered">
   <tbody>
     <tr class="info" >
-      <th>用户名</th>
+      <td>用户名</td>
       <td>xhx</td>
-      <th>Email</th>
+      <td>Email</td>
       <td>xhx@mail.com</td>
     </tr>
-    <tr >
-      <th>姓</th>
-      <td>小</td>
-      <th>名</th>
-      <td>hx</td>
-    </tr>
-    <tr  class="info">
-      <th>兴趣爱好</th>
-      <td>滑雪、购物</td>
-      <th>手机号码</th>
+    <tr>
+      <td>服务类型</td>
+      <td>
+        <% if (user.host) { %>
+          租房、司机+车、向导 
+        <% } else { %>
+          尚未开通 &nbsp; &nbsp; <a type="Primary" class="btn btn-xs btn-success ">我要加盟</a>
+        <% } %>
+      </td>
+      <td>手机号码</td>
       <td>123</td>
     </tr>
+    <% if (user.host) { %>
+    <tr class="info" >
+      <td>姓</td>
+      <td>小</td>
+      <td>名</td>
+      <td>hx</td>
+    </tr>
     <tr>
-      <th>服务类型</th>
-      <td>租房、司机+车、向导</td>
-      <th>服务语言</th>
+      <td>兴趣爱好</td>
+      <td>滑雪、购物</td>
+      <td>服务语言</td>
       <td>中文、英语</td>
     </tr>
+    <% } %>
     
   </tbody>
 </table>
@@ -56,33 +64,33 @@
 <table class="table">
   <tbody>
     <tr  class="warning">
-      <th>服务类型</th>
+      <td>服务类型</td>
       <td> personal</td>
-      <th>服务人数</th>
+      <td>服务人数</td>
       <td>最多<%= car.maxserivecount %>人</td>
     </tr>
     <tr>
-      <th>服务要求</th>
+      <td>服务要求</td>
       <td><%= car.forbids %></td>
-      <th>最短服务时间</th>
+      <td>最短服务时间</td>
       <td><%= car.minservicetime %>小时</td>
     </tr>
     <tr  class="warning">
-      <th>导游收费</th>
+      <td>导游收费</td>
       <td><%= car.guideprice %>美金/小时</td>
-      <th>司机+私家车收费</th>
+      <td>司机+私家车收费</td>
       <td><%= car.guidewithcarprice %>美金/小时</td>
     </tr>
     <tr>
-      <th>我的爱车</th>
+      <td>我的爱车</td>
       <td><%= car.carbrand %>&nbsp730&nbsp&nbsp<%= car.cartype %>&nbsp<%= car.cargroup %></td>
-      <th>车辆详情</th>
+      <td>车辆详情</td>
       <td><%= car.doorcount %>门<%= car.seatcount %>座&nbsp<%= car.facility %></td>
     </tr>
     <tr  class="warning">
-      <th>向导简介</th>
+      <td>向导简介</td>
       <td><%= car.guideintroduction %></td>
-      <th></th>
+      <td></td>
       <td></td>
     </tr>
 
@@ -103,42 +111,42 @@
 <table class="table">
   <tbody>
     <tr  class="success">
-      <th>房源名称</th>
+      <td>房源名称</td>
       <td>
         <%= house.housename %>
       </td>
-      <th>价格/天</th>
+      <td>价格/天</td>
       <td><%= house.price %></td>
     </tr>
     <tr>
-      <th>我的房子</th>
+      <td>我的房子</td>
       <td><%= house.housetype %>，<%= house.bedroomcount %>室<%= house.livingroomcount %>厅<%= house.bathroomcount %>卫</td>
-      <th>便利设施</th>
+      <td>便利设施</td>
       <td><%= house.facility %></td>
     </tr>
     <tr  class="success">
-      <th>入住时间</th>
+      <td>入住时间</td>
       <td><%= house.checkintime %>后入住，<%= house.checkouttime %>前退房</td>
-      <th>租房要求</th>
+      <td>租房要求</td>
       <td><%= house.forbids %></td>
       </tr>
       <tr>
-        <th>最多入住人数</th>
+        <td>最多入住人数</td>
         <td><%= house.capacity %>人</td>
-        <th>最短预定时间</th>
+        <td>最短预定时间</td>
         <td><%= house.minday %>天</td>
       </tr>
       <tr class="success">
-        <th>所在城市</th>
+        <td>所在城市</td>
         <td> <%= house.country %>,
       <%= house.city %></td>
-        <th>地址</th>
+        <td>地址</td>
         <td><%= house.street %>，<%= house.zip %></td>
         </tr>
         <tr>
-          <th>补充说明</th>
+          <td>补充说明</td>
           <td><%= house.memo %></td>
-          <th></th>
+          <td></td>
           <td></td>
         </tr>
   </tbody>

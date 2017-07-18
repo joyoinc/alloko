@@ -9,14 +9,13 @@ var Util = require('../helpers/util');
 module.exports = {
     /** Page */
     me : function(req, res) {
-        host = req.session.me;
+        req.session.me = null;
 
-        res.view("host/default", { chost: host, layout: 'host-layout' } );
+        res.redirect("/");
     },
 
 	main : function(req, res) {
-        var host = req.session.me || Util.simpleID(13);
-        req.session.me = host;
+        var userId = req.session.me;
 
         var car = {
             "guideintroduction": "xxd's car 2",
@@ -83,13 +82,23 @@ module.exports = {
             "id": "59669fac540064f80b7d30eb"
         }
 
-
-        res.view("host/default", { car: car, house: house, chost: host, layout: 'host-layout' } );
+        User.findOne({email: userId}).populate('host').exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+            if (!aUser) {
+                sails.log(`Could not find User ${userId}`);
+                res.notFound(`${userId}`);
+            } else {
+                console.log(aUser)
+                res.view("host/default", { user: aUser, car: car, house: house,
+                    displayId: aUser.host.length > 0 ? aUser.host[0].hostId : aUser.email, 
+                    layout: 'host-layout' } );
+            }
+        });
     },
 
     userProfile : function(req, res) {
         var userId = host = req.session.me;
-        User.findOne({id: userId}).populate('profile').exec(function (err, aUser) {
+        User.findOne({email: userId}).populate('profile').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
             if (!aUser) {
@@ -102,7 +111,7 @@ module.exports = {
                 if (profiles.length < 1) {
                     sails.log(`Could not find profile of User ${userId} `);
                 }
-                res.view("host/userProfile", { chost: host, cUser: aUser, layout: 'host-layout' } );
+                res.view("host/userProfile", { displayId: userId, cUser: aUser, layout: 'host-layout' } );
             }
         });
     },
@@ -110,19 +119,39 @@ module.exports = {
     becomeHost : function(req, res) {
         var host = req.session.me;
 
-        res.view("user.join.ejs", { chost: host, layout: 'host-layout' } );
+        res.view("host/join", { displayId: host, layout: 'host-layout' } );
+    },
+
+    join : function(req, res) {
+        var userId = host = req.session.me;
+
+        var newHost = { hostId: Util.simpleID(11),
+            firstname: req.param('firstname'),
+            lastname: req.param('lastname'),
+            servicetype: Util.ensureArray(req.param('servicetype')),
+            servicecity: Util.ensureArray(req.param('servicecity')),
+            servicelanguage: Util.ensureArray(req.param('servicelanguage')),
+            hobby: Util.ensureArray(req.param('hobby')),
+        };
+
+        User.update({email: userId}, {host: newHost}).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            sails.log(`user ${userId} joined as host`)
+            return res.redirect('/dashboard');
+        });
     },
 
     signIn : function(req, res) {
         var host = req.session.me;
 
-        res.view("user.signin.ejs", { chost: host, layout: 'host-layout' } );
+        res.view("user.signin.ejs", { displayId: host, layout: 'host-layout' } );
     },
 
     signUp : function(req, res) {
         var host = req.session.me;
 
-        res.view("user.signup.ejs", { chost: host, layout: 'host-layout' } );
+        res.view("user.signup.ejs", { displayId: host, layout: 'host-layout' } );
     },
 
     editHouse: function (req, res) {
@@ -134,11 +163,11 @@ module.exports = {
             if (!myHouse) {
                 sails.log(`Could not find house for ${host}`);
 
-                res.view("host/newOredit-house", { chost: host, layout: 'host-layout' });
+                res.view("host/newOredit-house", { displayId: host, layout: 'host-layout' });
             } else {
                 sails.log(`Find house ${myHouse.id} for ${host}`);
 
-                res.view("host/newOredit-house", { chost: host, layout: 'host-layout', myHouse: myHouse });
+                res.view("host/newOredit-house", { displayId: host, layout: 'host-layout', myHouse: myHouse });
             }
         });
 
@@ -153,11 +182,11 @@ module.exports = {
             if (!myCar) {
                 sails.log(`Could not find car for ${host}`);
 
-                res.view("host/newOredit-car", { chost: host, layout: 'host-layout' });
+                res.view("host/newOredit-car", { displayId: host, layout: 'host-layout' });
             } else {
                 sails.log(`Find car ${myCar.id} for ${host}`);
 
-                res.view("host/newOredit-car", { chost: host, layout: 'host-layout', myCar: myCar });
+                res.view("host/newOredit-car", { displayId: host, layout: 'host-layout', myCar: myCar });
             }
         });
 

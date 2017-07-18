@@ -23,6 +23,10 @@ module.exports = {
     profile: {
       collection:'profile',
     },
+
+    host: {
+      collection:'host',
+    },
   }
 };
 

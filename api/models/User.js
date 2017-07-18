@@ -24,8 +24,8 @@ module.exports = {
       collection:'profile',
     },
 
-    host: {
-      collection:'host',
+    hostInfo: {
+      collection:'hostInfo',
     },
   }
 };

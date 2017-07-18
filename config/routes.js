@@ -55,6 +55,6 @@ module.exports.routes = {
   '/h/dashboard': 'HostManagerController.main',
   '/h/setting': 'HostManagerController.main',
   '/h/profile': 'HostManagerController.main',
-  '/h/help': 'HostManagerController.me',
+  '/h/logout': 'HostManagerController.logout',
 
 };

@@ -20,23 +20,13 @@ var self = module.exports = {
         res.ok(req.session.me);
     },
 
-    updateProfile: function(req, res) {
-
-        
-    },
-
-    /* End API */
-
-    /* Page */
     signIn: function(req, res) {
-        console.log(req.allParams());
 
         User.findOne({email: req.param('email'), password: Util.encString(req.param('password'))}).exec(function (err, record) {
             if (err) return res.serverError(err);
 
             if (record) {
                 self._setMe(record.email, req, res);
-
                 sails.log(`User ${record.email} sign in `);
 
                 var target = decodeURIComponent(req.session.redirectTo || '/');
@@ -49,7 +39,6 @@ var self = module.exports = {
     },
 
     signUp: function(req, res) {
-        sails.log(req.allParams());
 
         User.create({ email: req.param('email'), password: Util.encString(req.param('password')),
             profile: { nick: Util.simpleID(7), cell: req.param('cell'), },
@@ -62,6 +51,46 @@ var self = module.exports = {
             res.ok('ok');
         });
 
+    },
+    /* End API */
+
+    /* Page */
+
+    updateProfile: function(req, res) {
+        var userId = req.session.me;
+
+        var newProfile = {
+            cell: req.param('cell'),
+            nick: req.param('nick'),
+        }
+
+        User.update({ email: userId }, { profile: newProfile }).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            sails.log(`user ${userId} profile updated`);
+            return res.redirect('/dashboard');
+        });
+    },
+
+        join: function (req, res) {
+        var userId = req.session.me;
+
+        var newHost = {
+            hostId: Util.simpleID(11),
+            firstname: req.param('firstname'),
+            lastname: req.param('lastname'),
+            servicetype: Util.ensureArray(req.param('servicetype')),
+            servicecity: Util.ensureArray(req.param('servicecity')),
+            servicelanguage: Util.ensureArray(req.param('servicelanguage')),
+            hobby: Util.ensureArray(req.param('hobby')),
+        };
+
+        User.update({ email: userId }, { hostInfo: newHost }).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            sails.log(`user ${userId} joined as host`)
+            return res.redirect('/dashboard');
+        });
     },
 
     /* End Page */

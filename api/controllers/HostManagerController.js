@@ -6,17 +6,21 @@
  */
 var Util = require('../helpers/util');
 
-module.exports = {
+var self = module.exports = {
+    _displayId: function (aUser) {
+        return aUser.hostInfo.length > 0 ? aUser.hostInfo[0].hostId : aUser.email;
+    },
     /** Page */
-    me : function(req, res) {
+    logout: function (req, res) {
         req.session.me = null;
-
         res.redirect("/");
     },
 
-	main : function(req, res) {
+    main: function (req, res) {
         var userId = req.session.me;
 
+        var car = {}, house = {};
+        /*
         var car = {
             "guideintroduction": "xxd's car 2",
             "guideprice": "",
@@ -81,77 +85,55 @@ module.exports = {
             "updatedAt": "2017-07-14T01:50:48.062Z",
             "id": "59669fac540064f80b7d30eb"
         }
+        */
 
-        User.findOne({email: userId}).populate('host').exec(function (err, aUser) {
+        User.findOne({ email: userId }).populate('hostInfo').exec(function (err, aUser) {
             if (err) return res.serverError(err);
             if (!aUser) {
                 sails.log(`Could not find User ${userId}`);
-                res.notFound(`${userId}`);
+                res.notFound(`user ${userId}`);
             } else {
-                console.log(aUser)
-                res.view("host/default", { user: aUser, car: car, house: house,
-                    displayId: aUser.host.length > 0 ? aUser.host[0].hostId : aUser.email, 
-                    layout: 'host-layout' } );
+                res.view("host/default", {
+                    displayId: self._displayId(aUser),
+                    user: aUser, car: car, house: house,
+                    layout: 'host-layout'
+                });
             }
         });
     },
 
-    userProfile : function(req, res) {
-        var userId = host = req.session.me;
-        User.findOne({email: userId}).populate('profile').exec(function (err, aUser) {
+    userProfile: function (req, res) {
+        var userId = req.session.me;
+        User.findOne({ email: userId }).populate('profile').populate('hostInfo').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
             if (!aUser) {
                 sails.log(`Could not find User ${userId}`);
-
-                res.notFound(`${userId}`);
-
+                res.notFound(`user ${userId}`);
             } else {
-                var profiles = Util.ensureArray(aUser.profile);
-                if (profiles.length < 1) {
-                    sails.log(`Could not find profile of User ${userId} `);
-                }
-                res.view("host/userProfile", { displayId: userId, cUser: aUser, layout: 'host-layout' } );
+                res.view("host/userProfile", {
+                    displayId: self._displayId(aUser),
+                    cUser: aUser,
+                    layout: 'host-layout'
+                });
             }
         });
     },
 
-    becomeHost : function(req, res) {
-        var host = req.session.me;
-
-        res.view("host/join", { displayId: host, layout: 'host-layout' } );
+    becomeHost: function (req, res) {
+        var userId = req.session.me;
+        res.view("host/join", { displayId: userId, layout: 'host-layout' });
     },
 
-    join : function(req, res) {
-        var userId = host = req.session.me;
 
-        var newHost = { hostId: Util.simpleID(11),
-            firstname: req.param('firstname'),
-            lastname: req.param('lastname'),
-            servicetype: Util.ensureArray(req.param('servicetype')),
-            servicecity: Util.ensureArray(req.param('servicecity')),
-            servicelanguage: Util.ensureArray(req.param('servicelanguage')),
-            hobby: Util.ensureArray(req.param('hobby')),
-        };
-
-        User.update({email: userId}, {host: newHost}).exec(function (err, aUser) {
-            if (err) return res.serverError(err);
-
-            sails.log(`user ${userId} joined as host`)
-            return res.redirect('/dashboard');
-        });
+    signIn: function (req, res) {
+        var userId = req.session.me;
+        res.view("user.signin.ejs", { displayId: userId, layout: 'host-layout' });
     },
 
-    signIn : function(req, res) {
-        var host = req.session.me;
-
-        res.view("user.signin.ejs", { displayId: host, layout: 'host-layout' } );
-    },
-
-    signUp : function(req, res) {
-        var host = req.session.me;
-
-        res.view("user.signup.ejs", { displayId: host, layout: 'host-layout' } );
+    signUp: function (req, res) {
+        var userId = req.session.me;
+        res.view("user.signup.ejs", { displayId: userId, layout: 'host-layout' });
     },
 
     editHouse: function (req, res) {
@@ -192,5 +174,7 @@ module.exports = {
 
     },
     /** End Page */
+
+
 };
 

@@ -7,8 +7,7 @@
   <hr />
 
   <!-- gallery -->
-  <div id='root'>
-  </div>
+  <div id='root'></div>
 
   <div class="progress" style="display: none">
     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
@@ -29,23 +28,30 @@
     else {
       $('.progress').show(); isLoading = true;
     }
+
     doLoad();
   }
 
   var doLoad = function() {
-    $.post("/house/recent", {skipCount:loadedCount}, (data) => {
+    $.get("/car", (data) => {
       loadedCount += data.length;
       
       setTimeout(function() {
+
+
+
+
+
+
         var model = data.map(function(e){ 
           var rr = parseInt(1 + Math.random() * 5);
-          return { title: `$${e.price} ${e.city} ${e.housename}`,
-            imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
-            detail: ` ${e.housetype} &nbsp， ${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+          return { title: `$${e.guideprice} 纽约 ${e.owner}`,
+            detail:` 汉语、，英语服务，${e.minservicetime}小时起`,
             btnText: "查看详情",
-            btnLink: `/house/__g/${e.id}`,
+            btnLink: `/car/__g/${e.id}`,
             btnText2: "查看地图",
             btnLink2: '#',
+            imageLink: e.carpic_fd ? `/message/snapshot/${e.carpic_fd}` : '/images/img-missing.png',
             reviewCount : 428,
             fiveStarStyles: Array(rr).fill('fa-star').concat(Array(5-rr).fill('fa-star-o')) ,
           }
@@ -63,7 +69,7 @@
       while(model.length > 0) {
         var str = "<div class='row'>";
         model.slice(0, 3).forEach(function(element) {
-          str += cli_render_bind(element, 'gallery_tile_1x3_btn2_star5');
+          str += cli_render_bind(element, 'gallery_tile_1x3_btn1_star5');
         });
         str += "</div>";
         $('#root').append(str);

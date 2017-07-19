@@ -1,0 +1,24 @@
+<!-- data: imageLink, title, detail, btnLink, btnText, btnLink2, btnText2 -->
+<!-- data: fiveStarStyles[0], fiveStarStyles[1], fiveStarStyles[2], fiveStarStyles[3], fiveStarStyles[4], reviewCount -->
+<!-- A tile in 1x3 row -->
+<div class="col-sm-6 col-md-4">
+	<div class="thumbnail">
+	<img src="<%= imageLink %>" alt="...">
+	<div class="caption">
+		<h3><%= title %></h3>
+		<p><%= detail %></p>
+		<div class="stars stars-small">
+			<label class="star-static fa <%= fiveStarStyles[0] %>" ></label>
+			<label class="star-static fa <%= fiveStarStyles[1] %>" ></label>
+			<label class="star-static fa <%= fiveStarStyles[2] %>" ></label>
+			<label class="star-static fa <%= fiveStarStyles[3] %>" ></label>
+			<label class="star-static fa <%= fiveStarStyles[4] %>" ></label>
+			<%= reviewCount %>个评价
+		</div>
+		<p>
+			<a href="<%= btnLink %>" class="btn btn-primary" role="button"><%= btnText %></a>
+			<a href="<%= btnLink2 %>" class="btn btn-success" role="button"><%= btnText2 %></a>
+		</p>
+	</div>
+	</div>
+</div>

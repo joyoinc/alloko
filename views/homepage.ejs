@@ -9,61 +9,44 @@
     <form class="form-horizontal">
       <div class="form-group">
 
-        <div class="col-md-3">
+        <div class="col-md-6">
           <div class="input-group">
             <div class="input-group-btn">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">国家 <span class="caret"></span></button>
-              <ul class="dropdown-menu" id="country-menu">
-              </ul>
+              <ul class="dropdown-menu" id="country-menu"> </ul>
             </div>
             <!-- /btn-group -->
-            <input type="text" name="country" class="form-control" readonly="" aria-label="...">
+            <input type="text" value='美国' name="country" class="form-control" readonly="" aria-label="...">
           </div>
           <!-- /input-group -->
         </div>
         <!-- /.col-md -->
 
-        <div class="col-md-3">
+        <div class="col-md-6">
           <div class="input-group">
             <div class="input-group-btn">
               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">城市 <span class="caret"></span></button>
-              <ul class="dropdown-menu" id="city-menu">
-              </ul>
+              <ul class="dropdown-menu" id="city-menu"></ul>
             </div>
             <!-- /btn-group -->
-            <input type="text" name="city" class="form-control" readonly="" aria-label="...">
+            <input type="text" value='纽约' name="city" class="form-control" readonly="" aria-label="...">
           </div>
           <!-- /input-group -->
         </div>
         <!-- /.col-md -->
 
-        <div class="col-md-3">
-          <div class="input-group ">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" ></span></span>
-            <input type="text" name="daterange" readonly="" class="form-control" value="01/01/2017 - 01/01/2018" />
-          </div>
-        </div>
-        <!-- /.col-md -->
+      </div>
 
-        <div class="col-md-2">
-          <div class="input-group ">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
-            <input type="number" class="form-control" value=1 min=1 max=10 />
-          </div>
-        </div>
-        <!-- /.col-md -->
-
+      <!-- form-group -->
+      <div class="form-group">
         <div class="col-md-1">
           <button type="submit" class="btn btn-success form-control">
             <span class="glyphicon glyphicon-search" ></span>
           </button>
         </div>
         <!-- /.col-md -->
-      </div>
-      <!-- form-group -->
 
-      <div class="form-group">
-        <div class="checkbox col-md-2">
+        <div class="checkbox col-md-3">
           <label>
             <input type="checkbox" value="">
            无车向导
@@ -71,7 +54,7 @@
         </div>
         <!-- div.checkbox -->
 
-        <div class="checkbox col-md-2">
+        <div class="checkbox col-md-3">
           <label>
             <input type="checkbox" value="">
             带车向导
@@ -79,7 +62,7 @@
         </div>
         <!-- div.checkbox -->
 
-        <div class="checkbox col-md-2">
+        <div class="checkbox col-md-3">
           <label>
             <input type="checkbox" value="">
             住房
@@ -136,19 +119,6 @@
 
   </div>
   <script>
-    /* data */
-    var countries = [
-      { id: 'usa', text: '美国' },
-      { id: 'japan', text: '日本' },
-    ];
-    var cities = [
-      { id: 'boston', text: '波士顿', par: 'usa' },
-      { id: 'nycity', text: '纽约', par: 'usa' },
-      { id: 'dc', text: '华盛顿', par: 'usa' },
-
-      { id: 'tokyo', text: '东京', par: 'japan' },
-    ];
-    /* end data */
 
     $(document).ready(function () {
       $.post("/house/recent", { batchSize: 3 }, (data) => {
@@ -182,34 +152,6 @@
 
       $('input[name="daterange"]').daterangepicker();
 
-      countries.forEach(function (e, idx) {
-        $('#country-menu').append(`<li><a id=${e.id} class='input-link' target='country'>${e.text}</a></li>`)
-      });
-
-      cities.forEach(function (e, idx) {
-        $('#city-menu').append(`<li><a id=${e.id} par=${e.par} class='input-link' target='city'>${e.text}</a></li>`)
-      });
-
-    });
-
-    $(document).on('click', 'a.input-link', function (e) {
-      e.preventDefault();
-      var t = $(this).attr('target');
-      var oldValue = $(`input[name=${t}]`).val();
-      if (oldValue !== $(this).text()) {
-        $(`input[name=${t}]`).val($(this).text()).trigger('change')
-      }
-    });
-
-    $('input[name="country"]').on("change", function () {
-      $('input[name="city"]').val("");
-      $('#city-menu a.input-link').hide();
-
-      var current_country = countries.find((elem) => { return elem.text === $(this).val() });
-
-      $('#city-menu a.input-link').filter((idx, elem) => {
-        return $(elem).attr('par') === current_country.id;
-      }).show();
     });
 
     $(window).on('load', function () {

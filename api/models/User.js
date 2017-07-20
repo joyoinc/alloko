@@ -14,20 +14,24 @@ module.exports = {
       required: true,
       primaryKey: true
     },
-
     password: {
       type:'string',
       required: true,
     },
-
-    profile: {
-      collection:'profile',
-      via: 'owner',
+    roles: {
+      type: 'array',
+      defaultsTo: ['customer'],
+    },
+    nick: {
+      type: 'string'
+    },
+    cell: {
+      type: 'string'
     },
 
-    hostInfo: {
+    hosts: {
       collection:'hostInfo',
-      via: 'owner',
+      via: 'ofUser',
     },
   }
 };

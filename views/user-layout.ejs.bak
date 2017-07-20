@@ -63,12 +63,7 @@
 
                 <!-- left panel -->
                 <div data-spy="affix" class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas">
-                    <% var hostInfo = cUser.hosts; %>
-                    <% if (typeof hostInfo === 'undefined' || hostInfo.length === 0) { %>
-                        <% include partials/user-sidebar %>
-                    <% } else { %>
-                        <% include partials/host-sidebar %>
-                    <% } %>
+                    <% include partials/user-sidebar %>
                 </div>   <!--/.sidebar-offcanvas-->
 
 

@@ -1,0 +1,156 @@
+<h3 style="color:green;">
+  <b>个人资料&nbsp&nbsp&nbsp</b>
+  <a href="/HostManager/userProfile" class="btn btn-warning " align="right">修改个人资料</a> 
+  <button type="Primary" class="btn btn-info " align="right">重置密码</button>
+</h3>
+
+<table class="table table-bordered">
+  <tbody>
+    <tr class="info">
+      <td>用户名</td>
+      <td>
+        <%= cUser.nick %>
+      </td>
+      <td>Email</td>
+      <td>
+        <%= cUser.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>服务类型</td>
+      <td>
+        租房、司机+车、向导
+      </td>
+      <td>手机号码</td>
+      <td><%= cUser.cell %></td>
+    </tr>
+
+    <% var cHost = cUser.hosts[0]; %>
+
+    <tr class="info">
+      <td>姓</td>
+      <td><%= cHost.lastname%></td>
+      <td>名</td>
+      <td><%= cHost.firstname%></td>
+    </tr>
+    <tr>
+      <td>兴趣爱好</td>
+      <td>滑雪、购物</td>
+      <td>服务语言</td>
+      <td>中文、英语</td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+</br></br></br>
+
+
+<h3 style="color:orange;"><b>司机、导游服务&nbsp&nbsp&nbsp </b> <a href="/HostManager/editCar" class="btn btn-success" align="right">修改司机+导游服务</a></h3>
+
+<% if (cHost.servicetype.includes("car_drive") ) { %>
+
+<table class="table">
+  <tbody>
+    <tr  class="warning">
+      <td>服务类型</td>
+      <td> personal</td>
+      <td>服务人数</td>
+      <td>最多<%= car.maxserivecount %>人</td>
+    </tr>
+    <tr>
+      <td>服务要求</td>
+      <td><%= car.forbids %></td>
+      <td>最短服务时间</td>
+      <td><%= car.minservicetime %>小时</td>
+    </tr>
+    <tr  class="warning">
+      <td>导游收费</td>
+      <td><%= car.guideprice %>美金/小时</td>
+      <td>司机+私家车收费</td>
+      <td><%= car.guidewithcarprice %>美金/小时</td>
+    </tr>
+    <tr>
+      <td>我的爱车</td>
+      <td><%= car.carbrand %>&nbsp730&nbsp&nbsp<%= car.cartype %>&nbsp<%= car.cargroup %></td>
+      <td>车辆详情</td>
+      <td><%= car.doorcount %>门<%= car.seatcount %>座&nbsp<%= car.facility %></td>
+    </tr>
+    <tr  class="warning">
+      <td>向导简介</td>
+      <td><%= car.guideintroduction %></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
+&nbsp&nbsp
+
+
+    <% } else { %>
+      <div>Not open yet</div>
+    <% } %>
+
+
+<h3 style="color:#149354"><b>租房服务&nbsp&nbsp&nbsp </b> <a href="/HostManager/editHouse" class="btn btn-warning " align="right">修改租房服务</a></h3>
+
+<% if (cHost.servicetype.includes("house4rent") ) { %>
+
+<table class="table">
+  <tbody>
+    <tr  class="success">
+      <td>房源名称</td>
+      <td>
+        <%= house.housename %>
+      </td>
+      <td>价格/天</td>
+      <td><%= house.price %></td>
+    </tr>
+    <tr>
+      <td>我的房子</td>
+      <td><%= house.housetype %>，<%= house.bedroomcount %>室<%= house.livingroomcount %>厅<%= house.bathroomcount %>卫</td>
+      <td>便利设施</td>
+      <td><%= house.facility %></td>
+    </tr>
+    <tr  class="success">
+      <td>入住时间</td>
+      <td><%= house.checkintime %>后入住，<%= house.checkouttime %>前退房</td>
+      <td>租房要求</td>
+      <td><%= house.forbids %></td>
+      </tr>
+      <tr>
+        <td>最多入住人数</td>
+        <td><%= house.capacity %>人</td>
+        <td>最短预定时间</td>
+        <td><%= house.minday %>天</td>
+      </tr>
+      <tr class="success">
+        <td>所在城市</td>
+        <td> <%= house.country %>,
+      <%= house.city %></td>
+        <td>地址</td>
+        <td><%= house.street %>，<%= house.zip %></td>
+        </tr>
+        <tr>
+          <td>补充说明</td>
+          <td><%= house.memo %></td>
+          <td></td>
+          <td></td>
+        </tr>
+  </tbody>
+</table>
+
+<img src="/images/3.png" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
+
+    <% } else { %>
+      <div>Not open yet</div>
+    <% } %>
+
+
+
+
+

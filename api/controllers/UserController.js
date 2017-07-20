@@ -9,51 +9,48 @@ var Util = require('../helpers/util');
 
 var self = module.exports = {
 
-    _setMe: function (id, req, res) {
+    _setMe: function (id, req) {
         req.session.me = id;
     },
 
     /* API */
     me: function (req, res) {
         self._setMe(req.param('id'), req);
-
         res.ok(req.session.me);
     },
+    /* End API */
 
+    /* Page */
     signIn: function (req, res) {
-
-        User.findOne({ email: req.param('email'), password: Util.encString(req.param('password')) }).exec(function (err, record) {
+        User.findOne({ email: req.param('email'), password: Util.encString(req.param('password')) }).exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
-            if (record) {
-                self._setMe(record.email, req, res);
-                sails.log(`User ${record.email} sign in `);
+            if (aUser) {
+                sails.log(`User ${aUser.email} sign in `);
 
+                self._setMe(aUser.email, req);
                 var target = decodeURIComponent(req.session.redirectTo || '/');
                 res.redirect(target);
             } else {
                 res.notFound('user not found');
             }
         });
-
     },
 
-    /* End API */
-
-    /* Page */
     signUp: function (req, res) {
+        var newUser = {
+            email: req.param('email'),
+            password: Util.encString(req.param('password')),
+            nick: Util.simpleID(5),
+            cell: req.param('cell'),
+        };
 
-        User.create({
-            email: req.param('email'), password: Util.encString(req.param('password')),
-        }).exec(function (err, aUser) {
+        User.create(newUser).exec(function (err, aUser) {
             if (err) return res.serverError(err);
-            sails.log(`User ${aUser.email} sign up done`);
 
-            aUser.profile.add({ nick: Util.simpleID(5), cell: req.param('cell'), });
-            aUser.save(function (err) {
-                self._setMe(aUser.email, req, res);
-                res.redirect('/dashboard');
-            });
+            sails.log(`User ${aUser.email} signed up `);
+            self._setMe(aUser.email, req, res);
+            return res.redirect('/dashboard');
         });
     },
 
@@ -63,9 +60,9 @@ var self = module.exports = {
         var newProfile = {
             cell: req.param('cell'),
             nick: req.param('nick'),
-        }
+        };
 
-        Profile.update({ owner: userId }, newProfile).exec(function (err, record) {
+        User.update(userId, newProfile).exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
             sails.log(`user ${userId} profile updated`);
@@ -86,12 +83,17 @@ var self = module.exports = {
             hobby: Util.ensureArray(req.param('hobby')),
         };
 
-        User.update({ email: userId }, { hostInfo: newHost }).exec(function (err, aUser) {
-            if (err) return res.serverError(err);
+        User.findOne(userId).exec(function (err, aUser) {
+            aUser.roles.push('host');
+            aUser.hosts.add(newHost);
+            aUser.save(function (err) {
+                if (err) return res.serverError(err);
 
-            sails.log(`user ${userId} joined as host`)
-            return res.redirect('/dashboard');
+                sails.log(`host ${newHost.hostId} joined`);
+                return res.redirect('/dashboard');
+            });
         });
+
     },
 
     /* End Page */

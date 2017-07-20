@@ -1,15 +1,27 @@
+<% var hostInfo = cUser.hosts[0]; %>
+
 <div class="list-group">
+    <li class="list-group-item list-group-item-info ">基本信息</li>
     <a id="overview" href="/HostManager/main" class="list-group-item">我的档案</a>
     <a id="user_profile" href="/HostManager/userProfile" class="list-group-item">个人信息</a>
 </div>
 
 <div class="list-group">
-    <a href="#" class="list-group-item ">我的服务</a>
+    <li class="list-group-item list-group-item-success ">我的服务</li>
+    <% if (hostInfo.servicetype.includes("house4rent") ) { %>
+    <% } %>
     <a id="edit_house" href="/HostManager/editHouse" class="list-group-item">租房服务</a>
+
+    <% if (hostInfo.servicetype.includes("car_drive") ) { %>
+    <% } %>
     <a id="edit_car" href="/HostManager/editCar" class="list-group-item">私家车服务</a>
+
+    <% if (hostInfo.servicetype.includes("guide") ) { %>
+    <% } %>
     <a id="edit_car" href="#" class="list-group-item">向导服务</a>
 </div>
 
 <div class="list-group">
-    <a href="#" class="list-group-item">我的订单</a>
+    <li class="list-group-item list-group-item-warning ">我的订单</li>
+    <a href="#" class="list-group-item"></a>
 </div>

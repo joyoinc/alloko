@@ -7,10 +7,10 @@
 var Util = require('../helpers/util');
 
 var self = module.exports = {
-    _displayId: function (aUser) {
-        return aUser.hostInfo.length > 0 ?
-            `加盟伙伴 ${aUser.hostInfo[0].hostId}` :
-            `顾客 ${aUser.email}`;
+    _greeting: function (aUser) {
+        return typeof aUser.hosts !== 'undefined' && aUser.hosts.length > 0 ?
+            `加盟伙伴 ${aUser.hosts[0].hostId}` :
+            `您好 顾客 ${aUser.email}`;
     },
     /** Page */
     logout: function (req, res) {
@@ -20,19 +20,21 @@ var self = module.exports = {
 
     main: function (req, res) {
         var userId = req.session.me;
-        var car = {}, house = {};
 
-        User.findOne({ email: userId }).populate('profile').populate('hostInfo').exec(function (err, aUser) {
+        User.findOne(userId).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
-            if (!aUser) {
-                sails.log(`Could not find User ${userId}`);
-                res.notFound(`user ${userId}`);
+
+            var car, house;
+            if (aUser.roles.includes("host")) {
+                // load car/house
+                console.log(aUser)
+                car = house = {};
             }
 
-            res.view("host/default", {
-                displayId: self._displayId(aUser),
-                user: aUser, car: car, house: house,
-                notHost: aUser.hostInfo.length == 0,
+            res.view("host/overview", {
+                greeting: self._greeting(aUser),
+                cUser: aUser,
+                car: car, house: house,
                 layout: 'host-layout'
             });
 
@@ -41,42 +43,43 @@ var self = module.exports = {
 
     userProfile: function (req, res) {
         var userId = req.session.me;
-        User.findOne({ email: userId }).populate('profile').populate('hostInfo').exec(function (err, aUser) {
+        User.findOne(userId).exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
-            if (!aUser) {
-                sails.log(`Could not find User ${userId}`);
-                res.notFound(`user ${userId}`);
-            } else {
-                res.view("host/userProfile", {
-                    displayId: self._displayId(aUser),
-                    cUser: aUser,
-                    layout: 'host-layout'
-                });
-            }
+            res.view("host/userProfile", {
+                cUser: aUser,
+                layout: 'host-layout'
+            });
         });
     },
 
     becomeHost: function (req, res) {
         var userId = req.session.me;
-        res.view("host/join", { displayId: userId, layout: 'host-layout' });
+
+        User.findOne({ email: userId }).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            res.view("host/join", {
+                cUser: aUser,
+                layout: 'host-layout'
+            });
+        });
     },
 
     editHouse: function (req, res) {
         var userId = req.session.me;
-
-        House.findOne({ owner: userId }).populate('owner').exec(function (err, myHouse) {
+        User.findOne(userId).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
-            if (!myHouse) {
-                sails.log(`Could not find house for ${userId}`);
+            House.findOne({ owner: aUser.hosts[0].hostId }).exec(function (err, aHouse) {
+                if (err) return res.serverError(err);
+                sails.log(`find house ${aHouse ? aHouse.id : "[null]"}`);
 
-                res.view("host/newOredit-house", { layout: 'host-layout' });
-            } else {
-                sails.log(`Find house ${myHouse.id} for ${userId}`);
-
-                res.view("host/newOredit-house", {  myHouse: myHouse, layout: 'host-layout', });
-            }
+                res.view("host/newOredit-house", { 
+                    cUser: aUser, 
+                    myHouse: aHouse,
+                    layout: 'host-layout', });
+            });
         });
 
     },

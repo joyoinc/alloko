@@ -1,15 +1,14 @@
 <form class="form-horizontal" action='/user/updateProfile'>
     <div class="form-group">
         <label for="nick">用户名</label>
-        <input type="text" class="form-control" name="nick"  id="nick" placeholder="用户名" value="<%= typeof cUser == 'undefined' ? '' : cUser.profile[0].nick %>" >
+        <input type="text" class="form-control" name="nick"  id="nick" placeholder="用户名" value="<%= typeof cUser == 'undefined' ? '' : cUser.nick %>" >
     </div>
     <div class="form-group">
         <label for="cell">手机号码</label>
-        <input type="text" class="form-control" name="cell" id="cell" placeholder="手机号码" value="<%= typeof cUser == 'undefined' ? '' : cUser.profile[0].cell %>">
+        <input type="text" class="form-control" name="cell" id="cell" placeholder="手机号码" value="<%= typeof cUser == 'undefined' ? '' : cUser.cell %>">
     </div>
-    <button type="submit" class="btn btn-success">修改个人信息</button>
-    &nbsp&nbsp&nbsp
-    <button type="submit" class="btn btn-danger">我要加盟</button>
-     &nbsp&nbsp&nbsp
-    <button type="Primary" class="btn btn-info " align="right">重置密码</button>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" style="margin-right: 10px;">修改个人信息</button>
+        <button type="Primary" class="btn btn-info " align="right">重置密码</button>
+    </div>
 </form>

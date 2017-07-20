@@ -19,29 +19,37 @@ var self = module.exports = {
         res.ok(req.allParams())
   },
 
-	_publish: function(house, res) {
+	_create: function(house, res) {
 
-    House.create(house).exec(function (err, record){
+    House.create(house).exec(function (err, aHouse){
       if(err) return res.serverError(err);
+      sails.log(`house ${aHouse.id} created`);
 
-      sails.log(`house ${record.id} created`);
-      return res.ok({ok:'ok', op:'c'});
+      HostInfo.findOne(aHouse.houseowner).exec(function(err, aHost){
+        aHost.servicetype.push("house4rent");
+        aHost.save(function(err){
+          if(err) return res.serverError(err);
+          sails.log(`${aHost.hostId} open house4rent service`);
+          
+          return res.ok({ok:'ok', op:'c'});
+        });
+      });
     })
   },
 
   _update: function(house, res) {
-    House.update({ owner: house.owner },house).exec(function (err, record){
+    House.update({ owner: house.owner }, house).exec(function (err, record){
       if(err) return res.serverError(err);
-
       sails.log(`${record.length} house(s) updated`);
+
       return res.ok({ok:'ok', op:'u'});
     })
   },
 
   publishOrUpdate: function (req, res) {
     var newHouse = req.allParams();
-    newHouse['modifiedBy'] = req.session.me || 'A ghost!'; 
-    newHouse['owner'] = req.param('houseowner') || req.session.me ;
+    newHouse['modifiedBy'] = req.session.me || 'A ghost'; 
+    newHouse['owner'] = req.param('houseowner') ;
 
     Util.handleChkboxControl(req, ['forbids', 'facility'], newHouse);
 
@@ -51,7 +59,7 @@ var self = module.exports = {
       if (record) {
         self._update(newHouse, res);
       } else {
-        self._publish(newHouse, res);
+        self._create(newHouse, res);
       }
     });
   },

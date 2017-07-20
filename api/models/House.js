@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     owner:{
-      model:'user',
+      model:'hostInfo',
       unique: true,
     },
   }

@@ -31,7 +31,7 @@ module.exports = {
       type:'array',
     },
 
-    owner:{
+    ofUser: {
       model:'user',
       unique: true,
     },

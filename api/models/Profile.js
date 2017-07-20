@@ -14,8 +14,10 @@ module.exports = {
     cell: {
       type: 'string'
     },
-    user:{
+    
+    owner:{
       model:'user',
+      unique: true,
     },
   }
 };

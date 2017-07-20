@@ -9,7 +9,8 @@ module.exports = {
 
   attributes: {
     hostId: {
-      type: 'string'
+      type: 'string',
+      primaryKey: true
     },
     lastname: {
       type: 'string'
@@ -29,8 +30,10 @@ module.exports = {
     hobby:{
       type:'array',
     },
-    user:{
+
+    owner:{
       model:'user',
+      unique: true,
     },
   }
 };

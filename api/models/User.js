@@ -12,7 +12,7 @@ module.exports = {
     email: {
       type:'email',
       required: true,
-      unique: true
+      primaryKey: true
     },
 
     password: {
@@ -22,10 +22,12 @@ module.exports = {
 
     profile: {
       collection:'profile',
+      via: 'owner',
     },
 
     hostInfo: {
       collection:'hostInfo',
+      via: 'owner',
     },
   }
 };

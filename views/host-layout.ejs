@@ -46,7 +46,7 @@
 
 <body>
     <!-- nav bar -->
-    <% include partials/host.navbar.ejs %>
+       <% include partials/host.navbar.ejs %>
 
         <div class="container-fluid">
             <div class="row row-offcanvas row-offcanvas-right">
@@ -57,15 +57,20 @@
                     </button>
 
                     <%- body %>
+                    
+                    <% include partials/footer.ejs %>
                 </div>
 
                 <!-- left panel -->
                 <div data-spy="affix" class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas">
-                    <% include partials/host.sidebar.ejs %>
+                    <% if (typeof notHost == 'undefined' || !notHost) { %>
+                        <% include partials/host-sidebar %>
+                    <% } else { %>
+                        <% include partials/user-sidebar %>
+                    <% } %>
                 </div>   <!--/.sidebar-offcanvas-->
 
 
-                <% include partials/footer.ejs %>
             </div>
         </div>
 

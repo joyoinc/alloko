@@ -9,20 +9,20 @@ var Util = require('../helpers/util');
 
 var self = module.exports = {
 
-    _setMe : function(id, req, res) {
+    _setMe: function (id, req, res) {
         req.session.me = id;
     },
 
     /* API */
-	me : function(req, res) {
+    me: function (req, res) {
         self._setMe(req.param('id'), req);
 
         res.ok(req.session.me);
     },
 
-    signIn: function(req, res) {
+    signIn: function (req, res) {
 
-        User.findOne({email: req.param('email'), password: Util.encString(req.param('password'))}).exec(function (err, record) {
+        User.findOne({ email: req.param('email'), password: Util.encString(req.param('password')) }).exec(function (err, record) {
             if (err) return res.serverError(err);
 
             if (record) {
@@ -38,25 +38,26 @@ var self = module.exports = {
 
     },
 
-    signUp: function(req, res) {
-
-        User.create({ email: req.param('email'), password: Util.encString(req.param('password')),
-            profile: { nick: Util.simpleID(7), cell: req.param('cell'), },
-        }).exec(function (err, record) {
-            if (err) return res.serverError(err);
-
-            sails.log(`User ${record.email} sign up done`);
-            
-            self._setMe(record.email, req, res);
-            res.ok('ok');
-        });
-
-    },
     /* End API */
 
     /* Page */
+    signUp: function (req, res) {
 
-    updateProfile: function(req, res) {
+        User.create({
+            email: req.param('email'), password: Util.encString(req.param('password')),
+        }).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+            sails.log(`User ${aUser.email} sign up done`);
+
+            aUser.profile.add({ nick: Util.simpleID(5), cell: req.param('cell'), });
+            aUser.save(function (err) {
+                self._setMe(aUser.email, req, res);
+                res.redirect('/dashboard');
+            });
+        });
+    },
+
+    updateProfile: function (req, res) {
         var userId = req.session.me;
 
         var newProfile = {
@@ -64,7 +65,7 @@ var self = module.exports = {
             nick: req.param('nick'),
         }
 
-        User.update({ email: userId }, { profile: newProfile }).exec(function (err, aUser) {
+        Profile.update({ owner: userId }, newProfile).exec(function (err, record) {
             if (err) return res.serverError(err);
 
             sails.log(`user ${userId} profile updated`);
@@ -72,7 +73,7 @@ var self = module.exports = {
         });
     },
 
-        join: function (req, res) {
+    join: function (req, res) {
         var userId = req.session.me;
 
         var newHost = {

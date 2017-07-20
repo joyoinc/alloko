@@ -14,8 +14,8 @@
 
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <p class="navbar-text ">欢迎
-        <%= typeof displayId == 'undefined' ? 'Anoymnous' : displayId %>
+      <p class="navbar-text ">
+        <%= typeof displayId == 'undefined' ? '' : "欢迎" + displayId %>
       </p>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/h/dashboard">工作台</a></li>

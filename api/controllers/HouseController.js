@@ -58,8 +58,9 @@ var self = module.exports = {
 
 	recent: function(req,res) {
     var query = House.find();
-    var toSkip = req.param('skipCount');
-    query.sort('updatedAt DESC').limit(6).skip(toSkip);
+    var toSkip = req.param('skipCount') || 0;
+    var batchSize = req.param('batchSize') || 9;
+    query.sort('updatedAt DESC').limit(batchSize).skip(toSkip);
 
     query.exec(function (err, house){
       if(err) return res.serverError(err)
@@ -101,7 +102,7 @@ var self = module.exports = {
       if (err) return res.serverError(err);
 
       if (record) {
-        res.view('owner-detail', { house: record,
+        res.view('owner-detail', { house: record, car: {},
         });
       } else {
         res.notFound(id);

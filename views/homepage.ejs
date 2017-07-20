@@ -1,9 +1,9 @@
-  <% include partials/navbar.ejs %>
-  
+<% include partials/navbar.ejs %>
+
   <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-      <img src="/images/banner.png" alt="Mountain View" >
+      <img src="/images/banner.png" alt="Mountain View">
     </div>
 
     <form class="form-horizontal">
@@ -93,38 +93,11 @@
 
     <ol class="breadcrumb">
       <li class="active">房源</li>
-      <li><a href="#">带车向导</a></li>
-      <li><a href="#">无车向导</a></li>
+      <li><a href="/gallery/car">带车向导</a></li>
+      <li><a href="/gallery/guide">无车向导</a></li>
     </ol>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEx1" id="modal-btn1">
-      Launch demo modal
-    </button>
-
-    <div class="row">
-      <div class="col-lg-4">
-        <h2>Safari bug warning!</h2>
-        <img src="/images/3.png" alt="Mountain View" style="width:304px;height:228px; margin-bottom:10px;">
-        <p>900元/天 &nbsp&nbsp &nbsp 3 室1 厅3 床 &nbsp &nbsp 美国 &nbsp Cary </br> 可议价 3.5 star
-        </p>
-        <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-lg-4">
-        <h2 id="service-test">Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-          nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        </p>
-        <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis
-          euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-        <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-    </div>
-
+    <div id="gallery-root"></div>
 
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -165,46 +138,74 @@
   <script>
     /* data */
     var countries = [
-      {id:'usa', text:'美国'},
-      {id:'japan', text:'日本'},
+      { id: 'usa', text: '美国' },
+      { id: 'japan', text: '日本' },
     ];
     var cities = [
-      {id:'boston', text:'波士顿', par:'usa'},
-      {id:'nycity', text:'纽约', par:'usa'},
-      {id:'dc', text:'华盛顿', par:'usa'},
+      { id: 'boston', text: '波士顿', par: 'usa' },
+      { id: 'nycity', text: '纽约', par: 'usa' },
+      { id: 'dc', text: '华盛顿', par: 'usa' },
 
-      {id:'tokyo', text:'东京', par:'japan'},
+      { id: 'tokyo', text: '东京', par: 'japan' },
     ];
     /* end data */
 
-    $(document).ready(function(){
+    $(document).ready(function () {
+      $.post("/house/recent", { batchSize: 3 }, (data) => {
+        var model = data.map(function (e) {
+          var rr = parseInt(1 + Math.random() * 5);
+          return {
+            title: `$${e.price} ${e.city} ${e.housename}`,
+            imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
+            detail: ` ${e.housetype} &nbsp， ${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+            btnText: "查看详情",
+            btnLink: `/house/__g/${e.id}`,
+            btnText2: "查看地图",
+            btnLink2: '#',
+            reviewCount: 428,
+            fiveStarStyles: Array(rr).fill('fa-star').concat(Array(5 - rr).fill('fa-star-o')),
+          }
+        });
+
+        while (model.length > 0) {
+          var str = "<div class='row'>";
+          model.slice(0, 3).forEach(function (element) {
+            str += cli_render_bind(element, 'gallery_tile_1x3_btn2_star5');
+          });
+          str += "</div>";
+          $('#gallery-root').append(str);
+
+          model.splice(0, 3);
+        }
+
+      });
+
       $('input[name="daterange"]').daterangepicker();
 
-      countries.forEach(function(e,idx){
+      countries.forEach(function (e, idx) {
         $('#country-menu').append(`<li><a id=${e.id} class='input-link' target='country'>${e.text}</a></li>`)
       });
 
-      cities.forEach(function(e,idx){
+      cities.forEach(function (e, idx) {
         $('#city-menu').append(`<li><a id=${e.id} par=${e.par} class='input-link' target='city'>${e.text}</a></li>`)
       });
 
-
     });
 
-    $(document).on('click', 'a.input-link', function(e){
+    $(document).on('click', 'a.input-link', function (e) {
       e.preventDefault();
-      var t =$(this).attr('target');
+      var t = $(this).attr('target');
       var oldValue = $(`input[name=${t}]`).val();
-      if(oldValue !== $(this).text()) {
+      if (oldValue !== $(this).text()) {
         $(`input[name=${t}]`).val($(this).text()).trigger('change')
       }
     });
 
-    $('input[name="country"]').on("change", function(){
+    $('input[name="country"]').on("change", function () {
       $('input[name="city"]').val("");
       $('#city-menu a.input-link').hide();
 
-      var current_country = countries.find((elem) => { return elem.text===$(this).val()});
+      var current_country = countries.find((elem) => { return elem.text === $(this).val() });
 
       $('#city-menu a.input-link').filter((idx, elem) => {
         return $(elem).attr('par') === current_country.id;
@@ -213,9 +214,7 @@
 
     $(window).on('load', function () {
       //console.log(this['JST']);  diffs window.onload vs document.ready
-      var jst_modal = this['JST']['assets/templates/modal1.html']({ id: 'modalEx1', title: 'Oh yeah!', body: '... ... ...' });
-      $('#modal-btn1').after(jst_modal);
+      //var jst_modal = this['JST']['assets/templates/modal1.html']({ id: 'modalEx1', title: 'Oh yeah!', body: '... ... ...' });
+      //$('#modal-btn1').after(jst_modal);
     });
-
   </script>
-

@@ -48,8 +48,9 @@ module.exports.routes = {
   '/signin': {view: 'home-signin'},
   '/signup': {view: 'home-signup'},
   '/home': {view: 'homepage'},
-  '/gallery/house': {view: 'gallery', locals: {data: 'house'}},
-  '/gallery/car': {view: 'gallery-car', locals: {data: 'car'}},
+  '/gallery/house': {view: 'gallery-house'} ,
+  '/gallery/car': {view: 'gallery-car'},
+  '/gallery/guide': {view: 'gallery-guide'},
   
   '/dashboard': '/h/dashboard',
   '/h/dashboard': 'HostManagerController.main',

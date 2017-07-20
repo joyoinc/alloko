@@ -8,8 +8,8 @@
 
       <ol class="breadcrumb">
         <li><a href="/gallery/house">房源</a></li>
-        <li class="active">带车向导</li>
-        <li><a href="/gallery/guide">无车向导</a></li>
+        <li><a href="/gallery/car">带车向导</a></li>
+        <li class="active">无车向导</li>
       </ol>
 
       <!-- gallery -->
@@ -44,11 +44,16 @@
 
         setTimeout(function () {
 
+
+
+
+
+
           var model = data.map(function (e) {
             var rr = parseInt(1 + Math.random() * 5);
             return {
-              title: `$${e.guidewithcarprice} 纽约 ${e.owner} ${e.carbrand} ${e.carmodel}`,
-              detail: ` ${e.doorcount} 门 ${e.seatcount} 座 ${e.cartype}${e.cargroup} `,
+              title: `$${e.guideprice} 纽约 ${e.owner}`,
+              detail: ` 汉语、，英语服务，${e.minservicetime}小时起`,
               btnText: "查看详情",
               btnLink: `/car/__g/${e.id}`,
               btnText2: "查看地图",

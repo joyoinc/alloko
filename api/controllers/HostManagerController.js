@@ -20,7 +20,7 @@ var self = module.exports = {
         var userId = req.session.me;
 
         var car = {}, house = {};
-        /*
+        
         var car = {
             "guideintroduction": "xxd's car 2",
             "guideprice": "",
@@ -85,9 +85,9 @@ var self = module.exports = {
             "updatedAt": "2017-07-14T01:50:48.062Z",
             "id": "59669fac540064f80b7d30eb"
         }
-        */
+        
 
-        User.findOne({ email: userId }).populate('hostInfo').exec(function (err, aUser) {
+        User.findOne({ email: userId }).populate('profile').populate('hostInfo').exec(function (err, aUser) {
             if (err) return res.serverError(err);
             if (!aUser) {
                 sails.log(`Could not find User ${userId}`);

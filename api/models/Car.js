@@ -8,7 +8,11 @@
 module.exports = {
 
   attributes: {
-
+    owner:{
+      model:'hostInfo',
+      unique: true,
+      via: 'myCar',
+    },
   }
 };
 

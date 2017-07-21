@@ -35,6 +35,16 @@ module.exports = {
       model:'user',
       unique: true,
     },
+
+    myHouse: {
+      model: 'house',
+      via: 'owner',
+    },
+
+    myCar: {
+      model: 'car',
+      via: 'owner',
+    },
   }
 };
 

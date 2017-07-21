@@ -11,6 +11,7 @@ module.exports = {
     owner:{
       model:'hostInfo',
       unique: true,
+      via: 'myHouse',
     },
   }
 };

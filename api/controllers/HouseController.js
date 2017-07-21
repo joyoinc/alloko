@@ -10,46 +10,38 @@ var Util = require('../helpers/util')
 var self = module.exports = {
 
   /* API */
-	hi: function(req,res) {   
-      sails.log(Util.simpleID(7))
-      res.ok();
-  },
 
-	echo: function(req,res) {
-        res.ok(req.allParams())
-  },
+  _create: function (house, res) {
 
-	_create: function(house, res) {
-
-    House.create(house).exec(function (err, aHouse){
-      if(err) return res.serverError(err);
+    House.create(house).exec(function (err, aHouse) {
+      if (err) return res.serverError(err);
       sails.log(`house ${aHouse.id} created`);
 
-      HostInfo.findOne(aHouse.houseowner).exec(function(err, aHost){
+      HostInfo.findOne(aHouse.houseowner).exec(function (err, aHost) {
         aHost.servicetype.push("house4rent");
-        aHost.save(function(err){
-          if(err) return res.serverError(err);
+        aHost.save(function (err) {
+          if (err) return res.serverError(err);
           sails.log(`${aHost.hostId} open house4rent service`);
-          
-          return res.ok({ok:'ok', op:'c'});
+
+          return res.ok({ ok: 'ok', op: 'c' });
         });
       });
     })
   },
 
-  _update: function(house, res) {
-    House.update({ owner: house.owner }, house).exec(function (err, record){
-      if(err) return res.serverError(err);
+  _update: function (house, res) {
+    House.update({ owner: house.owner }, house).exec(function (err, record) {
+      if (err) return res.serverError(err);
       sails.log(`${record.length} house(s) updated`);
 
-      return res.ok({ok:'ok', op:'u'});
+      return res.ok({ ok: 'ok', op: 'u' });
     })
   },
 
-  publishOrUpdate: function (req, res) {
+  createOrUpdate: function (req, res) {
     var newHouse = req.allParams();
-    newHouse['modifiedBy'] = req.session.me || 'A ghost'; 
-    newHouse['owner'] = req.param('houseowner') ;
+    newHouse['modifiedBy'] = req.session.me || 'A ghost';
+    newHouse['owner'] = req.param('houseowner');
 
     Util.handleChkboxControl(req, ['forbids', 'facility'], newHouse);
 
@@ -64,14 +56,14 @@ var self = module.exports = {
     });
   },
 
-	recent: function(req,res) {
+  recent: function (req, res) {
     var query = House.find();
     var toSkip = req.param('skipCount') || 0;
     var batchSize = req.param('batchSize') || 9;
     query.sort('updatedAt DESC').limit(batchSize).skip(toSkip);
 
-    query.exec(function (err, house){
-      if(err) return res.serverError(err)
+    query.exec(function (err, house) {
+      if (err) return res.serverError(err)
 
       return res.json(house);
     })
@@ -80,21 +72,23 @@ var self = module.exports = {
   /* End API */
 
   /* Page */
-  __g: function(req, res) {
+  __g: function (req, res) {
     var id = req.param('id');
 
     House.findOne(id).exec(function (err, record) {
       if (err) return res.serverError(err);
 
       if (record) {
-        res.view('house-detail', { house: record,
-          ratings: { overall:{ name:'overall', value: parseInt(1 + Math.random() * 5) },
-            clean:{ name:'clean', value: parseInt(1 + Math.random() * 5)},
-            infomatch:{ name:'infomatch', value: parseInt(1 + Math.random() * 5)},
-            goodlocation:{ name:'goodlocation', value: parseInt(1 + Math.random() * 5)},
-            communication:{ name:'communication', value: parseInt(1 + Math.random() * 5)},
-            goodfacility:{ name:'goodfacility', value: parseInt(1 + Math.random() * 5)},
-            goodprice:{ name:'goodprice', value: parseInt(1 + Math.random() * 5)},
+        res.view('house-detail', {
+          house: record,
+          ratings: {
+            overall: { name: 'overall', value: parseInt(1 + Math.random() * 5) },
+            clean: { name: 'clean', value: parseInt(1 + Math.random() * 5) },
+            infomatch: { name: 'infomatch', value: parseInt(1 + Math.random() * 5) },
+            goodlocation: { name: 'goodlocation', value: parseInt(1 + Math.random() * 5) },
+            communication: { name: 'communication', value: parseInt(1 + Math.random() * 5) },
+            goodfacility: { name: 'goodfacility', value: parseInt(1 + Math.random() * 5) },
+            goodprice: { name: 'goodprice', value: parseInt(1 + Math.random() * 5) },
           },
         });
       } else {
@@ -103,14 +97,15 @@ var self = module.exports = {
     });
   },
 
-  ownerInfo: function(req, res) {
+  ownerInfo: function (req, res) {
     var id = req.param('id');
 
-    House.findOne({owner: id}).exec(function (err, record) {
+    House.findOne({ owner: id }).exec(function (err, record) {
       if (err) return res.serverError(err);
 
       if (record) {
-        res.view('owner-detail', { house: record, car: {},
+        res.view('owner-detail', {
+          house: record, car: {},
         });
       } else {
         res.notFound(id);

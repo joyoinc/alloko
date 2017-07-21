@@ -27,7 +27,6 @@ var self = module.exports = {
             var car, house;
             if (aUser.roles.includes("host")) {
                 // load car/house
-                console.log(aUser)
                 car = house = {};
             }
 
@@ -85,22 +84,20 @@ var self = module.exports = {
     },
 
     editCar: function (req, res) {
-        var host = req.session.me;
-
-        Car.findOne({ owner: host }).exec(function (err, myCar) {
+        var userId = req.session.me;
+        User.findOne(userId).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
-            if (!myCar) {
-                sails.log(`Could not find car for ${host}`);
+            Car.findOne({ owner: aUser.hosts[0].hostId }).exec(function (err, aCar) {
+                if (err) return res.serverError(err);
+                sails.log(`find car ${aCar ? aCar.id : "[null]"}`);
 
-                res.view("host/newOredit-car", { layout: 'host-layout' });
-            } else {
-                sails.log(`Find car ${myCar.id} for ${host}`);
-
-                res.view("host/newOredit-car", { layout: 'host-layout', myCar: myCar });
-            }
+                res.view("host/newOredit-car", { 
+                    cUser: aUser, 
+                    myCar: aCar,
+                    layout: 'host-layout', });
+            });
         });
-
     },
     /** End Page */
 

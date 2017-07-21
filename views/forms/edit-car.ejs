@@ -1,4 +1,5 @@
 <form class="form-horizontal" action="/car/createOrUpdate">
+  <input type="hidden" name="carowner" value="<%= cUser.hosts[0].hostId %>" />
   <div class="form-group">
     <label class="control-label col-md-2">服务类型</label>
     <div class="col-md-3">

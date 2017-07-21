@@ -5,7 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var Util = require('../helpers/util')
+var Util = require('../helpers/util');
 
 var self = module.exports = {
 
@@ -18,7 +18,8 @@ var self = module.exports = {
       sails.log(`house ${aHouse.id} created`);
 
       HostInfo.findOne(aHouse.houseowner).exec(function (err, aHost) {
-        aHost.servicetype.push("house4rent");
+        Util.addToArray(aHost.servicetype, "house4rent", true);
+        aHost.myHouse = aHouse;
         aHost.save(function (err) {
           if (err) return res.serverError(err);
           sails.log(`${aHost.hostId} open house4rent service`);

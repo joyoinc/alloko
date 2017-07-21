@@ -24,19 +24,31 @@ var self = module.exports = {
         User.findOne(userId).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
-            var car, house;
             if (aUser.roles.includes("host")) {
                 // load car/house
-                car = house = {};
+                HostInfo.findOne(aUser.hosts[0].hostId).populate('myCar').populate('myHouse').exec(function (err, aHost) {
+                    if (err) return res.serverError(err);
+
+                    res.view("host/overview", {
+                        greeting: self._greeting(aUser),
+                        cUser: aUser,
+                        cCar: aHost.myCar,
+                        cHouse: aHost.myHouse,
+                        layout: 'host-layout'
+                    });
+                })
+            } else {
+
+
+                res.view("host/overview", {
+                    greeting: self._greeting(aUser),
+                    cUser: aUser,
+                    cCar: {},
+                    cHouse: {},
+                    layout: 'host-layout'
+                });
+
             }
-
-            res.view("host/overview", {
-                greeting: self._greeting(aUser),
-                cUser: aUser,
-                car: car, house: house,
-                layout: 'host-layout'
-            });
-
         });
     },
 
@@ -74,10 +86,11 @@ var self = module.exports = {
                 if (err) return res.serverError(err);
                 sails.log(`find house ${aHouse ? aHouse.id : "[null]"}`);
 
-                res.view("host/newOredit-house", { 
-                    cUser: aUser, 
+                res.view("host/newOredit-house", {
+                    cUser: aUser,
                     myHouse: aHouse,
-                    layout: 'host-layout', });
+                    layout: 'host-layout',
+                });
             });
         });
 
@@ -92,10 +105,11 @@ var self = module.exports = {
                 if (err) return res.serverError(err);
                 sails.log(`find car ${aCar ? aCar.id : "[null]"}`);
 
-                res.view("host/newOredit-car", { 
-                    cUser: aUser, 
+                res.view("host/newOredit-car", {
+                    cUser: aUser,
                     myCar: aCar,
-                    layout: 'host-layout', });
+                    layout: 'host-layout',
+                });
             });
         });
     },

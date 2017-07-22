@@ -1,14 +1,14 @@
 <% var hostInfo = cUser.hosts; %>
 
 <% if (typeof hostInfo === 'undefined' || hostInfo.length === 0) { %>
-    <% include ../partials/user-overview %>
+    <% include forms/user-edit-profile %>
 <% } else { %>
-    <% include ../partials/host-overview %>
+    <% include forms/host-edit-profile %>
 <% } %>
 
 <script >
     $(document).ready(function () {
-        toggleSiderbarMenu('overview');
+        toggleSiderbarMenu('user_profile');
     });
 </script>
 

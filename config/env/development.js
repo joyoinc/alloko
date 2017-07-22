@@ -18,8 +18,8 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-     //connection: 'localDiskDb'
-     connection: 'mongoSrv_pox'
+     connection: 'localDiskDb'
+     //connection: 'mongoSrv_pox'
   }
 
 };

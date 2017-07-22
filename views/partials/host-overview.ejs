@@ -107,29 +107,29 @@
       <td>服务类型</td>
       <td> personal</td>
       <td>服务人数</td>
-      <td>最多<%= car.maxserivecount %>人</td>
+      <td>最多<%= cCar.maxserivecount %>人</td>
     </tr>
     <tr>
       <td>服务要求</td>
-      <td><%= car.forbids %></td>
+      <td><%= cCar.forbids %></td>
       <td>最短服务时间</td>
-      <td><%= car.minservicetime %>小时</td>
+      <td><%= cCar.minservicetime %>小时</td>
     </tr>
     <tr  class="warning">
       <td>导游收费</td>
-      <td><%= car.guideprice %>美金/小时</td>
+      <td><%= cCar.guideprice %>美金/小时</td>
       <td>司机+私家车收费</td>
-      <td><%= car.guidewithcarprice %>美金/小时</td>
+      <td><%= cCar.guidewithcarprice %>美金/小时</td>
     </tr>
     <tr>
       <td>我的爱车</td>
-      <td><%= car.carbrand %>&nbsp730&nbsp&nbsp<%= car.cartype %>&nbsp<%= car.cargroup %></td>
+      <td><%= cCar.carbrand %>&nbsp730&nbsp&nbsp<%= cCar.cartype %>&nbsp<%= cCar.cargroup %></td>
       <td>车辆详情</td>
-      <td><%= car.doorcount %>门<%= car.seatcount %>座&nbsp<%= car.facility %></td>
+      <td><%= cCar.doorcount %>门<%= cCar.seatcount %>座&nbsp<%= cCar.facility %></td>
     </tr>
     <tr  class="warning">
       <td>向导简介</td>
-      <td><%= car.guideintroduction %></td>
+      <td><%= cCar.guideintroduction %></td>
       <td></td>
       <td></td>
     </tr>
@@ -155,39 +155,39 @@
     <tr  class="success">
       <td>房源名称</td>
       <td>
-        <%= house.housename %>
+        <%= cHouse.housename %>
       </td>
       <td>价格/天</td>
-      <td><%= house.price %></td>
+      <td><%= cHouse.price %></td>
     </tr>
     <tr>
       <td>我的房子</td>
-      <td><%= house.housetype %>，<%= house.bedroomcount %>室<%= house.livingroomcount %>厅<%= house.bathroomcount %>卫</td>
+      <td><%= cHouse.housetype %>，<%= cHouse.bedroomcount %>室<%= cHouse.livingroomcount %>厅<%= cHouse.bathroomcount %>卫</td>
       <td>便利设施</td>
-      <td><%= house.facility %></td>
+      <td><%= cHouse.facility %></td>
     </tr>
     <tr  class="success">
       <td>入住时间</td>
-      <td><%= house.checkintime %>后入住，<%= house.checkouttime %>前退房</td>
+      <td><%= cHouse.checkintime %>后入住，<%= cHouse.checkouttime %>前退房</td>
       <td>租房要求</td>
-      <td><%= house.forbids %></td>
+      <td><%= cHouse.forbids %></td>
       </tr>
       <tr>
         <td>最多入住人数</td>
-        <td><%= house.capacity %>人</td>
+        <td><%= cHouse.capacity %>人</td>
         <td>最短预定时间</td>
-        <td><%= house.minday %>天</td>
+        <td><%= cHouse.minday %>天</td>
       </tr>
       <tr class="success">
         <td>所在城市</td>
-        <td> <%= house.country %>,
-      <%= house.city %></td>
+        <td> <%= cHouse.country %>,
+      <%= cHouse.city %></td>
         <td>地址</td>
-        <td><%= house.street %>，<%= house.zip %></td>
+        <td><%= cHouse.street %>，<%= cHouse.zip %></td>
         </tr>
         <tr>
           <td>补充说明</td>
-          <td><%= house.memo %></td>
+          <td><%= cHouse.memo %></td>
           <td></td>
           <td></td>
         </tr>

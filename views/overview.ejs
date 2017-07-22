@@ -1,0 +1,15 @@
+<% var hostInfo = cUser.hosts; %>
+
+<% if (typeof hostInfo === 'undefined' || hostInfo.length === 0) { %>
+    <% include partials/user-overview %>
+<% } else { %>
+    <% include partials/host-overview %>
+<% } %>
+
+<script >
+    $(document).ready(function () {
+        toggleSiderbarMenu('overview');
+    });
+</script>
+
+

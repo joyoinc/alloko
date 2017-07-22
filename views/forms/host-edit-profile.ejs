@@ -1,4 +1,4 @@
-<form class="form-horizontal" action='/host/updateProfile'>
+<form class="form-horizontal" action='/HostManager/updateProfile'>
 
     <div class="form-group">
         <label for="nick" class="control-label col-md-2">用户名</label>
@@ -11,12 +11,13 @@
         </div>
     </div>
 
+    <% var cHost = cUser.hosts[0]; %>
     <div class="form-group">
         <label for="sex" class="control-label col-md-2">性别</label>
         <div class="col-md-4">
             <select class="form-control" id="sex" name="sex">
-              <option value="M"> <%= typeof cHost == 'undefined' || cHost.sex != '男' ? '' : 'selected'  %>男</option>
-              <option value="F"> <%= typeof cHost == 'undefined' || cHost.sex != '女' ? '' : 'selected'  %>女</option>
+              <option value="M" <%= typeof cHost == 'undefined' || cHost.sex != 'M' ? '' : 'selected'  %> >男</option>
+              <option value="F" <%= typeof cHost == 'undefined' || cHost.sex != 'F' ? '' : 'selected'  %> >女</option>
             </select>
         </div>
         <label for="age" class="control-label col-md-2">年龄</label>
@@ -185,8 +186,10 @@
     </div>
 
     <div class="form-group">
-        <a type="submit" class="btn btn-success" style="margin-right: 10px;">修改个人信息</a>
-        <a type="Primary" class="btn btn-info " align="right">重置密码</a>
+        <div class="col-sm-offset-2 col-md-10">
+          <input type="submit" class="btn btn-success" style="margin-right: 10px;" value="修改个人信息" />
+          <a type="Primary" class="btn btn-info " align="right">重置密码</a>
+        </div>
     </div>
 
 </form>

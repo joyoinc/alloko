@@ -20,7 +20,6 @@ var self = module.exports = {
 
     main: function (req, res) {
         var userId = req.session.me;
-
         User.findOne(userId).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
@@ -29,7 +28,7 @@ var self = module.exports = {
                 HostInfo.findOne(aUser.hosts[0].hostId).populate('myCar').populate('myHouse').exec(function (err, aHost) {
                     if (err) return res.serverError(err);
 
-                    res.view("host/overview", {
+                    res.view("overview", {
                         greeting: self._greeting(aUser),
                         cUser: aUser,
                         cCar: aHost.myCar,
@@ -39,12 +38,9 @@ var self = module.exports = {
                 })
             } else {
 
-
-                res.view("host/overview", {
+                res.view("overview", {
                     greeting: self._greeting(aUser),
                     cUser: aUser,
-                    cCar: {},
-                    cHouse: {},
                     layout: 'host-layout'
                 });
 
@@ -54,14 +50,47 @@ var self = module.exports = {
 
     userProfile: function (req, res) {
         var userId = req.session.me;
-        User.findOne(userId).exec(function (err, aUser) {
+        User.findOne(userId).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
-            res.view("host/userProfile", {
+            res.view("userProfile", {
                 cUser: aUser,
                 layout: 'host-layout'
             });
+
         });
+    },
+
+    updateProfile: function (req, res) {
+        var userId = req.session.me;
+
+        var newProfile = {
+            cell: req.param('cell'),
+            nick: req.param('nick'),
+        };
+
+        User.update(userId, newProfile).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            sails.log(`user ${userId} profile updated`);
+
+        var newHost = {
+          sex: req.param('sex'),
+          age: req.param('age'),
+          avartar_fd: req.param('avartar_fd'),
+          servicelanguage: Util.ensureArray(req.param('servicelanguage')),
+          servicecity: Util.ensureArray(req.param('servicecity')),
+          hobby: Util.ensureArray(req.param('hobby')),
+        };
+
+        HostInfo.update({ofUser:userId}, newHost).exec(function (err, aHost){
+            if (err) return res.serverError(err);
+
+              sails.log(`host ${aHost.hostId} updated`);
+              return res.redirect('/dashboard');
+            });
+        });
+
     },
 
     becomeHost: function (req, res) {

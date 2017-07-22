@@ -77,6 +77,8 @@ var self = module.exports = {
             hostId: Util.simpleID(11),
             firstname: req.param('firstname'),
             lastname: req.param('lastname'),
+            age: req.param('age'),
+            sex: req.param('sex'),
             servicetype: Util.ensureArray(req.param('servicetype')),
             servicecity: Util.ensureArray(req.param('servicecity')),
             servicelanguage: Util.ensureArray(req.param('servicelanguage')),

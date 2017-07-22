@@ -1,0 +1,192 @@
+<form class="form-horizontal" action='/host/updateProfile'>
+
+    <div class="form-group">
+        <label for="nick" class="control-label col-md-2">用户名</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="nick" id="nick" placeholder="用户名" value="<%= typeof cUser == 'undefined' ? '' : cUser.nick %>">
+        </div>
+        <label for="cell" class="control-label col-md-2">手机号码</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="cell" id="cell" placeholder="手机号码" value="<%= typeof cUser == 'undefined' ? '' : cUser.cell %>">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sex" class="control-label col-md-2">性别</label>
+        <div class="col-md-4">
+            <select class="form-control" id="sex" name="sex">
+              <option value="M"> <%= typeof cHost == 'undefined' || cHost.sex != '男' ? '' : 'selected'  %>男</option>
+              <option value="F"> <%= typeof cHost == 'undefined' || cHost.sex != '女' ? '' : 'selected'  %>女</option>
+            </select>
+        </div>
+        <label for="age" class="control-label col-md-2">年龄</label>
+        <div class="col-md-4">
+            <input type="number" class="form-control" name="age" id="age" min="18" max="100" value="<%= typeof cHost == 'undefined' ? '' : cHost.age %>">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">服务城市</label>
+        <div class="col-md-1">
+            <div class="checkbox">
+                <label>    <input type="checkbox" value="newyork" name="servicecity" <%= typeof cHost == 'undefined' || cHost.servicecity.indexOf('newyork') == -1 ? '' : 'checked'  %>>
+          纽约
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="boston" name="servicecity" <%= typeof cHost == 'undefined' || cHost.servicecity.indexOf('boston') == -1 ? '' : 'checked'  %>>
+          波士顿
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="sanfrancisco" name="servicecity" <%= typeof cHost == 'undefined' || cHost.servicecity.indexOf('sanfrancisco') == -1 ? '' : 'checked'  %>>
+          旧金山
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="raleigh" name="servicecity" <%= typeof cHost == 'undefined' || cHost.servicecity.indexOf('raleigh') == -1 ? '' : 'checked'  %>>
+          罗利
+          </label>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="lasvigas" name="servicecity" <%= typeof cHost == 'undefined' || cHost.servicecity.indexOf('lasvigas') == -1 ? '' : 'checked'  %>>
+         拉斯维加斯
+          </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">服务语言</label>
+        <div class="col-md-1">
+            <div class="checkbox">
+                <label><input type="checkbox" value="chinese" name="servicelanguage" <%= typeof cHost == 'undefined' || cHost.servicelanguage.indexOf('chinese') == -1 ? '' : 'checked'  %>>
+          中文
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label><input type="checkbox" value="english" name="servicelanguage" <%= typeof cHost == 'undefined' || cHost.servicelanguage.indexOf('english') == -1 ? '' : 'checked'  %>>
+          英语
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="germany" name="servicelanguage" <%= typeof cHost == 'undefined' || cHost.servicelanguage.indexOf('germany') == -1 ? '' : 'checked'  %>>
+         德语
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label> <input type="checkbox" value="japanese" name="servicelanguage" <%= typeof cHost == 'undefined' || cHost.servicelanguage.indexOf('japanese') == -1 ? '' : 'checked'  %>>
+          日语
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label> <input type="checkbox" value="french" name="servicelanguage" <%= typeof cHost == 'undefined' || cHost.servicelanguage.indexOf('french') == -1 ? '' : 'checked'  %>> 
+          法语
+          </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="spanish" name="servicelanguage" <%= typeof cHost == 'undefined' || cHost.servicelanguage.indexOf('spanish') == -1 ? '' : 'checked'  %>>
+          西班牙语
+          </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">兴趣爱好</label>
+        <div class="col-md-1">
+            <div class="checkbox">
+                <label>    <input type="checkbox" value="shopping" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('shopping') == -1 ? '' : 'checked'  %>>
+          购物
+          </label>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="travel" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('travel') == -1 ? '' : 'checked'  %>>
+          旅游
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="food" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('food') == -1 ? '' : 'checked'  %>>
+          美食
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="clibming" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('clibming') == -1 ? '' : 'checked'  %>>
+          登山
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="fishing" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('fishing') == -1 ? '' : 'checked'  %>>
+          钓鱼
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="hunting" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('hunting') == -1 ? '' : 'checked'  %>>
+          打猎
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="surfing" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('surfing') == -1 ? '' : 'checked'  %>>
+          冲浪
+          </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="checkbox ">
+                <label>    <input type="checkbox" value="golf" name="hobby" <%= typeof cHost == 'undefined' || cHost.hobby.indexOf('golf') == -1 ? '' : 'checked'  %>>
+          高尔夫
+          </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="avartar" class="control-label col-md-2">头像</label>
+        <div class="col-md-10">
+            <% if ((typeof cHost == 'undefined') || !(cHost.avartar_fd) ) { %>
+                <input type="file" name="avartar" id="avartar" multiple class="file-loading">
+                <% } else { %>
+                    <img src="/message/snapshot/<%= cHost.avartar_fd%>" alt="...">
+                    <% } %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <a type="submit" class="btn btn-success" style="margin-right: 10px;">修改个人信息</a>
+        <a type="Primary" class="btn btn-info " align="right">重置密码</a>
+    </div>
+
+</form>

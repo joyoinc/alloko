@@ -58,4 +58,5 @@ module.exports.routes = {
   '/h/profile': 'HostManagerController.main',
   '/h/logout': 'HostManagerController.logout',
 
+  '/test': {view: 'forms/host-edit-profile'},
 };

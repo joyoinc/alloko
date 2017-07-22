@@ -17,18 +17,19 @@
     <div class="form-group">
         <label for="sex" class="control-label col-md-2">性别</label>
         <div class="col-md-4">
-            <select class="form-control">
-              <option>男</option>
-              <option>女</option>
+            <select class="form-control" id="sex" name="sex">
+              <option value="M">男</option>
+              <option value="F">女</option>
             </select>
         </div>
         <label for="age" class="control-label col-md-2">年龄</label>
         <div class="col-md-4">
-            <input type="number" class="form-control" name="age" id="age">
+            <input type="number" class="form-control" name="age" id="age" value="40" min="18" max="100">
         </div>
     </div>
 
 
+    <!--
     <div class="form-group">
         <label class="control-label col-md-2">服务类型</label>
         <div class="col-md-2">
@@ -53,6 +54,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <div class="form-group">
         <label class="control-label col-md-2">服务城市</label>
@@ -99,14 +101,14 @@
         <label class="control-label col-md-2">服务语言</label>
         <div class="col-md-1">
             <div class="checkbox">
-                <label>    <input type="checkbox" value="chinese" name="servicelanguage">
+                <label><input type="checkbox" value="chinese" name="servicelanguage">
           中文
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="english" name="servicelanguage">
+                <label><input type="checkbox" value="english" name="servicelanguage">
           英语
           </label>
             </div>
@@ -120,14 +122,14 @@
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="japanese" name="servicelanguage">
+                <label> <input type="checkbox" value="japanese" name="servicelanguage">
           日语
           </label>
             </div>
         </div>
         <div class="col-md-1">
             <div class="checkbox ">
-                <label>    <input type="checkbox" value="french" name="servicelanguage">
+                <label> <input type="checkbox" value="french" name="servicelanguage">
           法语
           </label>
             </div>
@@ -202,14 +204,14 @@
         </div>
     </div>
 
-    <!--
+    
     <div class="form-group">
         <label for="avartar" class="control-label col-md-2">头像</label>
         <div class="col-md-10">
             <input type="file" name="avartar" id="avartar" multiple class="file-loading">
         </div>
     </div>
-    -->
+    
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-md-10">

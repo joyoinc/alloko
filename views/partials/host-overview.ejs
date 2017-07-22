@@ -27,6 +27,45 @@
 
     <% var cHost = cUser.hosts[0]; %>
 
+    <%
+      var getLanguage = function(lan) {
+        if(lan === 'japaness') return 'riyu';
+        else if (lan === 'chinese') return '中文';
+        else if (lan === 'japanese') return '日语';
+        else if (lan === 'english') return '英语';
+        else if (lan === 'germany') return '德语';
+        else if (lan === 'french') return '法语';
+        else if (lan === 'spanish') return '西班牙语';
+        else return '未知';
+      }
+    %>
+
+    <%
+      var getHobby = function(hob) {
+        if(hob === 'shopping') return '购物';
+        else if (hob === 'travel') return '旅游';
+        else if (hob === 'clibming') return '登山';
+        else if (hob === 'fishing') return '钓鱼';
+        else if (hob === 'food') return '美食';
+        else if (hob === 'hunting') return '打猎';
+        else if (hob === 'surfing') return '冲浪';
+        else if (hob === 'golf') return '高尔夫';
+        else return '未知';
+      }
+    %>
+    
+     <%
+      var getServicecity = function(cit) {
+        if(cit === 'newyork') return '纽约';
+        else if (cit === 'boston') return '波士顿';
+        else if (cit === 'sanfrancisco') return '旧金山';
+        else if (cit === 'raleigh') return '罗利';
+        else if (cit === 'lasvigas') return '拉斯维加斯';
+        else return '未知';
+      }
+    %>
+
+
     <tr class="info">
       <td>姓</td>
       <td><%= cHost.lastname%></td>
@@ -35,11 +74,22 @@
     </tr>
     <tr>
       <td>兴趣爱好</td>
-      <td>滑雪、购物</td>
+      <td><%= cHost.hobby.map(function(elem){return getHobby(elem); }).join(' | ') %></td>
       <td>服务语言</td>
-      <td>中文、英语</td>
+      <td><%= cHost.servicelanguage.map(function(elem){return getLanguage(elem); }).join(' | ') %></td>
     </tr>
-
+    <tr class="info">
+      <td>性别</td>
+      <td><%= cHost.sex === 'M' ? '男' : '女' %></td>
+      <td>年龄</td>
+      <td><%= cHost.age%></td>
+    </tr>
+    <tr>
+      <td>服务城市</td>
+      <td><%= cHost.servicecity.map(function(elem){return  getServicecity(elem); }).join(' | ') %></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
 

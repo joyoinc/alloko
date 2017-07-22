@@ -4,6 +4,7 @@
  */
 
 var md5 = require('./md5');
+var _ = require('underscore');
 
 var self = module.exports = {
 
@@ -29,6 +30,11 @@ var self = module.exports = {
         }
 
         return array;
+    },
+
+    addToArray: function(array, elem, wantUniq) {
+        if(!wantUniq || !array.includes(elem))
+            array.push(elem);
     },
 
     ensureArray: function(elemOrArray) {

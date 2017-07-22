@@ -18,7 +18,8 @@ var self = module.exports = {
             sails.log(`car ${aCar.id} created`);
 
             HostInfo.findOne(aCar.carowner).exec(function (err, aHost) {
-                aHost.servicetype.push("car_drive");
+                Util.addToArray(aHost.servicetype, "car_drive", true);
+                aHost.myCar = aCar;
                 aHost.save(function (err) {
                     if (err) return res.serverError(err);
                     sails.log(`${aHost.hostId} open car_drive service`);

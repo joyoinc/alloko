@@ -1,34 +1,29 @@
-<form class="form-horizontal" >
+<form class="">
     <div class="form-group">
-        <label for="lastname" class="control-label col-md-2">入住人姓</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control " id="lastname" name="lastname" placeholder="姓 ">
-        </div>
-        <label for="housetype" class="control-label col-md-2">入住人名</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control " id="housename" name="housename" placeholder="名 ">
-        </div>
+        <label for="lastname" class="control-label">入住人姓</label>
+        <input type="text" class="form-control " id="lastname" name="lastname" placeholder="姓 ">
+        <label for="housetype" class="control-label">入住人名</label>
+        <input type="text" class="form-control " id="housename" name="housename" placeholder="名 ">
     </div>
     <div class="form-group">
         <label for="checkin" class="control-label col-md-2">入住日期</label>
         <div class="col-md-4">
-            <input type="date" class="form-control" id="checkin" name="checkin" value="<%= typeof myHouse == 'undefined' ? '2' : myHouse.bedroomcount %>">
+            <input type="date" class="form-control" id="checkin" name="checkin" value="">
         </div>
         <label for="checkout" class="control-label col-md-2">退房日期</label>
         <div class="col-md-4">
-            <input type="date" class="form-control" id="checkout" name="checkout" value=" <%=t ypeof myHouse=='undefined' ? '1' : myHouse.livingroomcount
-                %>">
+            <input type="date" class="form-control" id="checkout" name="checkout" value="">
         </div>
     </div>
 
     <div class="form-group">
         <label for="cell" class="control-label col-md-2">手机号码</label>
         <div class="col-md-4">
-            <input type="number" class="form-control" id="cell" name="cell" value="<%= typeof myHouse == 'undefined' ? '2' : myHouse.bathroomcount %>">
+            <input type="number" class="form-control" id="cell" name="cell" value="">
         </div>
         <label for="email" class="control-label col-md-2">电子邮箱</label>
         <div class="col-md-4">
-            <input type="email" class="form-control" id="email" name="email" value="<%= typeof myHouse == 'undefined' ? '5' : myHouse.capacity %>">
+            <input type="email" class="form-control" id="email" name="email" value="">
         </div>
     </div>
 

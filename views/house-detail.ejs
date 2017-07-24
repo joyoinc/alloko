@@ -2,22 +2,20 @@
 
 <div class="container" >
 
-  <div class="blog-header">
-    <h1 class="blog-title">
-      <%= house.housename %>
-    </h1>
-    <p class="lead blog-description">
-      <%= house.country %>,
-      <%= house.city %>&nbsp&nbsp&nbsp&nbsp
-      <%= house.reviewcount %>个评价
-    </p>
-
-    <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
-  </div>
-
-
   <div class="row">
     <div class="col-sm-8 blog-main">
+      <div class="blog-header">
+        <h1 class="blog-title">
+          <%= house.housename %>
+        </h1>
+        <p class="lead blog-description">
+          <%= house.country %>,
+          <%= house.city %>&nbsp&nbsp&nbsp&nbsp
+          <%= house.reviewcount %>个评价
+        </p>
+
+        <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
+      </div>
       <br>
       <img src="/message/snapshot/<%= house.housepic_fd %>" alt="暂时没有该房屋图片" style="width:600px;height:400px;" class="img-thumbnail">
       <br>
@@ -136,28 +134,86 @@
     <div class="col-sm-3 col-sm-offset-1 ">
       <div class="affix">
         <div class="sidebar-module sidebar-module-inset">
-          <h3>$50 &nbsp&nbsp预订 </h3>
+          <h3>$<%= house.price %> 预订 </h3>
           <br>
         </div>
         <div class="sidebar-module">
 
-          <form>
+        <form>
             <div class="form-group">
-              <label for="chenkin">入住日期</label>
-              <input type="date" class="form-control" id="chenkin" name="chenkin" placeholder="">
+              <label for="checkin">入住日期</label>
+              <input type="date" class="form-control" id="checkin" name="checkin" placeholder="">
             </div>
+
             <div class="form-group">
               <label for="checkout">退房日期</label>
               <input type="date" class="form-control" id="checkout" name="checkout" placeholder="">
             </div>
+
+            <div class="form-group">
+              <label for="lastname">入住人姓名</label>
+              <input type="text" class="form-control" id="lastname" name="lastname" placeholder="">
+            </div>
+
+            <div class="form-group">
+              <label for="creditcard">信用卡号</label>
+              <input type="number" class="form-control" id="creditcard" name="creditcard" placeholder="">
+            </div>
+            
+            <div class="form-group">
+              <label for="firstname">持卡人姓名</label>
+              <input type="text" class="form-control" id="firstname" name="firstname" placeholder="">
+            </div>
+
+             <div class="form-group">
+              <label for="expiredate">有效期</label>
+              <input type="text" class="form-control" id="expiredate" name="expiredate" placeholder="">
+            </div>
+
+            <h4><b>总价:</b><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span id="grandTotal"></span></h4>
+            <input type="hidden" name="totalPrice" id="totalPrice">
+            <input type="submit" class="btn btn-success" value="预订"></input>
           </form>
 
+          <!---
+            <% include forms/order-house %> 
+          -->
 
-          <h4><b>总价:</b> &nbsp$150</h4>
-          <button class="btn btn-success" btn-smtype="submit">预订</button>
         </div>
       </div>
     </div>
     <!-- /.blog-sidebar -->
   </div>
 </div>
+
+<script>
+  var setDateAndPrice = function(date1, date2) {
+    if(typeof date1 === 'undefined' || typeof date2 === 'undefined' ) {
+      var today = new Date();
+      var tomorrow = addDays(today, 1);
+      return setDateAndPrice(today, tomorrow);
+    }
+
+    if(diffDays(date1, date2) >= 0) {
+      alert('date range cannot be negtive! Reset to default');
+      return setDateAndPrice();
+    }
+
+    var unitPrice = <%= house.price %>;
+    $("#checkin").val(date2string(date1));
+    $("#checkout").val(date2string(date2));
+    var daySpan = diffDays(date2, date1);
+    $('#grandTotal').text(daySpan * unitPrice);
+    $('#totalPrice').val(daySpan * unitPrice);
+  }
+
+  $(document).ready(function(){
+    setDateAndPrice();
+  });
+
+  $(document).on("change", "input[type=date]", function(env){ 
+    var dateStr1 = $('#checkin').val();
+    var dateStr2 = $('#checkout').val();
+    setDateAndPrice(string2date(dateStr1), string2date(dateStr2));
+  });
+</script>

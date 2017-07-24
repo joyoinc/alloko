@@ -4,7 +4,6 @@
  */
 
 var md5 = require('./md5');
-var _ = require('underscore');
 
 var self = module.exports = {
 

@@ -4,7 +4,6 @@
  */
 
 var md5 = require('./md5');
-var _ = require('underscore');
 
 var self = module.exports = {
 
@@ -12,6 +11,10 @@ var self = module.exports = {
         var arr = 'qwertyuiopasdfghjklzxcvbnm1234567890'.split('');
         return self.shuffleArray(arr).slice(0, length).join('');
     }, 
+
+    genID: function() {
+      return `${self.simpleID(7)}_${self.encString((new Date()).getTime())}`;
+    },
 
     shuffleArray: function (array) {
         var currentIndex = array.length, temporaryValue, randomIndex;

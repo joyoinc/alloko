@@ -8,11 +8,49 @@
 module.exports = {
 
   attributes: {
-    id: { type:'string',
-         primaryKey: true },
+    id: {
+      type: 'string',
+      primaryKey: true
+    },
 
-    type: { type:'string',
-      enum: ['house', 'car_drive', 'guide']},
+    type: {
+      type: 'string',
+      enum: ['house', 'car_drive', 'guide']
+    },
+
+    status: {
+      type: 'string',
+      defaultTo: 'booked',
+      enum: ['booked', 'cancelled', 'rated']
+    },
+
+    customerId: {
+      type: 'email',
+    },
+
+    customerName: {
+      type: 'string',
+    },
+
+    serverHost: {
+      type: 'string',
+    },
+
+    serviceStartDate: {
+      type: 'date',
+    },
+
+    serviceEndDate: {
+      type: 'date',
+    },
+
+    totalPrice: {
+      type: 'float',
+    },
+
+    paymentToken: {
+      type: 'string',
+    },
   }
 };
 

@@ -48,6 +48,21 @@ var self = module.exports = {
         });
     },
 
+    viewMine: function (req, res) {
+        Order.find({ customerId: req.session.me }).exec(function (err, myOrders) {
+            if (err) return res.serverError(err);
+
+            sails.log(`find orders for ${req.session.me}`);
+
+            res.view("user-orders", {
+                myOrders,
+                cUser: {},
+                layout: 'host-layout'
+            });
+
+        });
+    },
+
     userProfile: function (req, res) {
         var userId = req.session.me;
         User.findOne(userId).populate('hosts').exec(function (err, aUser) {
@@ -74,20 +89,20 @@ var self = module.exports = {
 
             sails.log(`user ${userId} profile updated`);
 
-        var newHost = {
-          sex: req.param('sex'),
-          age: req.param('age'),
-          avartar_fd: req.param('avartar_fd'),
-          servicelanguage: Util.ensureArray(req.param('servicelanguage')),
-          servicecity: Util.ensureArray(req.param('servicecity')),
-          hobby: Util.ensureArray(req.param('hobby')),
-        };
+            var newHost = {
+                sex: req.param('sex'),
+                age: req.param('age'),
+                avartar_fd: req.param('avartar_fd'),
+                servicelanguage: Util.ensureArray(req.param('servicelanguage')),
+                servicecity: Util.ensureArray(req.param('servicecity')),
+                hobby: Util.ensureArray(req.param('hobby')),
+            };
 
-        HostInfo.update({ofUser:userId}, newHost).exec(function (err, aHost){
-            if (err) return res.serverError(err);
+            HostInfo.update({ ofUser: userId }, newHost).exec(function (err, aHost) {
+                if (err) return res.serverError(err);
 
-              sails.log(`host ${aHost.hostId} updated`);
-              return res.redirect('/dashboard');
+                sails.log(`host ${aHost.hostId} updated`);
+                return res.redirect('/dashboard');
             });
         });
 

@@ -1,29 +1,26 @@
 <% include partials/navbar.ejs %>
 
-  <div class="container">
-    <div class="blog-header">
-      <h1 class="blog-title">
-        美国, 波士顿
-        <%= car.carbrand %>&nbsp
-          <%= car.carmodel %>
-      </h1>
-      <p class="lead blog-description">
-             &#36 <%= car.guidewithcarprice %> &#47小时 &nbsp&nbsp&nbsp  <%= car.reviewcount %>个评价
-      </p>
+<div class="container" >
 
-      <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
-    </div>
+  <div class="row">
+    <div class="col-sm-8 blog-main">
+      <div class="blog-header">
+        <h1 class="blog-title">
+          city <%= car.carbrand %>&nbsp <%= car.carmodel %>
+        </h1>
+        <p class="lead blog-description">
+           &#36 <%= car.guidewithcarprice %> &#47小时 &nbsp&nbsp&nbsp<%= car.reviewcount %>个评价
+        </p>
 
-
-    <div class="row">
-      <div class="col-sm-8 blog-main">
-        <br>
-        <img src="/message/snapshot/<%= car.carpic_fd %>" alt="暂时没有该车图片" style="width:600px;height:400px;" class="img-thumbnail">
-        <br>
-        <br>
-        <div class="blog-post">
-          <h3 class="blog-post-title">车辆详情</h3>
-          <table class="table table-bordered">
+        <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
+      </div>
+      <br>
+      <img src="/message/snapshot/<%= car.carpic_fd %>" alt="暂时没有该车图片" style="width:600px;height:400px;" class="img-thumbnail">
+      <br>
+      <br>
+      <div class="blog-post">
+        <h3 class="blog-post-title">房屋详情</h3>
+        <table class="table table-bordered">
             <tbody>
               <tr class="info">
                 <th>车主</th>
@@ -66,7 +63,7 @@
                   <%= car.minservicetime %>天</td>
               </tr>
               <tr class="info">
-                <th>所在城市</th>
+                <th>服务城市</th>
                 <td>
                   美国 波士顿
                 </td>
@@ -85,80 +82,101 @@
               </tr>
             </tbody>
           </table>
-        </div>
-        <!-- /.blog-post -->
-        <br>
-        <div class="blog-post">
-          <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
-          </table>
-          <h3 class="blog-post-title">
-            <%= car.reviewcount %>条评价 &nbsp&nbsp平均4.8分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
-          </h3>
-          <table class="table table-bordered">
-            <tbody>
+      </div>
+      <!-- /.blog-post -->
+      <br>
+      <div class="blog-post">
+        <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
+        <h3 class="blog-post-title">
+          <%= car.reviewcount %>条评价 &nbsp&nbsp平均4.8分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
+        </h3>
+        <table class="table table-bordered">
+          <tbody>
               <tr>
                 <th>信息准确</th>
                 <td>
-                  <div class="star5Ext stars-small" data-name='<%= ratings.infomatch.name %>' data-rating='<%= ratings.infomatch.value %>'  ></div>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.infomatch.name %>' data-rating='<%= ratings.infomatch.value %>'></div>
                 </td>
                 <th>服务守时</th>
                 <td>
-                  <div class="star5Ext stars-small" data-name='<%= ratings.goodlocation.name %>' data-rating='<%= ratings.goodlocation.value %>'  ></div>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.goodlocation.name %>' data-rating='<%= ratings.goodlocation.value %>'></div>
                 </td>
               </tr>
               <tr>
                 <th>干净整洁</th>
                 <td>
-                  <div class="star5Ext stars-small" data-name='<%= ratings.communication.name %>' data-rating='<%= ratings.communication.value %>'  ></div>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.communication.name %>' data-rating='<%= ratings.communication.value %>'></div>
                 </td>
                 <th>价格合理</th>
                 <td>
-                  <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'  ></div>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'></div>
                 </td>
               </tr>
               <tr>
                 <th>沟通愉快</th>
                 <td>
-                  <div class="star5Ext stars-small" data-name='<%= ratings.clean.name %>' data-rating='<%= ratings.clean.value %>'  ></div>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.clean.name %>' data-rating='<%= ratings.clean.value %>'></div>
                 </td>
                 <th>便利设施</th>
                 <td>
-                  <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'  ></div>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'></div>
                 </td>
               </tr>
             </tbody>
-        </div>
-        <!-- /.blog-post -->
+        </table>
       </div>
-      <!-- /.blog-main -->
+      <!-- /.blog-post -->
+    </div>
+    <!-- /.blog-main -->
 
-      <div class="col-sm-3 col-sm-offset-1 ">
-        <div class="affix">
-          <div class="sidebar-module sidebar-module-inset">
-            <h3>$50 &nbsp&nbsp预订 </h3>
-            <br>
-          </div>
-          <div class="sidebar-module">
+    <div class="col-sm-3 col-sm-offset-1 ">
+      <div class="affix">
+        <div class="sidebar-module sidebar-module-inset">
+          <h3>$<%= car.guidewithcarprice %>&nbsp&nbsp预订 </h3>
+          <br>
+        </div>
+        <div class="sidebar-module">
 
-            <form>
-              <div class="form-group">
+        <form>
+            <div class="form-group">
                 <label for="chenkin">预订时间</label>
                 <input type="datetime-local" class="form-control" id="chenkin" name="chenkin" placeholder="">
-              </div>
-              <div class="form-group">
+            </div>
+
+            <div class="form-group">
                 <label for="checkout">结束时间</label>
                 <input type="datetime-local" class="form-control" id="checkout" name="checkout" placeholder="">
-              </div>
-            </form>
+            </div>
 
+            <div class="form-group">
+                <label for="bookname">预订人姓名</label>
+                <input type="text" class="form-control" id="bookname" name="bookname" placeholder="">
+            </div>
 
-            <h4><b>总价:</b> &nbsp$150</h4>
-            <button class="btn btn-success" btn-smtype="submit">预订</button>
-          </div>
+            <div class="form-group">
+              <label for="creditcard">信用卡号</label>
+              <input type="number" class="form-control" id="creditcard" name="creditcard" placeholder="">
+            </div>
+            
+            <div class="form-group">
+              <label for="cardholdername">持卡人姓名</label>
+              <input type="text" class="form-control" id="cardholdername" name="cardholdername" placeholder="">
+            </div>
+
+             <div class="form-group">
+              <label for="expiredate">有效期</label>
+              <input type="text" class="form-control" id="expiredate" name="expiredate" placeholder="">
+            </div>
+
+            <h4><b>总价:</b><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span id="grandTotal"></span></h4>
+            <input type="hidden" name="totalPrice" id="totalPrice">
+            <input type="submit" class="btn btn-success" value="预订"></input>
+          </form>
+
         </div>
       </div>
-      <!-- /.blog-sidebar -->
     </div>
-
+    <!-- /.blog-sidebar -->
   </div>
+</div>

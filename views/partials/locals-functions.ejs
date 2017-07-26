@@ -1,0 +1,33 @@
+<%
+    locals.getLanguage = function(lan) {
+        if(lan === 'japaness') return 'riyu';
+        else if (lan === 'chinese') return '中文';
+        else if (lan === 'japanese') return '日语';
+        else if (lan === 'english') return '英语';
+        else if (lan === 'germany') return '德语';
+        else if (lan === 'french') return '法语';
+        else if (lan === 'spanish') return '西班牙语';
+        else return '未知';
+    };
+
+    locals.getHobby = function(hob) {
+        if(hob === 'shopping') return '购物';
+        else if (hob === 'travel') return '旅游';
+        else if (hob === 'clibming') return '登山';
+        else if (hob === 'fishing') return '钓鱼';
+        else if (hob === 'food') return '美食';
+        else if (hob === 'hunting') return '打猎';
+        else if (hob === 'surfing') return '冲浪';
+        else if (hob === 'golf') return '高尔夫';
+        else return '未知';
+    };
+
+    locals.getServicecity = function(cit) {
+        if(cit === 'newyork') return '纽约';
+        else if (cit === 'boston') return '波士顿';
+        else if (cit === 'sanfrancisco') return '旧金山';
+        else if (cit === 'raleigh') return '罗利';
+        else if (cit === 'lasvigas') return '拉斯维加斯';
+        else return '未知';
+    };
+%>

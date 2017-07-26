@@ -29,6 +29,8 @@
     var isLoading = false;
     var loadedCount = 0;
 
+    $('input[name="daterange"]').daterangepicker();
+
     var loadMore = function () {
       if (isLoading)
         return false;

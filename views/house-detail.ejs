@@ -1,219 +1,247 @@
 <% include partials/navbar.ejs %>
 
-<div class="container" >
+  <div class="container">
 
-  <div class="row">
-    <div class="col-sm-8 blog-main">
-      <div class="blog-header">
-        <h1 class="blog-title">
-          <%= house.housename %>
-        </h1>
-        <p class="lead blog-description">
-          <%= house.country %>,
-          <%= house.city %>&nbsp&nbsp&nbsp&nbsp
-          <%= house.reviewcount %>个评价
-        </p>
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div class="blog-header">
+          <h1 class="blog-title">
+            <%= house.housename %>
+          </h1>
+          <p class="lead blog-description">
+            <%= house.country %>,
+              <%= house.city %>&nbsp&nbsp&nbsp&nbsp
+                <%= house.reviewcount %>个评价
+          </p>
 
-        <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
-      </div>
-      <br>
-      <img src="/message/snapshot/<%= house.housepic_fd %>" alt="暂时没有该房屋图片" style="width:600px;height:400px;" class="img-thumbnail">
-      <br>
-      <br>
-      <div class="blog-post">
-        <h3 class="blog-post-title">房屋详情</h3>
-        <table class="table table-bordered">
-          <tbody>
-            <tr class="info">
-              <th>房主</th>
-              <td>
-                <%= house.owner %>&nbsp&nbsp<a class="btn btn-success btn-sm " href="/house/ownerInfo/<%= house.owner %>">查看房主信息</a></td>
-              <th>价格/天</th>
-              <td>
-                <%= house.price %>美金</td>
-            </tr>
-            <tr>
-              <th>房屋类型</th>
-              <td>
-                <%= house.housetype %>，
-                  <%= house.bedroomcount %>室
-                    <%= house.livingroomcount %>厅
-                      <%= house.bathroomcount %>卫</td>
-              <th>便利设施</th>
-              <td>
-                <%= house.facility %>
-              </td>
-            </tr>
-            <tr class="info">
-              <th>入住时间</th>
-              <td>
-                <%= house.checkintime %>后入住，
-                  <%= house.checkouttime %>前退房</td>
-              <th>租房要求</th>
-              <td>
-                <%= house.forbids%>
-              </td>
-            </tr>
-            <tr>
-              <th>最多入住人数</th>
-              <td>
-                <%= house.capacity %>人</td>
-              <th>最短预定时间</th>
-              <td>
-                <%= house.minday %>天</td>
-            </tr>
-            <tr class="info">
-              <th>所在城市</th>
-              <td>
-                <%= house.country %>,
-                  <%= house.city %>
-              </td>
-              <th>地址</th>
-              <td>
-                <%= house.street %>,
-                  <%= house.zip%> &nbsp&nbsp<a class="btn btn-success btn-sm " href="/house/ownerInfo/<%= house.owner %>">地图</a></td>
-            </tr>
-            <tr>
-              <th>补充说明</th>
-              <td>
-                <%= house.memo %>
-              </td>
-              <th>房主语言</th>
-              <td>中文、英文</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- /.blog-post -->
-      <br>
-      <div class="blog-post">
-        <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
-        <h3 class="blog-post-title">
-          <%= house.reviewcount %>条评价 &nbsp&nbsp平均4.8分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
-        </h3>
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <th>信息准确</th>
-              <td>
-                <div class="star5Ext stars-small" data-name='<%= ratings.infomatch.name %>' data-rating='<%= ratings.infomatch.value %>'  ></div>
-              </td>
-              <th>交通便利</th>
-              <td>
-                <div class="star5Ext stars-small" data-name='<%= ratings.goodlocation.name %>' data-rating='<%= ratings.goodlocation.value %>'  ></div>
-              </td>
-            </tr>
-            <tr>
-              <th>沟通愉快</th>
-              <td>
-                <div class="star5Ext stars-small" data-name='<%= ratings.communication.name %>' data-rating='<%= ratings.communication.value %>'  ></div>
-              </td>
-              <th>便利设施</th>
-              <td>
-                <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'  ></div>
-              </td>
-            </tr>
-            <tr>
-              <th>干净整洁</th>
-              <td>
-                <div class="star5Ext stars-small" data-name='<%= ratings.clean.name %>' data-rating='<%= ratings.clean.value %>'  ></div>
-              </td>
-              <th>价格合理</th>
-              <td>
-                <div class="star5Ext stars-small" data-name='<%= ratings.goodprice.name %>' data-rating='<%= ratings.goodprice.value %>'  ></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- /.blog-post -->
-    </div>
-    <!-- /.blog-main -->
-
-    <div class="col-sm-3 col-sm-offset-1 ">
-      <div class="affix">
-        <div class="sidebar-module sidebar-module-inset">
-          <h3>$<%= house.price %> 预订 </h3>
-          <br>
+          <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>'></div>
         </div>
-        <div class="sidebar-module">
+        <br>
+        <img src="/message/snapshot/<%= house.housepic_fd %>" alt="暂时没有该房屋图片" style="width:600px;height:400px;" class="img-thumbnail">
+        <br>
+        <br>
+        <div class="blog-post">
+          <h3 class="blog-post-title">房屋详情</h3>
+          <table class="table table-bordered">
+            <tbody>
+              <tr class="info">
+                <th>房主</th>
+                <td>
+                  <%= house.houseowner %>&nbsp&nbsp<a class="btn btn-success btn-sm " href="/house/ownerInfo/<%= house.owner %>">查看房主信息</a></td>
+                <th>价格/天</th>
+                <td>
+                  <%= house.price %>美金</td>
+              </tr>
+              <tr>
+                <th>房屋类型</th>
+                <td>
+                  <%= house.housetype %>，
+                    <%= house.bedroomcount %>室
+                      <%= house.livingroomcount %>厅
+                        <%= house.bathroomcount %>卫</td>
+                <th>便利设施</th>
+                <td>
+                  <%= house.facility %>
+                </td>
+              </tr>
+              <tr class="info">
+                <th>入住时间</th>
+                <td>
+                  <%= house.checkintime %>后入住，
+                    <%= house.checkouttime %>前退房</td>
+                <th>租房要求</th>
+                <td>
+                  <%= house.forbids%>
+                </td>
+              </tr>
+              <tr>
+                <th>最多入住人数</th>
+                <td>
+                  <%= house.capacity %>人</td>
+                <th>最短预定时间</th>
+                <td>
+                  <%= house.minday %>天</td>
+              </tr>
+              <tr class="info">
+                <th>所在城市</th>
+                <td>
+                  <%= house.country %>,
+                    <%= house.city %>
+                </td>
+                <th>地址</th>
+                <td>
+                  <%= house.street %>,
+                    <%= house.zip%> &nbsp&nbsp<a class="btn btn-success btn-sm " href="/house/ownerInfo/<%= house.owner %>">地图</a></td>
+              </tr>
+              <tr>
+                <th>补充说明</th>
+                <td>
+                  <%= house.memo %>
+                </td>
+                <th>房主语言</th>
+                <td>中文、英文</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.blog-post -->
+        <br>
+        <div class="blog-post">
+          <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>'></div>
+          <h3 class="blog-post-title">
+            <%= house.reviewcount %>条评价 &nbsp&nbsp平均4.8分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
+          </h3>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>信息准确</th>
+                <td>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.infomatch.name %>' data-rating='<%= ratings.infomatch.value %>'></div>
+                </td>
+                <th>交通便利</th>
+                <td>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.goodlocation.name %>' data-rating='<%= ratings.goodlocation.value %>'></div>
+                </td>
+              </tr>
+              <tr>
+                <th>沟通愉快</th>
+                <td>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.communication.name %>' data-rating='<%= ratings.communication.value %>'></div>
+                </td>
+                <th>便利设施</th>
+                <td>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.goodfacility.name %>' data-rating='<%= ratings.goodfacility.value %>'></div>
+                </td>
+              </tr>
+              <tr>
+                <th>干净整洁</th>
+                <td>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.clean.name %>' data-rating='<%= ratings.clean.value %>'></div>
+                </td>
+                <th>价格合理</th>
+                <td>
+                  <div class="star5Ext stars-small" data-name='<%= ratings.goodprice.name %>' data-rating='<%= ratings.goodprice.value %>'></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.blog-post -->
+      </div>
+      <!-- /.blog-main -->
 
-        <form>
-            <div class="form-group">
-              <label for="checkin">入住日期</label>
-              <input type="date" class="form-control" id="checkin" name="checkin" placeholder="">
-            </div>
+      <div class="col-sm-3 col-sm-offset-1 ">
+        <div class="affix">
+          <div class="sidebar-module sidebar-module-inset">
+            <h3><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span id="unitPrice"><%= house.price %></span>              预订</h3>
+            <br>
+          </div>
+          <div class="sidebar-module">
 
-            <div class="form-group">
-              <label for="checkout">退房日期</label>
-              <input type="date" class="form-control" id="checkout" name="checkout" placeholder="">
-            </div>
+            <form id="newOrder">
+              <div class="form-group">
+                <label for="checkin">入住日期</label>
+                <input type="date" class="form-control" id="checkin" name="checkin" placeholder="">
+              </div>
 
-            <div class="form-group">
-              <label for="bookname">入住人姓名</label>
-              <input type="text" class="form-control" id="bookname" name="bookname" placeholder="">
-            </div>
+              <div class="form-group">
+                <label for="checkout">退房日期</label>
+                <input type="date" class="form-control" id="checkout" name="checkout" placeholder="">
+              </div>
 
-            <div class="form-group">
-              <label for="creditcard">信用卡号</label>
-              <input type="number" class="form-control" id="creditcard" name="creditcard" placeholder="">
-            </div>
-            
-            <div class="form-group">
-              <label for="cardholdername">持卡人姓名</label>
-              <input type="text" class="form-control" id="cardholdername" name="cardholdername" placeholder="">
-            </div>
+              <div class="form-group">
+                <label for="customerFullName">入住人姓名</label>
+                <input type="text" class="form-control" id="customerFullName" name="customerFullName" placeholder="">
+              </div>
 
-             <div class="form-group">
-              <label for="expiredate">有效期</label>
-              <input type="text" class="form-control" id="expiredate" name="expiredate" placeholder="">
-            </div>
+              <div class="form-group">
+                <label for="ccnum">信用卡号</label>
+                <input type="number" class="form-control" id="ccnum" name="ccnum" placeholder="">
+              </div>
 
-            <h4><b>总价:</b><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span id="grandTotal"></span></h4>
-            <input type="hidden" name="totalPrice" id="totalPrice">
-            <input type="submit" class="btn btn-success" value="预订"></input>
-          </form>
+              <div class="form-group">
+                <label for="ccname">持卡人姓名</label>
+                <input type="text" class="form-control" id="ccname" name="ccname" placeholder="">
+              </div>
 
-          <!---
-            <% include forms/order-house %> 
-          -->
+              <div class="form-group">
+                <label for="expiredate">有效期</label>
+                <input type="text" class="form-control" id="expiredate" name="expiredate" placeholder="">
+              </div>
 
+              <h4><b>总价:</b><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span id="grandTotal"></span></h4>
+              <input type="hidden" name="totalPrice" id="totalPrice">
+              <input type="hidden" name="houseOwner" value="<%= house.houseowner %>">
+              <input type="submit" class="btn btn-success btn-submit" value="预订"></input>
+            </form>
+
+          </div>
         </div>
       </div>
+      <!-- /.blog-sidebar -->
     </div>
-    <!-- /.blog-sidebar -->
   </div>
-</div>
 
-<script>
-  var setDateAndPrice = function(date1, date2) {
-    if(typeof date1 === 'undefined' || typeof date2 === 'undefined' ) {
-      var today = new Date();
-      var tomorrow = addDays(today, 1);
-      return setDateAndPrice(today, tomorrow);
+  <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="alert " role="alert"> message </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var setDateAndPrice = function (date1, date2) {
+      if (typeof date1 === 'undefined' || typeof date2 === 'undefined') {
+        var today = new Date();
+        var tomorrow = addDays(today, 1);
+        return setDateAndPrice(today, tomorrow);
+      }
+
+      if (diffDays(date1, date2) >= 0) {
+        alert('date range cannot be negtive! Reset to default');
+        return setDateAndPrice();
+      }
+
+      var unitPrice = $('#unitPrice').text();
+      $("#checkin").val(date2string(date1));
+      $("#checkout").val(date2string(date2));
+      var daySpan = diffDays(date2, date1);
+      $('#grandTotal').text(daySpan * unitPrice);
+      $('#totalPrice').val(daySpan * unitPrice);
     }
 
-    if(diffDays(date1, date2) >= 0) {
-      alert('date range cannot be negtive! Reset to default');
-      return setDateAndPrice();
-    }
+    $(document).ready(function () {
+      setDateAndPrice();
+    });
 
-    var unitPrice = <%= house.price %>;
-    $("#checkin").val(date2string(date1));
-    $("#checkout").val(date2string(date2));
-    var daySpan = diffDays(date2, date1);
-    $('#grandTotal').text(daySpan * unitPrice);
-    $('#totalPrice').val(daySpan * unitPrice);
-  }
+    $(document).on("change", "input[type=date]", function (env) {
+      var dateStr1 = $('#checkin').val();
+      var dateStr2 = $('#checkout').val();
+      setDateAndPrice(string2date(dateStr1), string2date(dateStr2));
+    });
 
-  $(document).ready(function(){
-    setDateAndPrice();
-  });
+    $(document).on('submit', 'form#newOrder', (evt) => {
+      evt.preventDefault();
+      $.post('/order/bookHouse', $('form#newOrder').serialize(), (data) => {
+        var model = { type: 'success', title: 'Well done!', message: 'New house booked', modalId: 'modal1' };
+        if (data.ok) {
+        } else {
+          model = { type: 'error', title: 'Sorry!', message: data.message, modalId: 'modal1' };
+        }
+        $('#modal1 div.alert').removeClass().addClass(`alert alert-${model.type}`).text(`${model.title} ${model.message}`);
+        $('#modal1').modal('show');
+      });
+    });
 
-  $(document).on("change", "input[type=date]", function(env){ 
-    var dateStr1 = $('#checkin').val();
-    var dateStr2 = $('#checkout').val();
-    setDateAndPrice(string2date(dateStr1), string2date(dateStr2));
-  });
-</script>
+    $(document).on('click', 'form#newOrder .btn-submit', (evt) => {
+      evt.preventDefault();
+      $('form#newOrder').submit();
+    });
+  </script>

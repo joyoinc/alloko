@@ -1,0 +1,25 @@
+<table>
+    <tr>
+        <td>order id</td>
+        <td> price </td>
+        <td> customer name </td>
+        <td> check in date </td>
+        <td> check out date </td>
+    </tr>
+    <% for(var idx=0; idx < myOrders.length; idx++) { %>
+    <tr>
+        <td><%= myOrders[idx].id %></td>
+        <td><%= myOrders[idx].totalPrice %>  </td>
+        <td><%= myOrders[idx].customerName %>   </td>
+        <td><%= myOrders[idx].serviceStartDate %> </td>
+        <td><%= myOrders[idx].serviceEndDate %>    </td>
+    </tr>
+    <% }%>
+</table>
+
+
+<script >
+    $(document).ready(function () {
+        toggleSiderbarMenu('view_order');
+    });
+</script>

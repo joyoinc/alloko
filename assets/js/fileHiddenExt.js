@@ -70,13 +70,13 @@ $(document).ready(function () {
     $.get('/location', (data) => {
         var uniq = {};
         var cities = [], countries = [];
-        data.forEach(function (elem, idx) {
+        data.forEach(function (elem) {
             if (!uniq.hasOwnProperty(elem.country)) {
-                countries.push({ id: `country-${idx}`, text: elem.country });
-                uniq[elem.country] = `country-${idx}`;
+                countries.push({ id: `country-${elem.country}`, text: elem.country_text });
+                uniq[elem.country] = elem.country;
             }
 
-            cities.push({ id: `city-${idx}`, text: elem.city, parent: uniq[elem.country] });
+            cities.push({ id: `city-${elem.city}`, text: elem.city_text, parent: `country-${elem.country}` });
         });
 
         bindLinkedDropdown($('#country-menu'), $('#city-menu'),

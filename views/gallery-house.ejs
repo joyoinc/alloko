@@ -1,8 +1,8 @@
-<% include partials/navbar.ejs %>
+<% include partials/navbar %>
 
   <div class="container">
 
-    <% include forms/search.ejs %>
+    <% include forms/search %>
 
       <hr />
 
@@ -11,6 +11,10 @@
         <li><a href="/gallery/car">带车向导</a></li>
         <li><a href="/gallery/guide">无车向导</a></li>
       </ol>
+
+
+
+      <a class="btn btn-success" id="load_search2">更多筛选</a>
 
       <!-- gallery -->
       <div id='root'>
@@ -29,63 +33,102 @@
     var isLoading = false;
     var loadedCount = 0;
 
-    $('input[name="daterange"]').daterangepicker();
+    $(document).ready(function () {
+      // var orderby = getUrlParameter('orderby');
 
-    var loadMore = function () {
-      if (isLoading)
-        return false;
-      else {
-        $('.progress').show(); isLoading = true;
+      // if (orderby) {
+      //   $("#result_orderby").val(orderby);
+      // }
+
+      var search_condition = getUrlParameters();
+      $('input[name="country"]').val(search_condition.country || "美国");
+      $('input[name="city"]').val(search_condition.city || "");
+      $("#result_orderby").val(search_condition.result_orderby || "review_desc");
+
+      // $(document).on('change', '#result_orderby', function (evt) {
+      //   var baseUrl = getUrlWithoutQueryString(window.location.href);
+      //   var url = `${baseUrl}?${Object.entries(search_condition).map(function(_){return _.join('=')}).join('&')}`;
+      //   window.location.href = url;
+      // });
+
+      // $('input[name="daterange"]').daterangepicker();
+
+      var loadMore = function () {
+        if (isLoading)
+          return false;
+        else {
+          $('.progress').show(); isLoading = true;
+        }
+        doLoad();
       }
-      doLoad();
-    }
 
-    var doLoad = function () {
-      $.post("/house/recent", { skipCount: loadedCount }, (data) => {
-        loadedCount += data.length;
+      var doLoad = function () {
+        var search_filters = [{ country: $('input[name="country"]').val() }];
+        if ($('input[name="city"]').val()) search_filters.push({ city: $('input[name="city"]').val() });
 
-        setTimeout(function () {
-          var model = data.map(function (e) {
-            var rr = parseInt(1 + Math.random() * 5);
-            return {
-              title: `$${e.price} ${e.city} ${e.housename}`,
-              imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
-              detail: ` ${e.housetype} &nbsp， ${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
-              btnText: "查看详情",
-              btnLink: `/house/__g/${e.id}`,
-              btnText2: "查看地图",
-              btnLink2: '#',
-              reviewCount: 428,
-              fiveStarStyles: Array(rr).fill('fa-star').concat(Array(5 - rr).fill('fa-star-o')),
-            }
-          });
 
-          render_Row(model);
+        $.post("/house/recent", { skipCount: loadedCount, sortOrder: $('#result_orderby').val(), search_filters }, (data) => {
+          loadedCount += data.length;
 
-          $('.progress').hide();
-          isLoading = false;
-        }, 100);
-      });
-    }
+          setTimeout(function () {
+            var model = data.map(function (e) {
+              var rr = parseInt(1 + Math.random() * 5);
+              return {
+                title: `$${e.price} ${e.city} ${e.housename}`,
+                imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
+                detail: ` ${e.housetype} &nbsp， ${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
+                btnText: "查看详情",
+                btnLink: `/house/__g/${e.id}`,
+                btnText2: "查看地图",
+                btnLink2: '#',
+                reviewCount: 428,
+                fiveStarStyles: Array(rr).fill('fa-star').concat(Array(5 - rr).fill('fa-star-o')),
+              }
+            });
 
-    var render_Row = function (model) {
-      while (model.length > 0) {
-        var str = "<div class='row'>";
-        model.slice(0, 3).forEach(function (element) {
-          str += cli_render_bind(element, 'gallery_tile_1x3_btn2_star5');
+            render_Row(model);
+
+            $('.progress').hide();
+            isLoading = false;
+          }, 100);
         });
-        str += "</div>";
-        $('#root').append(str);
-
-        model.splice(0, 3);
       }
 
-    }
+      var render_Row = function (model) {
+        while (model.length > 0) {
+          var str = "<div class='row'>";
+          model.slice(0, 3).forEach(function (element) {
+            str += cli_render_bind(element, 'gallery_tile_1x3_btn2_star5');
+          });
+          str += "</div>";
+          $('#root').append(str);
 
-    $(window).on('scroll', function () {
-      if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-        loadMore()
+          model.splice(0, 3);
+        }
+
       }
-    }).scroll();
 
+      $(window).on('scroll', function () {
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+          loadMore()
+        }
+      }).scroll();
+
+      $("#load_search2").click(function (evt) {
+        cli_render_out($("form#search"), null, "search2");
+        $(evt.target).hide();
+      });
+
+      $("#search").on("submit", function (evt) {
+
+        if (!$("input[name=country]").val()) {
+          alert("country cannot be empty");
+          evt.preventDefault();
+          return;
+        }
+
+        $(this).submit();
+      });
+
+    });
   </script>

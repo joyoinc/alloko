@@ -27,6 +27,7 @@ var self = module.exports = {
                 // load car/house
                 HostInfo.findOne(aUser.hosts[0].hostId).populate('myCar').populate('myHouse').exec(function (err, aHost) {
                     if (err) return res.serverError(err);
+                    sails.log(aHost);
 
                     res.view("overview", {
                         greeting: self._greeting(aUser),
@@ -48,7 +49,7 @@ var self = module.exports = {
         });
     },
 
-    viewMine: function (req, res) {
+    viewMyOrder: function (req, res) {
         Order.find({ customerId: req.session.me }).exec(function (err, myOrders) {
             if (err) return res.serverError(err);
 
@@ -60,6 +61,30 @@ var self = module.exports = {
                 layout: 'host-layout'
             });
 
+        });
+    },
+
+    addUserComment: function(req, res){
+        Order.findOne(req.param('orderId')).exec(function(err, aOrder){
+            if (err) return res.serverError(err);
+            sails.log(`find order ${aOrder.id}`);
+
+            aOrder.ratings = req.param('ratings');
+            aOrder.commentOnHost = req.param('comment');
+
+            aOrder.save(function(err){
+                if (err) return res.serverError(err);
+
+                res.ok({ok:'ok'});
+            });
+        });
+    },
+
+    userComment: function (req, res) {
+        res.view('user-comment', {
+            orderId: req.param('id'),
+            cUser: {},
+            layout: 'host-layout',
         });
     },
 

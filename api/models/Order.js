@@ -51,6 +51,22 @@ module.exports = {
     paymentToken: {
       type: 'string',
     },
+
+    ratings: {
+      type: 'array'
+    },
+
+    ratingOnUser: {
+      type: 'integer'
+    },
+
+    commentOnUser: {
+      type: 'string'
+    },
+
+    commentOnHost: {
+      type: 'string'
+    },
   }
 };
 

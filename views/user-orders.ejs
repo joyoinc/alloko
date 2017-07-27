@@ -11,6 +11,7 @@ tr:nth-child(even){background-color: #f2f2f2}
         <th> 服务提供方 </th>
         <th> 服务起始时间 </th>
         <th> 服务结束时间 </th>
+        <th>  </th>
     </tr>
     <% for(var idx=0; idx < myOrders.length; idx++) { %>
     <tr>
@@ -20,6 +21,7 @@ tr:nth-child(even){background-color: #f2f2f2}
         <td><%= myOrders[idx].serverHost %>   </td>
         <td><%= myOrders[idx].serviceStartDate %> </td>
         <td><%= myOrders[idx].serviceEndDate %>    </td>
+        <td><a href="/HostManager/userComment/<%= myOrders[idx].id %>">ping jia</a>    </td>
     </tr>
     <% }%>
 </table>

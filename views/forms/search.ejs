@@ -1,104 +1,84 @@
-<form class="form-horizontal">
-    <div class="form-group">
+<form class="form-horizontal" id="search">
+  <div class="form-group">
 
-        <div class="col-md-3">
-            <div class="input-group">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country <span class="caret"></span></button>
-                    <ul class="dropdown-menu" id="country-menu">
-                    </ul>
-                </div>
-                <!-- /btn-group -->
-                <input type="text" name="country" class="form-control" readonly="" aria-label="...">
-            </div>
-            <!-- /input-group -->
+    <div class="col-md-3">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">国家 <span class="caret"></span></button>
+          <ul class="dropdown-menu" id="country-menu"> </ul>
         </div>
-        <!-- /.col-md -->
-
-        <div class="col-md-3">
-            <div class="input-group">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City <span class="caret"></span></button>
-                    <ul class="dropdown-menu" id="city-menu">
-                    </ul>
-                </div>
-                <!-- /btn-group -->
-                <input type="text" name="city" class="form-control" readonly="" aria-label="...">
-            </div>
-            <!-- /input-group -->
-        </div>
-        <!-- /.col-md -->
-
-        <div class="col-md-3">
-            <div class="input-group ">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" ></span></span>
-                <input type="text" name="daterange" readonly="" class="form-control" value="01/01/2017 - 01/01/2018" />
-            </div>
-        </div>
-        <!-- /.col-md -->
-
-        <div class="col-md-2">
-            <div class="input-group ">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
-                <input type="number" class="form-control" value=1 min=1 max=10 />
-            </div>
-        </div>
-        <!-- /.col-md -->
-
-        <div class="col-md-1">
-            <button type="submit" class="btn btn-success form-control">
-            <span class="glyphicon glyphicon-search" ></span>
-          </button>
-        </div>
-        <!-- /.col-md -->
+        <!-- /btn-group -->
+        <input type="text" placeholder='目的地国家' value="" name="country" class="form-control" readonly="" aria-label="...">
+      </div>
+      <!-- /input-group -->
     </div>
-    <!-- form-group -->
+    <!-- /.col-md -->
 
-    <div class="form-group">
-        <div class="checkbox col-md-2">
-            <label>
-            <input type="checkbox" value="">
-            私人向导
-          </label>
+    <div class="col-md-3">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">城市 <span class="caret"></span></button>
+          <ul class="dropdown-menu" id="city-menu"></ul>
         </div>
-        <!-- div.checkbox -->
+        <!-- /btn-group -->
+        <input type="text" placeholder='目的地城市' value="" name="city" class="form-control" readonly="" aria-label="...">
+      </div>
+      <!-- /input-group -->
+    </div>
+    <!-- /.col-md -->
 
-        <div class="checkbox col-md-2">
-            <label>
-            <input type="checkbox" value="">
-            私家车 + 司机
+    <div class="checkbox col-md-2">
+      <label>
+            <input type="checkbox" value="" checked>
+           无车向导
           </label>
-        </div>
-        <!-- div.checkbox -->
+    </div>
+    <!-- div.checkbox -->
 
-        <div class="checkbox col-md-2">
-            <label>
-            <input type="checkbox" value="">
+    <div class="checkbox col-md-2">
+      <label>
+            <input type="checkbox" value="" checked>
+            带车向导
+          </label>
+    </div>
+    <!-- div.checkbox -->
+
+    <div class="checkbox col-md-1">
+      <label>
+            <input type="checkbox" value="" checked>
             住房
           </label>
-        </div>
-        <!-- div.checkbox -->
-
-        <div class="col-md-3">
-            <div class="input-group ">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-minus" ></span></span>
-                <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" value=100 min=1 />
-                <span class="input-group-addon">.00</span>
-            </div>
-        </div>
-        <!-- /.col-md -->
-        <div class="col-md-3">
-            <div class="input-group ">
-                <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" value=10000 max=10000 />
-                <span class="input-group-addon">.00</span>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-plus" ></span></span>
-            </div>
-        </div>
-        <!-- /.col-md -->
-
-
     </div>
-    <!-- form-group -->
+    <!-- div.checkbox -->
+
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-success form-control">
+            <span class="glyphicon glyphicon-search" ></span>
+          </button>
+    </div>
+  </div>
+
+   
+    <div class="form-group">
+      <select id="result_orderby" name="result_orderby">
+           <option value="review_desc">评价从高到低</option>
+            <option value="price_asc" >价格从低到高</option>
+           <option value="price_desc" >价格从高到低</option>
+          </select>
+    </div>
+       
+    <!--
+    <div class="btn-group">
+      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       排序 <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#" value="review_desc">评价从高到低</a></li>
+        <li><a href="#" value="price_asc">价格从低到高</a></li>
+        <li><a href="#" value="price_desc">价格从高到低</a></li>
+      </ul>
+    </div>
+     -->
+  <!-- form-group -->
+  <!-- form-group -->
 </form>

@@ -57,17 +57,51 @@
           </button>
     </div>
   </div>
+ 
+  <div class="form-group">
+  <div class="col-md-3">
+    <div class="input-group ">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" ></span></span>
+      <input type="text" name="daterange" readonly="" class="form-control" value="" />
+    </div>
+  </div>
+  <!-- /.col-md -->
 
-   
-    <div class="form-group">
-      <select id="result_orderby" name="result_orderby">
+  <div class="col-md-3">
+    <div class="input-group ">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
+      <input type="number" class="form-control" value=1 min=1 max=10 />
+    </div>
+  </div>
+  <!-- /.col-md -->
+  <!-- form-group -->
+
+  <div class="col-md-2">
+    <div class="input-group ">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-minus" ></span></span>
+      <span class="input-group-addon">$</span>
+      <input type="number" class="form-control" value=1 min=1 />
+      <span class="input-group-addon">.00</span>
+    </div>
+  </div>
+  <!-- /.col-md -->
+  <div class="col-md-2">
+    <div class="input-group ">
+      <span class="input-group-addon">$</span>
+      <input type="number" class="form-control" value=10000 max=10000 />
+      <span class="input-group-addon">.00</span>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-plus" ></span></span>
+    </div>
+  </div>
+  <div class="col-md-2">
+      <select id="result_orderby" name="result_orderby" class="form-control">
            <option value="review_desc">评价从高到低</option>
             <option value="price_asc" >价格从低到高</option>
            <option value="price_desc" >价格从高到低</option>
-          </select>
-    </div>
-       
-    <!--
+      </select>
+  </div>
+</div>
+  <!--
     <div class="btn-group">
       <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
        排序 <span class="caret"></span>

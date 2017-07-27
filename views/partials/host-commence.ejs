@@ -1,0 +1,42 @@
+<div class="star5Ext" id='ui2' data-name='overview' data-rating='5'>
+</div>
+
+</br>
+    <b>请您对该客户进行评价</b>
+</br></br>
+
+
+<form>
+    <div class="form-group">
+        <textarea class="form-control" rows="6" name='hostcommence' id='hostcommence'></textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success btn-submit" value="提交"></input>
+    </div>
+</form>
+
+<script>
+    
+    $(document).on('click', '.btn-submit', (evt) => {
+        evt.preventDefault();
+        var json = { ratings : [ $("[name=overview]:checked").val(), 
+            $("[name=infomatch]:checked").val(), 
+            $("[name=goodlocation]:checked").val(), 
+            $("[name=communication]:checked").val(), 
+            $("[name=goodfacility]:checked").val(), 
+            $("[name=clean]:checked").val(), 
+            $("[name=goodprice]:checked").val(), 
+            ],
+            orderId: "<%= orderId%>",
+            comment: $("textarea").val()
+        };
+
+        $.post('/HostManager/addUserComment', json, (data) => {
+            if (data.ok) {
+                window.location = "/HostManager/viewMyOrder";
+            } else {
+                alert('error');
+            }
+        });
+    });
+</script>

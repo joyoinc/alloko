@@ -1,4 +1,18 @@
 <%
+
+    locals.dateToString = function(date) {
+        var dd = date.getDate();
+        dd = dd < 10 ? '0' + dd : dd;
+        var mm = date.getMonth() + 1;
+        mm = mm < 10 ? '0' + mm : mm;
+        var yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    };
+
+    locals.safeStr = function(obj) {
+        return typeof obj === 'undefined' ? "" : obj;
+    };
+
     locals.getLanguage = function(lan) {
         if(lan === 'japaness') return 'riyu';
         else if (lan === 'chinese') return '中文';

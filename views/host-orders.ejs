@@ -1,3 +1,8 @@
+<!-- 
+    myOrders
+-->
+
+<% include partials/locals-functions %>
 
 <style>
 tr:nth-child(even){background-color: #f2f2f2}
@@ -26,9 +31,9 @@ table {
         <td><%= myOrders[idx].totalPrice %>  </td>
         <td><%= myOrders[idx].type %></td>
         <td><%= myOrders[idx].customerId %>   </td>
-        <td><%= myOrders[idx].serviceStartDate %> </td>
-        <td><%= myOrders[idx].serviceEndDate %>    </td>
-        <td><a href="/HostManager/userComment/<%= myOrders[idx].id %>">评价</a>    </td>
+        <td><%= dateToString(myOrders[idx].serviceStartDate) %> </td>
+        <td><%= dateToString(myOrders[idx].serviceEndDate) %>    </td>
+        <td><a href="/HostManager/hostComment/<%= myOrders[idx].id %>">评价</a>    </td>
     </tr>
     <% }%>
 </table>
@@ -54,6 +59,6 @@ table {
 
 <script >
     $(document).ready(function () {
-        toggleSiderbarMenu('view_order');
+        toggleSiderbarMenu('host_order');
     });
 </script>

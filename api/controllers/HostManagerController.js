@@ -49,7 +49,7 @@ var self = module.exports = {
         });
     },
 
-    viewMyOrder: function (req, res) {
+    userOrder: function (req, res) {
         Order.find({ customerId: req.session.me }).exec(function (err, myOrders) {
             if (err) return res.serverError(err);
 
@@ -61,6 +61,26 @@ var self = module.exports = {
                 layout: 'host-layout'
             });
 
+        });
+    },
+
+    hostOrder: function (req, res) {
+        HostInfo.findOne({ofUser: req.session.me}).exec(function (err, aHost) {
+            if (err) return res.serverError(err);
+            sails.log(`host ${aHost.hostId} found`);
+
+            Order.find({ serverHost: aHost.hostId }).exec(function (err, myOrders) {
+                if (err) return res.serverError(err);
+
+                sails.log(`find ${myOrders.length} orders `);
+
+                res.view("host-orders", {
+                    myOrders,
+                    cUser: {},
+                    layout: 'host-layout'
+                });
+
+            });
         });
     },
 
@@ -80,8 +100,32 @@ var self = module.exports = {
         });
     },
 
+    addHostComment: function(req, res){
+        Order.findOne(req.param('orderId')).exec(function(err, aOrder){
+            if (err) return res.serverError(err);
+            sails.log(`find order ${aOrder.id}`);
+
+            aOrder.ratingOnUser = Util.ensureArray(req.param('ratings'))[0];
+            aOrder.commentOnUser = req.param('comment');
+
+            aOrder.save(function(err){
+                if (err) return res.serverError(err);
+
+                res.ok({ok:'ok'});
+            });
+        });
+    },
+
     userComment: function (req, res) {
         res.view('user-comment', {
+            orderId: req.param('id'),
+            cUser: {},
+            layout: 'host-layout',
+        });
+    },
+
+    hostComment: function (req, res) {
+        res.view('host-comment', {
             orderId: req.param('id'),
             cUser: {},
             layout: 'host-layout',

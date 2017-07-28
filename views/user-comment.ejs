@@ -68,7 +68,7 @@
 
         $.post('/HostManager/addUserComment', json, (data) => {
             if (data.ok) {
-                window.location = "/HostManager/viewMyOrder";
+                window.location = "/dashboard";
             } else {
                 alert('error');
             }

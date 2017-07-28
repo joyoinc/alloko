@@ -1,4 +1,4 @@
-<div class="star5Ext" id='ui2' data-name='overview' data-rating='5'>
+<div class="star5Ext" id='overview' data-name='overview' data-rating='5'>
 </div>
 
 </br>
@@ -19,21 +19,14 @@
     
     $(document).on('click', '.btn-submit', (evt) => {
         evt.preventDefault();
-        var json = { ratings : [ $("[name=overview]:checked").val(), 
-            $("[name=infomatch]:checked").val(), 
-            $("[name=goodlocation]:checked").val(), 
-            $("[name=communication]:checked").val(), 
-            $("[name=goodfacility]:checked").val(), 
-            $("[name=clean]:checked").val(), 
-            $("[name=goodprice]:checked").val(), 
-            ],
+        var json = { ratings : [ $("[name=overview]:checked").val() ],
             orderId: "<%= orderId%>",
             comment: $("textarea").val()
         };
 
-        $.post('/HostManager/addUserComment', json, (data) => {
+        $.post('/HostManager/addHostComment', json, (data) => {
             if (data.ok) {
-                window.location = "/HostManager/viewMyOrder";
+                window.location = "/dashboard";
             } else {
                 alert('error');
             }

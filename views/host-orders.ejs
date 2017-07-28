@@ -15,6 +15,9 @@ table {
 </head>
 <body>
 
+<b><%= myOrders.length %> 个订单 ， 共 $ <%= myOrders.reduce(function(sum,elem){return sum+elem.totalPrice}, 0) %> </b>
+<br><br>
+
 <table class="table table-bordered" width="100%">
     <tr class="info">
         <th> 订单号</th>

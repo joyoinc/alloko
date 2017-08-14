@@ -61,12 +61,15 @@ var self = module.exports = {
     var query = House.find();
     var toSkip = req.param('skipCount') || 0;
     var batchSize = req.param('batchSize') || 9;
+    var filters = req.param('search_filters') || [];
 
-    req.param('search_filters').forEach(function (element) { query.where(element); });
+    filters.forEach(function (element) { query.where(element); });
 
-    var sortOrder = req.param('sortOrder').split('_');
-    if (sortOrder[0] == "price")
-      query.sort(`${sortOrder[0]} ${sortOrder[1]}`);
+    var sortOrder = req.param('sortOrder');
+    if (sortOrder) {
+      var __ = sortOrder.split('_');
+      query.sort(`${__[0]} ${__[1]}`);
+    }
 
     query.sort('updatedAt DESC').limit(batchSize).skip(toSkip).exec(function (err, house) {
       if (err) return res.serverError(err)

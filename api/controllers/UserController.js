@@ -5,7 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var Util = require('../helpers/util');
+var Util = require('../helpers/util'),
+    Mailer = require('../services/Mailer.js');
 
 var self = module.exports = {
 
@@ -27,30 +28,36 @@ var self = module.exports = {
 
             if (aUser) {
                 sails.log(`User ${aUser.email} sign in `);
-
                 self._setMe(aUser.email, req);
                 var target = decodeURIComponent(req.session.redirectTo || '/');
-                res.redirect(target);
+                //Mailer.sendWelcomeMail(aUser);
+                res.json({ redirectTo: target });
             } else {
-                res.notFound('user not found');
+                res.json({ errCode: 'notMatch' });
             }
         });
     },
 
     signUp: function (req, res) {
-        var newUser = {
-            email: req.param('email'),
-            password: Util.encString(req.param('password')),
-            nick: Util.simpleID(5),
-            cell: req.param('cell'),
-        };
+        User.findOne({ email: req.param('email'), password: Util.encString(req.param('password')) }).exec(function (err, foundUser) {
+                            sails.log(`found User ${foundUser} `);
+            if(foundUser)
+                return res.json({ errCode: 'usrExist' });
 
-        User.create(newUser).exec(function (err, aUser) {
-            if (err) return res.serverError(err);
+            var newUser = {
+                email: req.param('email'),
+                password: Util.encString(req.param('password')),
+                nick: Util.simpleID(5),
+                cell: req.param('cell'),
+            };
 
-            sails.log(`User ${aUser.email} signed up `);
-            self._setMe(aUser.email, req, res);
-            return res.redirect('/dashboard');
+            User.create(newUser).exec(function (err, aUser) {
+                if (err) return res.serverError(err);
+
+                sails.log(`User ${aUser.email} signed up `);
+                self._setMe(aUser.email, req, res);
+                return res.json({ errCode: '' });
+            });
         });
     },
 

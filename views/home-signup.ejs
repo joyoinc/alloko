@@ -1,10 +1,61 @@
-  <% include partials/navbar.ejs %>
+<% include partials/navbar.ejs %>
 
   <div class="container">
-  
+
     <% include forms/user-signup %>
 
   </div>
-  <script>  
-  </script>
+  <script>
+    $(document).on('submit', 'form', (evt) => {
+      evt.preventDefault();
+      $.post($('form').attr('action'), $('form').serialize(), (data) => {
+        if(data.errCode) {
+          var message = "";
+          if(data.errCode == "usrExist")
+            message = "该用户已经存在";
+            
+          alert(message);
+        } else {
+          window.location = "/dashboard";
+        }
+      });
+    });
 
+    $(document).on('click', 'form .btn-submit', (evt) => {
+      evt.preventDefault();
+      var msg = validateForm();
+      if (msg === 'ok')
+        $('form').submit();
+      else
+        alert(msg);
+    });
+
+    function validateForm() {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var email = $('#email').val();
+      if (email.trim() === '')
+        return 'email不能为空';
+      
+      if (!re.test(email))
+        return 'email格式不正确';
+
+      var psd1 = $('#password').val();
+      if (psd1.trim() === '')
+        return '密码不能为空';
+
+      if (psd1.length < 8)
+        return '密码至少要8位';
+
+      if(! psd1.match(/[0-9]+/))
+        return '密码必须同时包含数字和字母';
+
+      if(! psd1.match(/[a-zA-Z]+/))
+        return '密码必须同时包含数字和字母';
+
+      var psd2 = $('#password2').val();
+      if (psd1 !== psd2)
+        return '两次输入密码不匹配';
+
+      return 'ok';
+    }
+  </script>

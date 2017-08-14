@@ -6,5 +6,24 @@
 
   </div>
   <script>  
+    $(document).on('submit', 'form', (evt) => {
+      evt.preventDefault();
+      $.post($('form').attr('action'), $('form').serialize(), (data) => {
+        if(data.errCode) {
+          var message = "";
+          if(data.errCode == "notMatch")
+            message = "用户名密码不匹配";
+
+          alert(message);
+        } else {
+          window.location = data.redirectTo;
+        }
+      });
+    });
+
+    $(document).on('click', 'form .btn-submit', (evt) => {
+      evt.preventDefault();
+      $('form').submit();
+    });
   </script>
 

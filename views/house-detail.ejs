@@ -17,7 +17,9 @@
           <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>'></div>
         </div>
         <br>
-        <img src="/message/snapshot/<%= house.housepic_fd %>" alt="暂时没有该房屋图片" style="width:600px;height:400px;" class="img-thumbnail">
+        <% var picture_fds = house.housepic_fd.split(',') %>
+        <% include partials/picture-slides.ejs %>
+        <!--img src="/message/snapshot/<%= house.housepic_fd %>" alt="暂时没有该房屋图片" style="width:600px;height:400px;" class="img-thumbnail"-->
         <br>
         <br>
         <div class="blog-post">

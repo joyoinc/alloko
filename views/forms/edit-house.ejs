@@ -55,22 +55,14 @@
     <div class="form-group">
       <label for="housepic" class="control-label col-md-2">房屋图片</label>
       <div class="col-md-10">
-        <% if ((typeof myHouse == 'undefined') || !(myHouse.housepic_fd) ) { %>
-          <input type="file" name="housepic" id="housepic" multiple class="file-loading">
-        <% } else { %>
-          <img src="/message/snapshot/<%= myHouse.housepic_fd%>" alt="...">
-        <% } %>
+        <input type="file" name="housepic" id="housepic" count=5 multiple class="file-loading" init-fd="<%= typeof myHouse == 'undefined' ? '' : myHouse.housepic_fd %>">
       </div>
     </div>
 
     <div class="form-group">
       <label for="ownershippic" class="control-label col-md-2">房产证照片</label>
       <div class="col-md-10">
-        <% if ((typeof myHouse == 'undefined') || !(myHouse.ownershippic_fd) ) { %>
-        <input type="file" name="ownershippic" id="ownershippic" multiple class="file-loading">
-         <% } else { %>
-          <img src="/message/snapshot/<%= myHouse.ownershippic_fd%>" alt="...">
-        <% } %>
+        <input type="file" name="ownershippic" id="ownershippic" count=5 multiple class="file-loading" init-fd="<%= typeof myHouse == 'undefined' ? '' : myHouse.ownershippic_fd %>">
       </div>
     </div>
 

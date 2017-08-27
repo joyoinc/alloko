@@ -1,16 +1,23 @@
 $(document).ready(function () {
 
+    // file uploader ext.
     $('input[type=file]').each((idx, elem) => {
         var name = $(elem).attr('name');
+        var fileCount = $(elem).attr('count') || 1;
+        var initFds = $(elem).attr('init-fd') || '';
 
-        $(elem).after(`<input type=hidden name="${name}_fd" />`)
+        initFds.split(',').forEach(function (e) {
+            $(elem).after(`<img src="/message/snapshot/${e}" class="img-thumbnail" >`);
+        });
+
+        $(elem).after(`<input type=hidden name="${name}_fd" value="${initFds}"/>`)
             .fileinput({
                 showPreview: true,
                 uploadAsync: false,
                 uploadUrl: `/message/image/${name}`, // server upload action
                 language: "zh",
                 allowedFileExtensions: ['jpg', 'png', 'gif'],
-                maxFileCount: 1,
+                maxFileCount: fileCount,
             }).on('filebatchuploadsuccess', function (event, data, previewId, index) {
                 var form = data.form, files = data.files, extra = data.extra,
                     response = data.response, reader = data.reader;
@@ -18,13 +25,13 @@ $(document).ready(function () {
                 //console.log('File uploaded');
                 //console.log($(this).attr('name'));
                 //console.log(response.files[0].fd);
-                $(`input[name="${name}_fd"]`).val(response.files[0].fd);
+                $(`input[name="${name}_fd"]`).val(response.files.map(function (_) { return _.fd }).join(','));
             });
     });
 
 
 
-    // star2 ext. will move to separate file later
+    // star2 ext.
     $('div.star5Ext').each((idx, elem) => {
         $(elem).addClass('stars').append('<form></form>');
         var uiid = $(elem).attr('id') || `ui${parseInt(Math.random() * 10000)}`;

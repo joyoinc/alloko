@@ -67,7 +67,6 @@
         var search_filters = [{ country: $('input[name="country"]').val() }];
         if ($('input[name="city"]').val()) search_filters.push({ city: $('input[name="city"]').val() });
 
-
         $.post("/house/recent", { skipCount: loadedCount, sortOrder: $('#result_orderby').val(), search_filters }, (data) => {
           loadedCount += data.length;
 
@@ -76,7 +75,7 @@
               var rr = parseInt(1 + Math.random() * 5);
               return {
                 title: `$${e.price} ${e.city} ${e.housename}`,
-                imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd}` : '/images/img-missing.png',
+                imageLink: e.housepic_fd ? `/message/snapshot/${e.housepic_fd.split(',')[0]}` : '/images/img-missing.png',
                 detail: ` ${e.housetype} &nbsp， ${e.bedroomcount} 室 ${e.livingroomcount} 厅 ${e.bathroomcount} 卫`,
                 btnText: "查看详情",
                 btnLink: `/house/__g/${e.id}`,

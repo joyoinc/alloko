@@ -149,33 +149,21 @@
   <div class="form-group">
     <label for="carpic" class="control-label col-md-2">车辆图片</label>
     <div class="col-md-10">
-      <% if ((typeof myCar == 'undefined') || !(myCar.carpic_fd) ) { %>
-        <input type="file" name="carpic" id="carpic" multiple class="file-loading">
-      <% } else { %>
-          <img src="/message/snapshot/<%= myCar.carpic_fd%>" alt="...">
-      <% } %>
+      <input type="file" name="carpic" id="carpic" count=5 multiple class="file-loading" init-fd="<%= typeof myCar == 'undefined' ? '' : myCar.carpic_fd %>">
     </div>
   </div>
 
   <div class="form-group">
     <label for="insurancepic" class="control-label col-md-2">车保险扫描件</label>
     <div class="col-md-10">
-      <% if ((typeof myCar == 'undefined') || !(myCar.insurancepic_fd) ) { %>
-        <input type="file" name="insurancepic" id="insurancepic" multiple class="file-loading">
-      <% } else { %>
-          <img src="/message/snapshot/<%= myCar.insurancepic_fd%>" alt="...">
-      <% } %>
+      <input type="file" name="insurancepic" id="insurancepic" count=5 multiple class="file-loading" init-fd="<%= typeof myCar == 'undefined' ? '' : myCar.insurancepic_fd %>">
     </div>
   </div>
 
   <div class="form-group">
     <label for="dlpic" class="control-label col-md-2">驾照扫描件</label>
     <div class="col-md-10">
-      <% if ((typeof myCar == 'undefined') || !(myCar.dlpic_fd) ) { %>
-        <input type="file" name="dlpic" id="dlpic" multiple class="file-loading">
-        <% } else { %>
-          <img src="/message/snapshot/<%= myCar.dlpic_fd%>" alt="...">
-          <% } %>
+      <input type="file" name="dlpic" id="dlpic" count=5 multiple class="file-loading" init-fd="<%= typeof myCar == 'undefined' ? '' : myCar.dlpic_fd %>">
     </div>
   </div>
 

@@ -177,11 +177,7 @@
     <div class="form-group">
         <label for="avartar" class="control-label col-md-2">头像</label>
         <div class="col-md-10">
-            <% if ((typeof cHost == 'undefined') || !(cHost.avartar_fd) ) { %>
-                <input type="file" name="avartar" id="avartar" multiple class="file-loading">
-                <% } else { %>
-                    <img src="/message/snapshot/<%= cHost.avartar_fd%>" alt="...">
-                    <% } %>
+            <input type="file" name="avartar" id="avartar" count=1 multiple class="file-loading" init-fd="<%= typeof cHost == 'undefined' ? '' : cHost.avartar_fd %>">
         </div>
     </div>
 

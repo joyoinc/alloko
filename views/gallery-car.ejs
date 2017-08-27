@@ -53,7 +53,7 @@
               btnLink: `/car/__g/${e.id}`,
               btnText2: "查看地图",
               btnLink2: '#',
-              imageLink: e.carpic_fd ? `/message/snapshot/${e.carpic_fd}` : '/images/img-missing.png',
+              imageLink: e.carpic_fd ? `/message/snapshot/${e.carpic_fd.split(',')[0]}` : '/images/img-missing.png',
               reviewCount: 428,
               fiveStarStyles: Array(rr).fill('fa-star').concat(Array(5 - rr).fill('fa-star-o')),
             }

@@ -15,7 +15,9 @@
         <div class="star5Ext" data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
       </div>
       <br>
-      <img src="/message/snapshot/<%= car.carpic_fd %>" alt="暂时没有该车图片" style="width:600px;height:400px;" class="img-thumbnail">
+      <% var picture_fds = car.carpic_fd.split(',').filter(function(_){return _;}) %>
+      <% include partials/picture-slides.ejs %>
+      <!--img src="/message/snapshot/<%= car.carpic_fd %>" alt="暂时没有该车图片" style="width:600px;height:400px;" class="img-thumbnail"-->
       <br>
       <br>
       <div class="blog-post">

@@ -6,9 +6,7 @@ $(document).ready(function () {
         var fileCount = $(elem).attr('count') || 1;
         var initFds = $(elem).attr('init-fd') || '';
 
-        initFds.split(',').forEach(function (e) {
-            $(elem).after(`<img src="/message/snapshot/${e}" class="img-thumbnail" >`);
-        });
+        initFds.split(',').forEach(function (e) { if (e) $(elem).after(`<img src="/message/snapshot/${e}" class="img-thumbnail" >`); });
 
         $(elem).after(`<input type=hidden name="${name}_fd" value="${initFds}"/>`)
             .fileinput({

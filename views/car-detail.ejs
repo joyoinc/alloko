@@ -91,8 +91,9 @@
         <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>' ></div>
         <h3 class="blog-post-title">
           <%= car.reviewcount %>条评价 &nbsp&nbsp平均4.8分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
+          <button class="btn btn-info btn-sm " id="btn-view-comment">查看评价</button>
         </h3>
+        <ul id="comment-root"></ul>
         <table class="table table-bordered">
           <tbody>
               <tr>
@@ -182,3 +183,63 @@
     <!-- /.blog-sidebar -->
   </div>
 </div>
+
+<script>
+    var setDateAndPrice = function (date1, date2) {
+      if (typeof date1 === 'undefined' || typeof date2 === 'undefined') {
+        var today = new Date();
+        var tomorrow = addDays(today, 1);
+        return setDateAndPrice(today, tomorrow);
+      }
+
+      if (diffDays(date1, date2) >= 0) {
+        alert('date range cannot be negtive! Reset to default');
+        return setDateAndPrice();
+      }
+
+      var unitPrice = $('#unitPrice').text();
+      $("#checkin").val(date2string(date1));
+      $("#checkout").val(date2string(date2));
+      var daySpan = diffDays(date2, date1);
+      $('#grandTotal').text(daySpan * unitPrice);
+      $('#totalPrice').val(daySpan * unitPrice);
+    }
+
+    $(document).ready(function () {
+      setDateAndPrice();
+    });
+
+    $(document).on("change", "input[type=date]", function (env) {
+      var dateStr1 = $('#checkin').val();
+      var dateStr2 = $('#checkout').val();
+      setDateAndPrice(string2date(dateStr1), string2date(dateStr2));
+    });
+
+    $(document).on('submit', 'form#newOrder', (evt) => {
+      evt.preventDefault();
+      $.post('/order/bookCar', $('form#newOrder').serialize(), (data) => {
+        var model = { type: 'success', title: 'Well done!', message: 'New car booked', modalId: 'modal1' };
+        if (data.ok) {
+        } else {
+          model = { type: 'error', title: 'Sorry!', message: data.message, modalId: 'modal1' };
+        }
+        $('#modal1 div.alert').removeClass().addClass(`alert alert-${model.type}`).text(`${model.title} ${model.message}`);
+        $('#modal1').modal('show');
+      });
+    });
+
+    $(document).on('click', 'form#newOrder .btn-submit', (evt) => {
+      evt.preventDefault();
+      $('form#newOrder').submit();
+    });
+
+    $(document).on('click', '#btn-view-comment', (evt) => {
+      $.get("/order", {}, (data) => {
+        var model = data.filter(function(_){ return _.serverHost == "<%=car.carowner%>" && _.type == "car" && _.commentOnHost })
+          .map(function(_){ return { text:_.commentOnHost, author:_.customerId } });
+
+        var html = model.reduce(function(sum, v){ return sum + cli_render_bind(v, 'simple-comment') }, "");
+        $('#comment-root').html(html);
+      });
+    });
+  </script>

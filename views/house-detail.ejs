@@ -92,8 +92,9 @@
           <div class="star5Ext" id='ui2' data-name='<%= ratings.overall.name %>' data-rating='<%= ratings.overall.value %>'></div>
           <h3 class="blog-post-title">
             <%= house.reviewcount %>条评价 &nbsp&nbsp平均4.8分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <button class="btn btn-info btn-sm " btn-smtype="submit">查看评价</button>
+              <button class="btn btn-info btn-sm " id="btn-view-comment">查看评价</button>
           </h3>
+          <ul id="comment-root"></ul>
           <table class="table table-bordered">
             <tbody>
               <tr>
@@ -245,5 +246,15 @@
     $(document).on('click', 'form#newOrder .btn-submit', (evt) => {
       evt.preventDefault();
       $('form#newOrder').submit();
+    });
+
+    $(document).on('click', '#btn-view-comment', (evt) => {
+      $.get("/order", {}, (data) => {
+        var model = data.filter(function(_){ return _.serverHost == "<%=house.houseowner%>" && _.type == "house" && _.commentOnHost })
+          .map(function(_){ return { text:_.commentOnHost, author:_.customerId } });
+
+        var html = model.reduce(function(sum, v){ return sum + cli_render_bind(v, 'simple-comment') }, "");
+        $('#comment-root').html(html);
+      });
     });
   </script>

@@ -68,7 +68,7 @@ var self = module.exports = {
     datesInRange: function (start, end) {
         var range = [];
         var current = start;
-        while (self.diffDays(current, end) <= 0) {
+        while (self.diffDays(current, end) < 0) {
             range.push(current);
             current = self.dateAddDays(current, 1);
         }

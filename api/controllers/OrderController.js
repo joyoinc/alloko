@@ -20,24 +20,16 @@ var self = module.exports = {
     var endDate = Util.stringToDate(req.param('checkout'));
     Order.find({
       serverHost: hostId,
-      not: {
-        or: [
-          { serviceStartDate: { '>': endDate } },
-          { serviceEndDate: { '<': startDate } },
-        ]
-      },
     }).exec(function (err, orders) {
       if (err) return res.serverError(err);
       sails.log(`find ${orders.length} orders`);
+      var allBookedDates = Util.ensureArray(orders).reduce(function(sum, val){ return sum.concat(Util.datesInRange(val.serviceStartDate, val.serviceEndDate)); }, []);
+      sails.log(`find ${allBookedDates.length} days booked`);
 
-      var unavailableDates = [];
-      Util.ensureArray(orders).forEach(function (order) {
-        Util.datesInRange(startDate, endDate).forEach(function (d) {
-          if (Util.isInRange(d, order.serviceStartDate, order.serviceEndDate))
-            unavailableDates.push(d);
-        });
+      var unavailableDates = Util.datesInRange(startDate, endDate).filter(function (d) { 
+        return allBookedDates.reduce(function(sum, _){ return sum = sum || Util.diffDays(d, _) == 0 }, false);
       });
-      sails.log(`there are ${unavailableDates.length} dates`);
+      sails.log(`there are ${unavailableDates.length} dates unavailable`);
       if (unavailableDates.length > 0) {
         return res.ok({ message: `dates ${unavailableDates.join(',')} are not available.` });
       }

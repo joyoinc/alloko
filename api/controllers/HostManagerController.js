@@ -50,33 +50,35 @@ var self = module.exports = {
     },
 
     userOrder: function (req, res) {
-        Order.find({ customerId: req.session.me }).exec(function (err, myOrders) {
+        User.findOne(req.session.me).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
+            Order.find({ customerId: aUser.email }).exec(function (err, myOrders) {
+                if (err) return res.serverError(err);
 
-            sails.log(`find orders for ${req.session.me}`);
+                sails.log(`find orders for ${aUser.email}`);
 
-            res.view("user-orders", {
-                myOrders,
-                cUser: {},
-                layout: 'host-layout'
+                res.view("user-orders", {
+                    myOrders,
+                    cUser: aUser,
+                    layout: 'host-layout'
+                });
             });
-
         });
     },
 
     hostOrder: function (req, res) {
-        HostInfo.findOne({ofUser: req.session.me}).exec(function (err, aHost) {
+        User.findOne(req.session.me).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
-            sails.log(`host ${aHost.hostId} found`);
+            sails.log(`host ${aUser.hosts[0].hostId} found`);
 
-            Order.find({ serverHost: aHost.hostId }).exec(function (err, myOrders) {
+            Order.find({ serverHost: aUser.hosts[0].hostId }).exec(function (err, myOrders) {
                 if (err) return res.serverError(err);
 
                 sails.log(`find ${myOrders.length} orders `);
 
                 res.view("host-orders", {
                     myOrders,
-                    cUser: {},
+                    cUser: aUser,
                     layout: 'host-layout'
                 });
 

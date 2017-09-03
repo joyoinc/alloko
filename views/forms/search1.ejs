@@ -4,11 +4,12 @@
         <div class="col-md-3">
           <div class="input-group">
             <div class="input-group-btn">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">国家 <span class="caret"></span></button>
-              <ul class="dropdown-menu" id="country-menu"> </ul>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">国家</button>
             </div>
             <!-- /btn-group -->
-            <input type="text" placeholder='目的地国家' value="" name="country" class="form-control" readonly="" aria-label="...">
+            <select type="text" value="" name="country" class="form-control" dpId='dp-0'>
+              <option value="" disabled selected>--Select--</option>
+            </select>
           </div>
           <!-- /input-group -->
         </div>
@@ -17,11 +18,12 @@
         <div class="col-md-3">
           <div class="input-group">
             <div class="input-group-btn">
-              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">城市 <span class="caret"></span></button>
-              <ul class="dropdown-menu" id="city-menu"></ul>
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">城市</button>
             </div>
             <!-- /btn-group -->
-            <input type="text" placeholder='目的地城市' value="" name="city" class="form-control" readonly="" aria-label="...">
+            <select type="text" value="" name="city" class="form-control" dpId='dp-1'>
+              <option value="" disabled selected>--Select--</option>
+            </select>
           </div>
           <!-- /input-group -->
         </div>
@@ -59,6 +61,4 @@
         </div>
 
       </div>
-      <!-- form-group -->
-      <!-- form-group -->
     </form>

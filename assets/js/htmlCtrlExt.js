@@ -40,53 +40,22 @@ $(document).ready(function () {
         });
     });
 
-    // linked dropdown ext. 
-    var bindLinkedDropdown = function (lvl1UL, lvl2UL, lvl1INPUT, lvl2INPUT, lvl1Data, lvl2Data) {
-        lvl1Data.forEach(function (e, idx) {
-            $(lvl1UL).append(`<li><a id=${e.id} class='input-link' target='${$(lvl1INPUT).attr('name')}'>${e.text}</a></li>`);
-        });
-
-        lvl2Data.forEach(function (e, idx) {
-            $(lvl2UL).append(`<li><a id=${e.id} parent=${e.parent} class='input-link' target='${$(lvl2INPUT).attr('name')}'>${e.text}</a></li>`);
-        });
-
-        $(document).on('click', 'a.input-link', function (evt) {
-            evt.preventDefault();
-            var t = $(this).attr('target');
-            var oldValue = $(`input[name=${t}]`).val();
-            if (oldValue !== $(this).text()) {
-                $(`input[name=${t}]`).val($(this).text()).trigger('change');
-            }
-        });
-
-        $(lvl1INPUT).on('change', function (evt) {
-            evt.preventDefault();
-            $(lvl2INPUT).val("");
-            $('a.input-link', lvl2UL).hide();
-
-            var currentLvl1Value = lvl1Data.find((elem) => { return elem.text === $(evt.target).val() });
-
-            $('a.input-link', lvl2UL).filter((idx, elem) => {
-                return $(elem).attr('parent') === currentLvl1Value.id;
-            }).show();
-        });
-    };
-
-    $.get('/location', (data) => {
-        var uniq = {};
-        var cities = [], countries = [];
-        data.forEach(function (elem) {
-            if (!uniq.hasOwnProperty(elem.country)) {
-                countries.push({ id: `country-${elem.country}`, text: elem.country_text });
-                uniq[elem.country] = elem.country;
-            }
-
-            cities.push({ id: `city-${elem.city}`, text: elem.city_text, parent: `country-${elem.country}` });
-        });
-
-        bindLinkedDropdown($('#country-menu'), $('#city-menu'),
-            $('input[name=country]'), $('input[name=city]'),
-            countries, cities);
+    // dropdown dynamic load
+    loadDropdownOption('select[name=country]');
+    $(document).on('change', 'select[name=country]', (evt) => {
+        loadDropdownOption('select[name=city]', $(evt.target).val());
     });
-
 });
+
+
+var loadDropdownOption = function (jqSelector, parentValue) {
+    $(jqSelector).each((idx, element) => {
+        var id = $(element).attr('dpId').replace("dp-", "");
+        $.post("/Dropdown/load", { id: id, parV: parentValue || '' }, (data) => {
+            $("option:not(:disabled)", element).remove();
+            data.forEach(function (_) {
+                $(element).append(`<option value=${_.v}>${_.t}</option>`);
+            });
+        });
+    });
+}

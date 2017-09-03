@@ -39,10 +39,24 @@
     <div class="form-group">
       <label for="country" class="control-label col-md-2">地址</label>
       <div class="col-md-2">
-        <input type="text" class="form-control" name="country" id="country" placeholder="国家"  value="<%= typeof myHouse == 'undefined' ? '' : myHouse.country %>" >
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">国家</button>
+          </div>
+          <select type="text" value="" name="country" class="form-control" dpId='dp-0'>
+            <option value="" disabled selected>--Select--</option>
+          </select>
+        </div>
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control" name="city" id="city" placeholder="城市"  value="<%= typeof myHouse == 'undefined' ? '' : myHouse.city %>">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">城市</button>
+          </div>
+          <select type="text" value="" name="city" class="form-control" dpId='dp-1'>
+            <option value="" disabled selected>--Select--</option>
+          </select>
+        </div>
       </div>
       <div class="col-md-5">
         <input type="text" class="form-control" name="street" id="street" placeholder="街道，门牌号"  value="<%= typeof myHouse == 'undefined' ? '' : myHouse.street %>">

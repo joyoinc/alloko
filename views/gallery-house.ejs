@@ -12,7 +12,7 @@
         <li><a href="/gallery/guide">无车向导</a></li>
       </ol>
 
-   
+
       <!--
       <a class="btn btn-success" id="load_search2">更多筛选</a>
       -->
@@ -52,7 +52,7 @@
       //   window.location.href = url;
       // });
 
-      // $('input[name="daterange"]').daterangepicker();
+      $('input[name="daterange"]').daterangepicker();
 
       var loadMore = function () {
         if (isLoading)
@@ -121,7 +121,7 @@
 
       $("#search").on("submit", function (evt) {
 
-        if (!$("input[name=country]").val()) {
+        if (!$("[name=country]").val()) {
           alert("country cannot be empty");
           evt.preventDefault();
           return;

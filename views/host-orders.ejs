@@ -4,64 +4,109 @@
 
 <% include partials/locals-functions %>
 
-<style>
-tr:nth-child(even){background-color: #f2f2f2}
-table {
-    border-collapse: separate;
-    width: 100%;
-    border: 1px solid black;
-} 
-</style>
-</head>
-<body>
+    <style>
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
 
-<b><%= myOrders.length %> 个订单 ， 共 $ <%= myOrders.reduce(function(sum,elem){return sum+elem.totalPrice}, 0) %> </b>
-<br><br>
+        table {
+            border-collapse: separate;
+            width: 100%;
+            border: 1px solid black;
+        }
+    </style>
+    </head>
 
-<table class="table table-bordered" width="100%">
-    <tr class="info">
-        <th> 订单号</th>
-        <th> 总价格（美元） </th>
-        <th> 服务类型 </th>
-        <th> 客户 </th>
-        <th> 服务起始时间 </th>
-        <th> 服务结束时间 </th>
-        <th>  </th>
-    </tr>
-    <% for(var idx=0; idx < myOrders.length; idx++) { %>
-    <tr>
-        <td><%= myOrders[idx].id %></td>
-        <td><%= myOrders[idx].totalPrice %>  </td>
-        <td><%= myOrders[idx].type %></td>
-        <td><%= myOrders[idx].customerId %>   </td>
-        <td><%= dateToString(myOrders[idx].serviceStartDate) %> </td>
-        <td><%= dateToString(myOrders[idx].serviceEndDate) %>    </td>
-        <td><a href="/HostManager/hostComment/<%= myOrders[idx].id %>">评价</a>    </td>
-    </tr>
-    <% }%>
-</table>
+    <body>
 
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1-title">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modal1-title"> title </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert " role="alert" id="modal1-msg"> message </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div id='calendar'></div>
 
+        <b><%= myOrders.length %> 个订单 ， 共 $ <%= myOrders.reduce(function(sum,elem){return sum+elem.totalPrice}, 0) %> </b>
+        <br><br>
 
+        <table class="table table-bordered" width="100%">
+            <tr class="info">
+                <th> 订单号</th>
+                <th> 总价格（美元） </th>
+                <th> 服务类型 </th>
+                <th> 客户 </th>
+                <th> 服务起始时间 </th>
+                <th> 服务结束时间 </th>
+                <th> </th>
+            </tr>
+            <% for(var idx=0; idx < myOrders.length; idx++) { %>
+                <tr>
+                    <td>
+                        <%= myOrders[idx].id %>
+                    </td>
+                    <td>
+                        <%= myOrders[idx].totalPrice %>
+                    </td>
+                    <td>
+                        <%= myOrders[idx].type %>
+                    </td>
+                    <td>
+                        <%= myOrders[idx].customerId %>
+                    </td>
+                    <td>
+                        <%= dateToString(myOrders[idx].serviceStartDate) %>
+                    </td>
+                    <td>
+                        <%= dateToString(myOrders[idx].serviceEndDate) %>
+                    </td>
+                    <td><a href="/HostManager/hostComment/<%= myOrders[idx].id %>">评价</a> </td>
+                </tr>
+                <% }%>
+        </table>
 
+    </body>
 
+    <script>
+        var orders = <%- JSON.stringify(myOrders) %>;
+        $(document).ready(function () {
+            toggleSiderbarMenu('host_order');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script >
-    $(document).ready(function () {
-        toggleSiderbarMenu('host_order');
-    });
-</script>
+            $('#calendar').fullCalendar({
+                header: {
+                    left: '',
+                    center: 'prev title next',
+                    right: ''
+                },
+                height: 450,
+                events: 
+                orders.map(function(_){
+                    return { title: _.id, 
+                    start: dateToString(stringToDate(_.serviceStartDate)), 
+                    end: dateToString(stringToDate(_.serviceEndDate)), 
+                    msg: `${ diffDays(stringToDate(_.serviceEndDate), stringToDate(_.serviceStartDate)) } Days for ${_.customerId}` }
+                }), 
+                // [
+                //     { title: 't1', start: '2017-08-28', end: '2017-08-29' },
+                //     { title: 't2', start: '2017-08-29', end: '2017-08-31' },
+                //     { title: 't3', start: '2017-08-31', end: '2017-09-06' },
+                // ],
+                eventClick: function (evt, jsEvt, view) {
+                    $('#modal1-title').html(`# ${evt.title}`);
+                    $('#modal1-msg').html(evt.msg);
+                    $('#modal1').modal();
+                }
+            });
+        });
+    </script>

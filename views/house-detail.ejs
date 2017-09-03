@@ -213,8 +213,8 @@
       }
 
       var unitPrice = $('#unitPrice').text();
-      $("#checkin").val(date2string(date1));
-      $("#checkout").val(date2string(date2));
+      $("#checkin").val(dateToString(date1));
+      $("#checkout").val(dateToString(date2));
       var daySpan = diffDays(date2, date1);
       $('#grandTotal').text(daySpan * unitPrice);
       $('#totalPrice').val(daySpan * unitPrice);
@@ -227,7 +227,7 @@
     $(document).on("change", "input[type=date]", function (env) {
       var dateStr1 = $('#checkin').val();
       var dateStr2 = $('#checkout').val();
-      setDateAndPrice(string2date(dateStr1), string2date(dateStr2));
+      setDateAndPrice(stringToDate(dateStr1), stringToDate(dateStr2));
     });
 
     $(document).on('submit', 'form#newOrder', (evt) => {

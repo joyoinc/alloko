@@ -12,7 +12,7 @@ var self = module.exports = {
             `加盟伙伴 ${aUser.hosts[0].hostId}` :
             `您好 顾客 ${aUser.email}`;
     },
-    /** Page */
+
     logout: function (req, res) {
         req.session.me = null;
         res.redirect("/");
@@ -46,6 +46,22 @@ var self = module.exports = {
                 });
 
             }
+        });
+    },
+
+    publishTripLog: function(req, res) {
+
+        
+    },
+
+    tripLog: function(req, res) {
+        User.findOne(req.session.me).populate('hosts').exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            res.view("trip-log", {
+                cUser: aUser,
+                layout: 'host-layout',
+            });
         });
     },
 
@@ -228,7 +244,6 @@ var self = module.exports = {
             });
         });
     },
-    /** End Page */
 
 
 };

@@ -51,6 +51,7 @@ module.exports.routes = {
   '/gallery/house': {view: 'gallery-house'} ,
   '/gallery/car': {view: 'gallery-car'},
   '/gallery/guide': {view: 'gallery-guide'},
+  '/triplog': {view: 'gallery-triplog'},
   
   '/dashboard': '/h/dashboard',
   '/h/dashboard': 'HostManagerController.main',

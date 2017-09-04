@@ -1,0 +1,23 @@
+<form class="form-horizontal">
+    <input type="hidden" name="author" value="<%= cUser.email %>" />
+
+    <div class="form-group">
+        <label for="picture" class="control-label col-md-2">Picture:</label>
+        <div class="col-md-10">
+            <input type="file" name="picture" id="picture" count=5 multiple class="file-loading" init-fd="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="content" class="control-label col-md-2">Content:</label>
+        <div class="col-md-10">
+            <textarea class="form-control" rows="30" name="content" id="content"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary btn-submit">提交</button>
+        </div>
+    </div>
+</form>

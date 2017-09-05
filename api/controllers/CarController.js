@@ -87,6 +87,14 @@ var self = module.exports = {
         });
     },
 
+    ownerInfo: function (req, res) {
+        var id = req.param('id');
+    
+        HostInfo.findOne({ hostId: id }).populate('myHouse').populate('myCar').exec(function (err, aHost) {
+          if (err) return res.serverError(err);
+            res.view('owner-detail', { cHost: aHost, house: aHost.myHouse, car: aHost.myCar });
+        });
+      },
     /* End Page */
 };
 

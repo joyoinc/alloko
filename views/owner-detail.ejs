@@ -2,7 +2,7 @@
 
   <div class="container">
     <div class="blog-header">
-      <h1 class="blog-title">张三</h1>
+      <h1 class="blog-title"><%= cHost.lastname%>, <%= cHost.firstname%> <a class="btn btn-success" href="/HostManager/ContactMe/<%= cHost.ofUser%>">contact me</a></h1> 
       <p class="lead blog-description"> 美国，波士顿&nbsp&nbsp&nbsp&nbsp25个评价</p>
       <form action="">
         <input class="star star-5" id="star-5" type="radio" name="star" />
@@ -101,7 +101,7 @@
           </tbody>
         </table>
 
-        <img src="/images/3.png" alt="头像" style="width:600px;height:400px;" class="img-thumbnail">
+        <img src="<%= cHost.avartar_fd ? `/message/snapshot/${cHost.avartar_fd}` : '/images/img-missing.png' %>" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
         </br>
         </br>
 
@@ -172,7 +172,7 @@
           </tbody>
         </table>
 
-        <img src="/images/3.png" alt="头像" style="width:600px;height:400px;" class="img-thumbnail">
+        <img src="<%= cHost.avartar_fd ? `/message/snapshot/${cHost.avartar_fd}` : '/images/img-missing.png' %>" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
       </div>
       <!-- /.blog-post -->
 

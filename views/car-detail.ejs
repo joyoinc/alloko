@@ -27,7 +27,7 @@
               <tr class="info">
                 <th>车主</th>
                 <td>
-                  <%= car.owner %>&nbsp&nbsp<button class="btn btn-success btn-sm " btn-smtype="submit">查看车主信息</button></td>
+                  <%= car.owner %>&nbsp&nbsp<a class="btn btn-success btn-sm " href="/car/ownerInfo/<%= car.owner %>">查看车主信息</a></td>
                 <th>价格/天</th>
                 <td>
                   <%= car.guidewithcarprice %>美金</td>

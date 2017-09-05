@@ -49,12 +49,12 @@ var self = module.exports = {
         });
     },
 
-    publishTripLog: function(req, res) {
+    publishTripLog: function (req, res) {
 
-        
+
     },
 
-    tripLog: function(req, res) {
+    tripLog: function (req, res) {
         User.findOne(req.session.me).populate('hosts').exec(function (err, aUser) {
             if (err) return res.serverError(err);
 
@@ -102,34 +102,34 @@ var self = module.exports = {
         });
     },
 
-    addUserComment: function(req, res){
-        Order.findOne(req.param('orderId')).exec(function(err, aOrder){
+    addUserComment: function (req, res) {
+        Order.findOne(req.param('orderId')).exec(function (err, aOrder) {
             if (err) return res.serverError(err);
             sails.log(`find order ${aOrder.id}`);
 
             aOrder.ratings = req.param('ratings');
             aOrder.commentOnHost = req.param('comment');
 
-            aOrder.save(function(err){
+            aOrder.save(function (err) {
                 if (err) return res.serverError(err);
 
-                res.ok({ok:'ok'});
+                res.ok({ ok: 'ok' });
             });
         });
     },
 
-    addHostComment: function(req, res){
-        Order.findOne(req.param('orderId')).exec(function(err, aOrder){
+    addHostComment: function (req, res) {
+        Order.findOne(req.param('orderId')).exec(function (err, aOrder) {
             if (err) return res.serverError(err);
             sails.log(`find order ${aOrder.id}`);
 
             aOrder.ratingOnUser = Util.ensureArray(req.param('ratings'))[0];
             aOrder.commentOnUser = req.param('comment');
 
-            aOrder.save(function(err){
+            aOrder.save(function (err) {
                 if (err) return res.serverError(err);
 
-                res.ok({ok:'ok'});
+                res.ok({ ok: 'ok' });
             });
         });
     },
@@ -245,6 +245,26 @@ var self = module.exports = {
         });
     },
 
+    contactMe: function (req, res) {
+        res.view('simple-message', { from: req.session.me, to: req.param('id') });
+    },
+
+    shortMessage: function (req, res) {
+        var userId = req.session.me;
+
+        User.findOne(userId).populate('hosts').exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+            Message.find({ type: 'sim', to: req.session.me }).sort('updatedAt DESC').exec(function (err, messages) {
+                if (err) return res.serverError(err);
+
+                res.view('host/short-messages', {
+                    cUser: aUser,
+                    allShortMessages: messages,
+                    layout: 'host-layout',
+                });
+            });
+        });
+    }
 
 };
 

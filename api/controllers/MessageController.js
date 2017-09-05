@@ -84,5 +84,33 @@ var self = module.exports = {
       return res.json(triplogs);
     });
   },
+
+  publishShortMessage: function(req, res) {
+    var newShortMessage = req.allParams();
+    Message.create(newShortMessage).exec(function (err, aMsg) {
+      if (err) return res.serverError(err);
+      sails.log(`ShortMessage ${aMsg.id} created`);
+
+      Mailer.sendShortMessage(newShortMessage);
+      return res.ok({ ok: 'ok', op: 'c' });
+    });
+  },
+
+  replyShortMessage: function(req, res) {
+    var id = req.param('id');
+    Message.update({id:id}, {reply: req.param('reply')}).exec(function (err, aMsg) {
+      if (err) return res.serverError(err);
+      sails.log(`ShortMessage ${aMsg.id} replied.`);
+
+      var newShortMessage = {
+        from: aMsg.to,
+        to: aMsg.from,
+        subject: `Re: ${aMsg.subject}`,
+        body: `${aMsg.reply}\r\n --original--\r\n${aMsg.body}`
+      }
+      Mailer.sendShortMessage(newShortMessage);
+      return res.ok({ ok: 'ok', op: 'c' });
+    });
+  },
 };
 

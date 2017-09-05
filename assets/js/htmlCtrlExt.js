@@ -3,8 +3,8 @@ $(document).ready(function () {
     // file uploader ext.
     $('input[type=file]').each((idx, elem) => {
         var name = $(elem).attr('name');
-        var fileCount = $(elem).attr('count') || 1;
-        var initFds = $(elem).attr('init-fd') || '';
+        var fileCount = ensureInt($(elem).attr('count'), 1);
+        var initFds = ensureString($(elem).attr('init-fd'), '');
 
         initFds.split(',').forEach(function (e) { if (e) $(elem).after(`<img src="/message/snapshot/${e}" class="img-thumbnail" >`); });
 

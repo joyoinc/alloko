@@ -2,7 +2,9 @@
 
   <div class="container">
     <div class="blog-header">
-      <h1 class="blog-title"><%= cHost.lastname%>, <%= cHost.firstname%> <a class="btn btn-success" href="/HostManager/ContactMe/<%= cHost.ofUser%>">contact me</a></h1> 
+      <h1 class="blog-title">
+        <%= cHost.lastname%>,
+          <%= cHost.firstname%> <a class="btn btn-success" href="/HostManager/ContactMe/<%= cHost.ofUser%>">contact me</a></h1>
       <p class="lead blog-description"> 美国，波士顿&nbsp&nbsp&nbsp&nbsp25个评价</p>
       <form action="">
         <input class="star star-5" id="star-5" type="radio" name="star" />
@@ -25,7 +27,7 @@
           <h2 class="blog-post-title">波士顿大房子</h2>
         </div-->
         <!-- /.blog-post -->
-        </br>
+        <br>
         <table class="table table-bordered">
           <tbody>
             <tr class="info">
@@ -43,136 +45,145 @@
           </tbody>
         </table>
 
-       
-        </br>
-        </br>
+
+        <br>
+        <br>
+
+        <% if(typeof(car) != "undefined") { %>
+
+          <h3 style="color:orange;"><b>司机、导游服务</b></h3>
 
 
-        <h3 style="color:orange;"><b>司机、导游服务</b></h3>
+          <table class="table">
+            <tbody>
+              <tr class="warning">
+                <th>服务类型</th>
+                <td> personal</td>
+                <th>服务人数</th>
+                <td>最多
+                  <%= car.maxserivecount %>人</td>
+              </tr>
+              <tr>
+                <th>服务要求</th>
+                <td>
+                  <%= car.forbids %>
+                </td>
+                <th>最短服务时间</th>
+                <td>
+                  <%= car.minservicetime %>小时</td>
+              </tr>
+              <tr class="warning">
+                <th>导游收费</th>
+                <td>
+                  <%= car.guideprice %>美金/小时</td>
+                <th>司机+私家车收费</th>
+                <td>
+                  <%= car.guidewithcarprice %>美金/小时</td>
+              </tr>
+              <tr>
+                <th>私家车</th>
+                <td>
+                  <%= car.carbrand %>&nbsp730&nbsp&nbsp
+                    <%= car.cartype %>&nbsp
+                      <%= car.cargroup %>
+                </td>
+                <th>车辆详情</th>
+                <td>
+                  <%= car.doorcount %>门
+                    <%= car.seatcount %>座&nbsp
+                      <%= car.facility %>
+                </td>
+              </tr>
+              <tr class="warning">
+                <th>向导简介</th>
+                <td>
+                  <%= car.guideintroduction %>
+                </td>
+                <th></th>
+                <td></td>
+              </tr>
 
+            </tbody>
+          </table>
 
-        <table class="table">
-          <tbody>
-            <tr class="warning">
-              <th>服务类型</th>
-              <td> personal</td>
-              <th>服务人数</th>
-              <td>最多
-                <%= car.maxserivecount %>人</td>
-            </tr>
-            <tr>
-              <th>服务要求</th>
-              <td>
-                <%= car.forbids %>
-              </td>
-              <th>最短服务时间</th>
-              <td>
-                <%= car.minservicetime %>小时</td>
-            </tr>
-            <tr class="warning">
-              <th>导游收费</th>
-              <td>
-                <%= car.guideprice %>美金/小时</td>
-              <th>司机+私家车收费</th>
-              <td>
-                <%= car.guidewithcarprice %>美金/小时</td>
-            </tr>
-            <tr>
-              <th>私家车</th>
-              <td>
-                <%= car.carbrand %>&nbsp730&nbsp&nbsp
-                  <%= car.cartype %>&nbsp
-                    <%= car.cargroup %>
-              </td>
-              <th>车辆详情</th>
-              <td>
-                <%= car.doorcount %>门
-                  <%= car.seatcount %>座&nbsp
-                    <%= car.facility %>
-              </td>
-            </tr>
-            <tr class="warning">
-              <th>向导简介</th>
-              <td><%= car.guideintroduction %></td>
-              <th></th>
-              <td></td>
-            </tr>
+          <img src="<%= cHost.avartar_fd ? `/message/snapshot/${cHost.avartar_fd}` : '/images/img-missing.png' %>" alt="头像" style="width:128px;height:128px;"
+            class="img-thumbnail">
+          <hr/>
+          <% } %>
 
-          </tbody>
-        </table>
+            <% if(typeof(house) != "undefined") { %>
 
-        <img src="<%= cHost.avartar_fd ? `/message/snapshot/${cHost.avartar_fd}` : '/images/img-missing.png' %>" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
-        </br>
-        </br>
+              <h3 style="color:#149354"><b>租房服务 </b> </h3>
+              <table class="table">
+                <tbody>
 
-        <h3 style="color:#149354"><b>租房服务 </b> </h3>
-        <table class="table">
-          <tbody>
+                  <tr class="success">
+                    <th>房源名称</th>
+                    <td>
+                      <%= house.housename %>
+                    </td>
+                    <th>价格/天</th>
+                    <td>
+                      <%= house.price %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>房屋详情</th>
+                    <td>
+                      <%= house.housetype %>，
+                        <%= house.bedroomcount %>室
+                          <%= house.livingroomcount %>厅
+                            <%= house.bathroomcount %>卫</td>
+                    <th>便利设施</th>
+                    <td>
+                      <%= house.facility %>
+                    </td>
+                  </tr>
+                  <tr class="success">
+                    <th>入住时间</th>
+                    <td>
+                      <%= house.checkintime %>后入住，
+                        <%= house.checkouttime %>前退房</td>
+                    <th>租房要求</th>
+                    <td>
+                      <%= house.forbids %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>最多入住人数</th>
+                    <td>
+                      <%= house.capacity %>人</td>
+                    <th>最短预定时间</th>
+                    <td>
+                      <%= house.minday %>天</td>
+                  </tr>
+                  <tr class="success">
+                    <th>所在城市</th>
+                    <td>
+                      <%= house.country %>,
+                        <%= house.city %>
+                    </td>
+                    <th>地址</th>
+                    <td>
+                      <%= house.street %>，
+                        <%= house.zip %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>补充说明</th>
+                    <td>
+                      <%= house.memo %>
+                    </td>
+                    <th></th>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <tr class="success">
-              <th>房源名称</th>
-              <td>
-                <%= house.housename %>
-              </td>
-              <th>价格/天</th>
-              <td>
-                <%= house.price %>
-              </td>
-            </tr>
-            <tr>
-              <th>房屋详情</th>
-              <td>
-                <%= house.housetype %>，
-                  <%= house.bedroomcount %>室
-                    <%= house.livingroomcount %>厅
-                      <%= house.bathroomcount %>卫</td>
-              <th>便利设施</th>
-              <td>
-                <%= house.facility %>
-              </td>
-            </tr>
-            <tr class="success">
-              <th>入住时间</th>
-              <td>
-                <%= house.checkintime %>后入住，
-                  <%= house.checkouttime %>前退房</td>
-              <th>租房要求</th>
-              <td>
-                <%= house.forbids %>
-              </td>
-            </tr>
-            <tr>
-              <th>最多入住人数</th>
-              <td>
-                <%= house.capacity %>人</td>
-              <th>最短预定时间</th>
-              <td>
-                <%= house.minday %>天</td>
-            </tr>
-            <tr class="success">
-              <th>所在城市</th>
-              <td>
-                <%= house.country %>,
-                  <%= house.city %>
-              </td>
-              <th>地址</th>
-              <td>
-                <%= house.street %>，
-                  <%= house.zip %>
-              </td>
-            </tr>
-            <tr>
-              <th>补充说明</th>
-              <td>
-                <%= house.memo %>
-              </td>
-              <th></th>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+              <img src="<%= cHost.avartar_fd ? `/message/snapshot/${cHost.avartar_fd}` : '/images/img-missing.png' %>" alt="头像" style="width:128px;height:128px;"
+                class="img-thumbnail">
+              <% } %>
 
-        <img src="<%= cHost.avartar_fd ? `/message/snapshot/${cHost.avartar_fd}` : '/images/img-missing.png' %>" alt="头像" style="width:128px;height:128px;" class="img-thumbnail"> 
       </div>
       <!-- /.blog-post -->
 
@@ -180,7 +191,7 @@
         <div class="affix">
           <div class="sidebar-module sidebar-module-inset">
             <h3>$50 &nbsp&nbsp预订 </h3>
-            </br>
+            <br>
           </div>
           <div class="sidebar-module">
 

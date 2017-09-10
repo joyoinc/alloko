@@ -88,16 +88,17 @@ var self = module.exports = {
       if (err) return res.serverError(err);
 
       if (record) {
+        var ratings = typeof(record.ratings) == "undefined" ? [5,5,5,5,5,5,5] : record.ratings;
         res.view('house-detail', {
           house: record,
           ratings: {
-            overall: { name: 'overall', value: parseInt(1 + Math.random() * 5) },
-            clean: { name: 'clean', value: parseInt(1 + Math.random() * 5) },
-            infomatch: { name: 'infomatch', value: parseInt(1 + Math.random() * 5) },
-            goodlocation: { name: 'goodlocation', value: parseInt(1 + Math.random() * 5) },
-            communication: { name: 'communication', value: parseInt(1 + Math.random() * 5) },
-            goodfacility: { name: 'goodfacility', value: parseInt(1 + Math.random() * 5) },
-            goodprice: { name: 'goodprice', value: parseInt(1 + Math.random() * 5) },
+            overall: { name: 'overall', value: ratings[0] },
+            infomatch: { name: 'infomatch', value: ratings[1] },
+            communication: { name: 'communication', value: ratings[2] },
+            clean: { name: 'clean', value: ratings[3] },
+            goodlocation: { name: 'goodlocation', value: ratings[4] },
+            goodfacility: { name: 'goodfacility', value: ratings[5] },
+            goodprice: { name: 'goodprice', value: ratings[6] },
           },
         });
       } else {

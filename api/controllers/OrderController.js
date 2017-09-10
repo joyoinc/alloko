@@ -23,11 +23,11 @@ var self = module.exports = {
     }).exec(function (err, orders) {
       if (err) return res.serverError(err);
       sails.log(`find ${orders.length} orders`);
-      var allBookedDates = Util.ensureArray(orders).reduce(function(sum, val){ return sum.concat(Util.datesInRange(val.serviceStartDate, val.serviceEndDate)); }, []);
+      var allBookedDates = Util.ensureArray(orders).reduce(function (sum, val) { return sum.concat(Util.datesInRange(val.serviceStartDate, val.serviceEndDate)); }, []);
       sails.log(`find ${allBookedDates.length} days booked`);
 
-      var unavailableDates = Util.datesInRange(startDate, endDate).filter(function (d) { 
-        return allBookedDates.reduce(function(sum, _){ return sum = sum || Util.diffDays(d, _) == 0 }, false);
+      var unavailableDates = Util.datesInRange(startDate, endDate).filter(function (d) {
+        return allBookedDates.reduce(function (sum, _) { return sum = sum || Util.diffDays(d, _) == 0 }, false);
       });
       sails.log(`there are ${unavailableDates.length} dates unavailable`);
       if (unavailableDates.length > 0) {
@@ -53,6 +53,30 @@ var self = module.exports = {
 
     });
 
+  },
+
+  sumup: function (req, res) {
+    Order.find().exec(function (err, orders) {
+      if (err) return res.serverError(err);
+      var houseOrders = orders.filter(function (elem) { return elem.type == "house" && typeof (elem.ratings) != "undefined" });
+      sails.log(`find ${houseOrders.length} house orders`);
+      var hash = {};
+      houseOrders.forEach(function (elem) {
+        var v = hash.hasOwnProperty(elem.serverHost) ? hash[elem.serverHost] : { ratings: [0, 0, 0, 0, 0, 0, 0], count: 0 };
+        for (var i = 0; i < 7; i++) { v.ratings[i] += parseInt(elem.ratings[i]); }
+        v.count++;
+        hash[elem.serverHost] = v;
+      });
+      
+      for(var key in hash) {
+        for (var i = 0; i < 7; i++) { hash[key].ratings[i] = Math.round(hash[key].ratings[i] / hash[key].count) }
+        House.update({houseowner: key}, {ratings: hash[key].ratings}).exec(function(err, updated){
+          if (err) return res.serverError(err);
+          sails.log(`${updated.length} updated`);
+        });
+      }
+    });
+    res.ok('ok');
   },
 };
 

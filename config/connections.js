@@ -56,9 +56,9 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
-  mongoSrv_pox: {
+  mongoSrv_local: {
     adapter: 'sails-mongo',
-    host: 'pox',
+    host: 'plab',
     port: 27017,
     user: 'dba', //optional
     password: 'dba', //optional

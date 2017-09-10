@@ -19,7 +19,7 @@ module.exports = {
 
   models: {
      //connection: 'localDiskDb'
-     connection: 'mongoSrv_pox'
+     connection: 'mongoSrv_local'
   }
 
 };

@@ -58,6 +58,7 @@ module.exports.routes = {
   '/h/setting': 'HostManagerController.main',
   '/h/profile': 'HostManagerController.main',
   '/h/logout': 'HostManagerController.logout',
+  '/ping': 'OrderController.sumup',
 
   '/test': {view: 'forms/host-edit-profile'},
 };

@@ -55,7 +55,7 @@
         <div class="container-fluid">
             <div class="row row-offcanvas row-offcanvas-right">
                 <!-- right panel -->
-                <div class="col-xs-12 col-sm-9 col-sm-push-3 console-main-panel">
+                <div class="col-xs-12 col-sm-10 col-sm-push-2 console-main-panel">
                     <button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
                         <span class="glyphicon glyphicon-menu-hamburger"></span>
                     </button>
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- left panel -->
-                <div data-spy="affix" class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas">
+                <div data-spy="affix" class="col-xs-6 col-sm-2 col-sm-pull-10 sidebar-offcanvas">
                     <% var hostInfo = cUser.hosts; %>
                     <% if (typeof hostInfo === 'undefined' || hostInfo.length === 0) { %>
                         <% include partials/user-sidebar %>

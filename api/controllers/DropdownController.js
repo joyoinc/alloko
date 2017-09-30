@@ -11,11 +11,18 @@ module.exports = {
         var parentValue = req.param('parV') || '';
 
         if (id == 0) {
-            return res.json([{ v: 'us', t: 'USA' }, { v: 'cn', t: 'CHINA' }, { v: 'jp', t: 'JAPAN' }]);
+            return res.json([{ v: 'us', t: '美国' }, { v: 'cn', t: '中国' }, { v: 'jp', t: '日本' }]);
         }
 
         if (id == 1) {
-            var all = [{ v: 'rdu', t: 'Raleigh', p: 'us' }, { v: 'nyc', t: 'New York', p: 'us' }, { v: 'pek', t: 'Bei jing', p: 'cn' }, { v: 'pvg', t: 'Shang hai', p: 'cn' }, { v: 'tyo', t: 'Tokyo', p: 'jp' }];
+            var all = [{ v: 'rdu', t: '罗利', p: 'us' }, 
+            { v: 'nyc', t: '纽约', p: 'us' }, 
+            { v: 'bos', t: '波士顿', p: 'us' }, 
+            { v: 'san', t: '旧金山', p: 'us' }, 
+            { v: 'las', t: '拉斯维加斯', p: 'us' }, 
+            { v: 'pek', t: '北京', p: 'cn' }, 
+            { v: 'pvg', t: '上海', p: 'cn' }, 
+            { v: 'tyo', t: '东京', p: 'jp' }];
             var result = all.filter(function(_){ return _.p == parentValue}).map(function(_){ return {v:_.v, t:_.t} });
             return res.json(result);
         }

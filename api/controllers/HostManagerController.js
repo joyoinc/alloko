@@ -249,6 +249,20 @@ var self = module.exports = {
         res.view('simple-message', { from: req.session.me, to: req.param('id') });
     },
 
+    changePassword: function(req, res) {
+        var userId = req.session.me;
+        User.findOne(userId).populate('hosts').exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+            res.view("change-password", {
+                greeting: self._greeting(aUser),
+                cUser: aUser,
+                layout: 'host-layout'
+            });
+           
+        });
+        
+    },
+
     shortMessage: function (req, res) {
         var userId = req.session.me;
 

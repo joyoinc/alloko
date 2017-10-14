@@ -21,6 +21,23 @@
       });
     });
 
+    $(document).on('click', '#btnForget', (evt) => {
+      evt.preventDefault();
+      if(! $('#email').val()) {
+        alert("请先输入邮件地址，将为您重置密码");
+        return;
+      }
+
+      $.post("/user/resetPassword", $('form').serialize(), (data) => {
+        if(data.errCode) {
+          alert(data.errCode);
+        } else {
+          alert("您的密码已重置，请查看邮件获得新密码");
+          window.location = "/";
+        }
+      });
+    });
+
     $(document).on('click', 'form .btn-submit', (evt) => {
       evt.preventDefault();
       $('form').submit();

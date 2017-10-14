@@ -40,8 +40,8 @@ var self = module.exports = {
 
     signUp: function (req, res) {
         User.findOne({ email: req.param('email'), password: Util.encString(req.param('password')) }).exec(function (err, foundUser) {
-                            sails.log(`found User ${foundUser} `);
-            if(foundUser)
+            sails.log(`found User ${foundUser} `);
+            if (foundUser)
                 return res.json({ errCode: 'usrExist' });
 
             var newUser = {
@@ -56,6 +56,49 @@ var self = module.exports = {
 
                 sails.log(`User ${aUser.email} signed up `);
                 self._setMe(aUser.email, req, res);
+                return res.json({ errCode: '' });
+            });
+        });
+    },
+
+    changePassword: function (req, res) {
+        if (req.param('newpassword') !== req.param('newpassword1'))
+            res.json({ errCode: 'notMatch' });
+
+        var userId = req.session.me;
+        User.findOne({ email: userId, password: Util.encString(req.param('password')) }).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+
+            if (aUser) {
+                aUser.password = Util.encString(req.param('newpassword'));
+                aUser.save(function (err) {
+                    if (err) return res.serverError(err);
+
+                    sails.log(`User ${aUser.email} password changed `);
+                    return res.json({ errCode: '' });
+                });
+            } else {
+                res.json({ errCode: 'notFound' });
+            }
+
+        });
+    },
+
+    resetPassword: function (req, res) {
+        User.findOne({ email: req.param('email') }).exec(function (err, aUser) {
+            if (err) return res.serverError(err);
+            var newPass = Util.simpleID(9);
+            aUser.password = Util.encString(newPass);
+
+            aUser.save(function (err) {
+                if (err) return res.serverError(err);
+
+                sails.log(`User ${aUser.email} password reset `);
+                var message = {
+                    email: aUser.email,
+                    password: newPass
+                }
+                Mailer.sendResetEmail(message);
                 return res.json({ errCode: '' });
             });
         });
